@@ -1,0 +1,77 @@
+@import '../../../styles/variables';
+
+.container {
+  display: flex;
+  background: #fff;
+  height: 100vh;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.left-panel {
+  flex: 1;
+  background: $primary-color;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.right-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: $text-color;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: $border-radius;
+}
+
+actions {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.actions a {
+  text-decoration: none;
+  color: $primary-color;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: $border-radius;
+  background: $primary-color;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 10px;
+
+  &.google-login {
+    background: #db4437;
+  }
+}
