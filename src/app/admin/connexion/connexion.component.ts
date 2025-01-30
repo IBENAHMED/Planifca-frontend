@@ -6,7 +6,7 @@ import { FormInputEmailComponent } from '../../components/form/form-input-email/
 import { FormInputPasswordComponent } from '../../components/form/form-input-password/form-input-password.component';
 
 @Component({
-  selector: 'app-auth',
+  selector: 'connexion-auth',
   standalone: true,
   imports: [
     FormsModule,
@@ -15,10 +15,10 @@ import { FormInputPasswordComponent } from '../../components/form/form-input-pas
     FormInputEmailComponent,
     FormInputPasswordComponent,
   ],
-  templateUrl: './auth.component.html',
-  styleUrl: './auth.component.scss'
+  templateUrl: './connexion.component.html',
+  styleUrl: './connexion.component.scss'
 })
-export class AuthComponent {
+export class ConnexionComponent {
   email: string = "";
   password: string = "";
 
