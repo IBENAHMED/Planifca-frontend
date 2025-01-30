@@ -65,18 +65,3 @@ actions {
   text-decoration: none;
   color: $primary-color;
 }
-
-button {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: $border-radius;
-  background: $primary-color;
-  color: #fff;
-  cursor: pointer;
-  margin-top: 10px;
-
-  &.google-login {
-    background: #db4437;
-  }
-}
