@@ -6,9 +6,10 @@
   </div>
   <div class="right-panel">
     <div class="login-box">
-       <img class="img-login" src="images/logo.png" alt="img-login"/>
-      <form>
+      <img class="img-login" src="images/logo.png" alt="img-login"/>
+      <form (ngSubmit)="onSubmit($event)">
         <app-form-input-email
+          (emailEvent)="onEmailReceived($event)"
           id="email"
           label="Identifiant"
           name="email"
@@ -16,6 +17,7 @@
           [required]="true"
         />
         <app-form-input-password
+          (passwordEvent)="onPasswordReceived($event)"
           id="password"
           label="Mot de passe"
           name="password"
