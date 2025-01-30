@@ -1,29 +1,36 @@
 <article class="AuthComponent container">
   <div class="left-panel">
     <div class="content">
-      <h2>New Scheduling And Routing Options</h2>
-      <p>We also updated the format of podcasts and rewards.</p>
+      <img class="img-login" src="images/img-interface-client.jpg" alt="img-login"/>
     </div>
   </div>
   <div class="right-panel">
     <div class="login-box">
-      <img class="login-icon" src="images/login-icon.svg" alt="login-icon"/>
-      <h2>Connexion</h2>
-      <p>Entrez votre email et votre mot de passe pour vous connecter.</p>
+       <img class="img-login" src="images/logo.png" alt="img-login"/>
       <form>
         <app-form-input-email
           id="email"
           label="Identifiant"
+          name="email"
           placeholder="john.doe@gmail.com"
           [required]="true"
         />
         <app-form-input-password
           id="password"
           label="Mot de passe"
+          name="password"
           placeholder="**********"
           [required]="true"
         />
-        <app-tag-button label="Login" type="submit"/>
+        <app-tag-a
+          [onLinkClick]="onLinkClick"
+          href="#"
+          text="Mot de passe oublié ?"
+        />
+        <app-tag-button
+          label="Se connecter"
+          type="submit"
+        />
       </form>
     </div>
   </div>

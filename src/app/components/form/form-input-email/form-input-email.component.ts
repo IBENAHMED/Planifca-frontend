@@ -11,6 +11,7 @@ import { Component, Input } from '@angular/core';
 export class FormInputEmailComponent {
   @Input() id: string = '';
   @Input() label: string = '';
+  @Input() name: string = '';
   @Input() placeholder: string = 'john.doe@gmail.com';
   @Input() required: boolean = true;
 
