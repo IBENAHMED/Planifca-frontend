@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { URLS } from '../../components/helpers/url-constants';
 import { TagAComponent } from '../../components/tag-a/tag-a.component';
 import { TagButtonComponent } from '../../components/tag-button/tag-button.component';
 import { FormInputEmailComponent } from '../../components/form/form-input-email/form-input-email.component';
@@ -19,6 +20,8 @@ import { FormInputPasswordComponent } from '../../components/form/form-input-pas
   styleUrl: './connexion.component.scss'
 })
 export class ConnexionComponent {
+  resetPasswordUrl = URLS.PASSWORD_RESET;
+
   email: string = "";
   password: string = "";
 
@@ -32,11 +35,6 @@ export class ConnexionComponent {
 
   onSubmit(event: Event) {
     event.preventDefault();
-    console.log(this.email);
-    console.log(this.password);
-  }
-
-  onLinkClick() {
-    alert('Fonctionnalité en cours');
-  }
+    console.log(this.email, this.password);
+  };
 }

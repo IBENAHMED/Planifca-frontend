@@ -10,5 +10,5 @@ import { Component, Input } from '@angular/core';
 export class TagAComponent {
   @Input() text: string = '';
   @Input() href: string = '';
-  @Input() onLinkClick: () => void = () => {};
+  @Input() name: string = '';
 }
