@@ -18,6 +18,12 @@
   padding: 20px;
 }
 
+@media ($sm) {
+  .left-panel {
+    display: none;
+  }
+}
+
 .right-panel {
   flex: 1;
   display: flex;
@@ -28,7 +34,7 @@
 
 .login-box {
   width: 100%;
-  max-width: 300px;
+  max-width: 400px;
   text-align: center;
 
   h2 {
@@ -47,21 +53,8 @@
   }
 }
 
-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: $border-radius;
-}
-
-actions {
+form {
   display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-}
-
-.actions a {
-  text-decoration: none;
-  color: $primary-color;
+  flex-direction: column;
+  gap: 3px;
 }

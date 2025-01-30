@@ -8,15 +8,21 @@
   <div class="right-panel">
     <div class="login-box">
       <img class="login-icon" src="images/login-icon.svg" alt="login-icon"/>
-      <h2>Hello Again!</h2>
-      <p>Aliquam consectetur et tincidunt praesent enim massa pellentesque velit odio neque.</p>
+      <h2>Connexion</h2>
+      <p>Entrez votre email et votre mot de passe pour vous connecter.</p>
       <form>
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <div class="actions">
-          <label><input type="checkbox"> Remember Me</label>
-          <a href="#">Recovery Password</a>
-        </div>
+        <app-form-input-email
+          id="email"
+          label="Identifiant"
+          placeholder="john.doe@gmail.com"
+          [required]="true"
+        />
+        <app-form-input-password
+          id="password"
+          label="Mot de passe"
+          placeholder="**********"
+          [required]="true"
+        />
         <app-tag-button label="Login" type="submit"/>
       </form>
     </div>
