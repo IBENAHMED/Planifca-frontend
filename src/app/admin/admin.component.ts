@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { AuthComponent } from './auth/auth.component';
 
 @Component({
-  selector: 'app-client',
+  selector: 'app-admin',
   standalone: true,
   imports: [AuthComponent],
-  templateUrl: './client.component.html',
-  styleUrl: './client.component.scss'
+  templateUrl: './admin.component.html',
+  styleUrl: './admin.component.scss'
 })
-export class ClientComponent {
+export class AdminComponent {
 
 }
