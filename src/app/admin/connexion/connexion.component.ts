@@ -10,8 +10,8 @@ import { AuthLayoutComponentComponent } from '../../layout/auth-layout-component
 
 import { adminConnexion } from '../../model/admin-connexion.type';
 
-import { ConnexionService } from '../../services/connexion.service';
-import { SnackBarServiceService } from '../../services/snack-bar-service.service';
+import { ConnexionService } from '../../services/auth/connexion.service';
+import { ToastServiceService } from '../../services/toast/toast-service.service';
 
 
 @Component({
@@ -30,8 +30,8 @@ import { SnackBarServiceService } from '../../services/snack-bar-service.service
 })
 export class ConnexionComponent {
 
+  private toastService = inject(ToastServiceService);
   private connexionService = inject(ConnexionService);
-  private snackBarService = inject(SnackBarServiceService);
 
   resetPasswordUrl = URLS.PASSWORD_RESET;
   email: string = '';
@@ -45,8 +45,14 @@ export class ConnexionComponent {
     this.password = password;
   };
 
+  isTagButtonDisabled(): boolean {
+    return !(this.email && this.password);
+  }
+
   onSubmit(event: Event): void {
     event.preventDefault();
+
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     const credentials: adminConnexion = {
       email: this.email,
@@ -54,17 +60,23 @@ export class ConnexionComponent {
     };
 
     if (!this.email || !this.password) {
-      this.snackBarService.show('Veuillez remplir tous les champs.');
+      this.toastService.showToast('⚠️ Veuillez entrer votre e-mail et mot de passe.', 'error');
+      return;
+    };
+
+    if(!emailPattern.test(this.email)) {
+      this.toastService.showToast('❌ Veuillez entrer un e-mail valide', 'error');
       return;
     };
 
     this.connexionService.login(credentials).subscribe({
       next: (response) => {
-        console.log("response:", response)
+        this.toastService.showToast('✅ Vous êtes connecté avec succès.','success');
         // todo: generate response of the user
+        console.log(response);
       },
       error: () => {
-        this.snackBarService.show('Échec de la connexion, veuillez vérifier vos identifiants.');
+        this.toastService.showToast('❌ Échec de la connexion, veuillez vérifier vos identifiants.','error');
       },
     });
   };

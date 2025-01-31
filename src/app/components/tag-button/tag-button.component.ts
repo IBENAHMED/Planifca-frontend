@@ -8,7 +8,8 @@ import { Component, Input } from '@angular/core';
   styleUrl: './tag-button.component.scss'
 })
 export class TagButtonComponent {
-  
+
   @Input() label: string = '';
   @Input() type: string = 'button';
+  @Input() disabled: boolean = true;
 }
