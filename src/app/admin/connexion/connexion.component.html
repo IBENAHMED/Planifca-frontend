@@ -23,9 +23,9 @@
       text="Mot de passe oublié ?"
     />
     <app-tag-button
+      [disabled]="isTagButtonDisabled()"
       label="Se connecter"
       type="submit"
-      [disabled]="isTagButtonDisabled()"
     />
   </form>
 </app-auth-layout-component>

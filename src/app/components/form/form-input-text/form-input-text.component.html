@@ -3,6 +3,8 @@
   <input
     [id]="id"
     [name]="name"
+    [(ngModel)]="password"
+    (ngModelChange)="onPasswordChnage()"
     [placeholder]="placeholder"
     [required]="required"
     type="email"

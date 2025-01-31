@@ -1,6 +1,7 @@
 <app-auth-layout-component>
   <form (ngSubmit)="onSubmit($event)">
     <app-form-input-text
+      (passwordEvent)="onNewPasswordReceived($event)"
       id="password"
       label="Nouveau mot de passe"
       name="password"
@@ -9,6 +10,7 @@
 
     />
     <app-form-input-text
+      (passwordEvent)="onConfirmationPasswordReceived($event)"
       id="password"
       label="Confirmer le mot de passe"
       name="password"
@@ -16,6 +18,7 @@
       [required]="true"
     />
     <app-tag-button
+      [disabled]="isTagButtonDisabled()"
       label="Réinitialisation"
       type="submit"
     />
