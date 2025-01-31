@@ -6,13 +6,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   selector: 'app-form-input-email',
   standalone: true,
   imports: [
+    NgIf,
     FormsModule,
-    NgIf
   ],
   templateUrl: './form-input-email.component.html',
   styleUrl: './form-input-email.component.scss'
 })
 export class FormInputEmailComponent {
+  
   @Input() id: string = '';
   @Input() label: string = '';
   @Input() name: string = '';
@@ -23,7 +24,7 @@ export class FormInputEmailComponent {
 
   email:string = '';
 
-  onEmailChange() {
+  onEmailChange(): void {
     this.emailEvent.emit(this.email);
   };
 };

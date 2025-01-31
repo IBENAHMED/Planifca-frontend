@@ -14,10 +14,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class FormInputPasswordComponent {
 
-  @Input() id: string = "password";
-  @Input() label: string = "Mot de passe";
-  @Input() name: string = "";
-  @Input() placeholder: string = "**********";
+  @Input() id: string = 'password';
+  @Input() label: string = 'Mot de passe';
+  @Input() name: string = '';
+  @Input() placeholder: string = '**********';
   @Input() required: boolean = true;
 
   @Output() passwordEvent = new EventEmitter<string>();
@@ -26,7 +26,7 @@ export class FormInputPasswordComponent {
   password: string = '';
 
   onPasswordChnage() {
-    this.passwordEvent.emit(this.password)
+    this.passwordEvent.emit(this.password);
   };
 
   togglePasswordVisibility() {

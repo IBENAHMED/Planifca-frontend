@@ -8,6 +8,7 @@ import { Component, Input } from '@angular/core';
   styleUrl: './tag-a.component.scss'
 })
 export class TagAComponent {
+
   @Input() text: string = '';
   @Input() href: string = '';
   @Input() name: string = '';
