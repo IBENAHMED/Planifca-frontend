@@ -37,4 +37,4 @@ export class ResetComponent {
     event.preventDefault();
     alert('Fonctionnalité en cours');
   };
-}
+};
