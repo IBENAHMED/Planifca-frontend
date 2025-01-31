@@ -1,8 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import { Component, inject } from '@angular/core';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
-
 import { URLS } from '../../components/helpers/url-constants';
 import { TagAComponent } from '../../components/tag-a/tag-a.component';
 import { TagButtonComponent } from '../../components/tag-button/tag-button.component';
@@ -13,6 +11,8 @@ import { AuthLayoutComponentComponent } from '../../layout/auth-layout-component
 import { adminConnexion } from '../../model/admin-connexion.type';
 
 import { ConnexionService } from '../../services/connexion.service';
+import { SnackBarServiceService } from '../../services/snack-bar-service.service';
+
 
 @Component({
   selector: 'connexion-auth',
@@ -31,7 +31,7 @@ import { ConnexionService } from '../../services/connexion.service';
 export class ConnexionComponent {
 
   private connexionService = inject(ConnexionService);
-  private snackBar = inject(MatSnackBar);
+  private snackBarService = inject(SnackBarServiceService);
 
   resetPasswordUrl = URLS.PASSWORD_RESET;
   email: string = '';
@@ -53,16 +53,18 @@ export class ConnexionComponent {
       password: this.password,
     };
 
+    if (!this.email || !this.password) {
+      this.snackBarService.show('Veuillez remplir tous les champs.');
+      return;
+    };
+
     this.connexionService.login(credentials).subscribe({
       next: (response) => {
         console.log("response:", response)
+        // todo: generate response of the user
       },
-      error: (error) => {
-        this.snackBar.open('Échec de la connexion, veuillez vérifier vos identifiants.', 'Close', {
-          duration: 3000,
-          horizontalPosition: 'left',
-          verticalPosition: 'bottom',
-        });
+      error: () => {
+        this.snackBarService.show('Échec de la connexion, veuillez vérifier vos identifiants.');
       },
     });
   };
