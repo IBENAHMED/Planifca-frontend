@@ -13,7 +13,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './form-input-email.component.scss'
 })
 export class FormInputEmailComponent {
-  
+
   @Input() id: string = '';
   @Input() label: string = '';
   @Input() name: string = '';

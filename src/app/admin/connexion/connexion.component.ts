@@ -1,5 +1,7 @@
-import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { URLS } from '../../components/helpers/url-constants';
 import { TagAComponent } from '../../components/tag-a/tag-a.component';
@@ -29,6 +31,7 @@ import { ConnexionService } from '../../services/connexion.service';
 export class ConnexionComponent {
 
   private connexionService = inject(ConnexionService);
+  private snackBar = inject(MatSnackBar);
 
   resetPasswordUrl = URLS.PASSWORD_RESET;
   email: string = '';
@@ -52,10 +55,14 @@ export class ConnexionComponent {
 
     this.connexionService.login(credentials).subscribe({
       next: (response) => {
-        console.log('Login successful:', response);
+        console.log("response:", response)
       },
       error: (error) => {
-        console.log('Login failed:', error);
+        this.snackBar.open('Échec de la connexion, veuillez vérifier vos identifiants.', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'left',
+          verticalPosition: 'bottom',
+        });
       },
     });
   };
