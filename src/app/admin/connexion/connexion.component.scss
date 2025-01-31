@@ -1,5 +1,12 @@
+@import 'variables';
+
 form {
   display: flex;
   flex-direction: column;
   gap: 3px;
+}
+
+.app-tag-a {
+  text-decoration: underline;
+  text-decoration-color: $text-color;
 }

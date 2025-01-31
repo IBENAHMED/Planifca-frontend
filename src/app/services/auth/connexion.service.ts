@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { adminConnexion } from '../model/admin-connexion.type';
+import { adminConnexion } from '../../model/admin-connexion.type';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
