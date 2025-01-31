@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class ConnexionService {
+  
   private readonly apiUrl: string = `${environment.baseUrl}/api/v1/auth`;
 
   constructor(private http: HttpClient) {}

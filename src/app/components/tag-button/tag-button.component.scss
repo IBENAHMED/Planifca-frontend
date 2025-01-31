@@ -13,3 +13,8 @@ button {
   border-radius: $border-radius;
   background: $primary-color;
 }
+
+.disabled-btn {
+  opacity: 0.5;
+  cursor: no-drop;
+}

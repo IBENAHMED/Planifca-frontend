@@ -18,14 +18,14 @@
     />
     <app-tag-a
       class="app-tag-a"
-      [href]="resetPasswordUrl"
+      [routerLink]="resetPasswordUrl"
       name="resetPassword"
       text="Mot de passe oublié ?"
     />
     <app-tag-button
+      [disabled]="isTagButtonDisabled()"
       label="Se connecter"
       type="submit"
-      [disabled]="isTagButtonDisabled()"
     />
   </form>
 </app-auth-layout-component>

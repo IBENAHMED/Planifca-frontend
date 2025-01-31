@@ -33,7 +33,7 @@ export class ConnexionComponent {
   private toastService = inject(ToastServiceService);
   private connexionService = inject(ConnexionService);
 
-  resetPasswordUrl = URLS.PASSWORD_RESET;
+  resetPasswordUrl = URLS.PASSWORD_FORGET;
   email: string = '';
   password: string = '';
 
@@ -47,7 +47,7 @@ export class ConnexionComponent {
 
   isTagButtonDisabled(): boolean {
     return !(this.email && this.password);
-  }
+  };
 
   onSubmit(event: Event): void {
     event.preventDefault();
@@ -59,24 +59,27 @@ export class ConnexionComponent {
       password: this.password,
     };
 
-    if (!this.email || !this.password) {
-      this.toastService.showToast('⚠️ Veuillez entrer votre e-mail et mot de passe.', 'error');
-      return;
-    };
+    if (!this.email || !this.password) return;
 
     if(!emailPattern.test(this.email)) {
-      this.toastService.showToast('❌ Veuillez entrer un e-mail valide', 'error');
+      this.toastService.showToast('Veuillez entrer un e-mail valide', 'error', '⚠️');
       return;
     };
 
     this.connexionService.login(credentials).subscribe({
       next: (response) => {
-        this.toastService.showToast('✅ Vous êtes connecté avec succès.','success');
+        this.toastService.showToast('Vous êtes connecté avec succès.','success', '✅');
         // todo: generate response of the user
         console.log(response);
       },
-      error: () => {
-        this.toastService.showToast('❌ Échec de la connexion, veuillez vérifier vos identifiants.','error');
+      error: ({status}) => {
+        if(status === 404) {
+          this.toastService.showToast('Échec de la connexion, veuillez vérifier vos identifiants.', 'error', '❌');
+        } else if (status === 401) {
+          this.toastService.showToast('Mot de passe incorrect. Essayez encore.','error', '❌');
+        } else {
+          alert("Internal server error");
+        };
       },
     });
   };

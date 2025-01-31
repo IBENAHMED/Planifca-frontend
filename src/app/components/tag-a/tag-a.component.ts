@@ -1,15 +1,16 @@
+import { RouterModule } from '@angular/router';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-tag-a',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './tag-a.component.html',
   styleUrl: './tag-a.component.scss'
 })
 export class TagAComponent {
 
   @Input() text: string = '';
-  @Input() href: string = '';
   @Input() name: string = '';
+  @Input() routerLink: string = '';
 }
