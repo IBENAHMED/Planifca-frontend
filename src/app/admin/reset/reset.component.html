@@ -1,0 +1,23 @@
+<app-auth-layout-component>
+  <form (ngSubmit)="onSubmit($event)">
+    <app-form-input-text
+      id="password"
+      label="Nouveau mot de passe"
+      name="password"
+      placeholder="**********"
+      [required]="true"
+
+    />
+    <app-form-input-text
+      id="password"
+      label="Confirmer le mot de passe"
+      name="password"
+      placeholder="**********"
+      [required]="true"
+    />
+    <app-tag-button
+      label="Réinitialisation"
+      type="submit"
+    />
+  </form>
+</app-auth-layout-component>

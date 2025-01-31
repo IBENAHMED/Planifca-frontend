@@ -10,9 +10,15 @@ export const routes: Routes = [
     },
   },
   {
-    path: URLS.PASSWORD_RESET,
+    path: URLS.PASSWORD_FORGET,
     loadComponent() {
       return import("./admin/forget-password/forget-password.component").then((m) => m.ForgetPasswordComponent)
     },
-  }
+  },
+  {
+    path: URLS.PASSWORD_RESET,
+    loadComponent() {
+      return import("./admin/reset/reset.component").then((m) => m.ResetComponent)
+    },
+  },
 ];
