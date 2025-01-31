@@ -17,14 +17,15 @@ import { AuthLayoutComponentComponent } from '../../layout/auth-layout-component
   styleUrl: './forget-password.component.scss'
 })
 export class ForgetPasswordComponent {
-  email: string = "";
 
-  onEmailReceived(email: string) {
+  email: string = '';
+
+  onEmailReceived(email: string): void {
     this.email = email;
   };
 
-  onSubmit(event: Event) {
+  onSubmit(event: Event): void {
     event.preventDefault();
-    alert("Fonctionnalité en cours");
+    alert('Fonctionnalité en cours');
   };
-}
+};
