@@ -1,0 +1,29 @@
+<app-auth-layout-component>
+  <form (ngSubmit)="onSubmit($event)">
+    <app-form-input-email
+      (emailEvent)="onEmailReceived($event)"
+      id="email"
+      label="Identifiant"
+      name="email"
+      placeholder="john.doe@gmail.com"
+      [required]="true"
+    />
+    <app-form-input-password
+      (passwordEvent)="onPasswordReceived($event)"
+      id="password"
+      label="Mot de passe"
+      name="password"
+      placeholder="**********"
+      [required]="true"
+    />
+    <app-tag-a
+      [href]="resetPasswordUrl"
+      name="resetPassword"
+      text="Mot de passe oublié ?"
+    />
+    <app-tag-button
+      label="Se connecter"
+      type="submit"
+    />
+  </form>
+</app-auth-layout-component>

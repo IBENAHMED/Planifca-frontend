@@ -2,6 +2,9 @@
   <label [for]="id">{{label}}<span *ngIf="required">*</span></label>
   <input
     [id]="id"
+    [name]="name"
+    [(ngModel)]="email"
+    (ngModelChange)="onEmailChange()"
     [placeholder]="placeholder"
     type="email"
     [required]="required"
