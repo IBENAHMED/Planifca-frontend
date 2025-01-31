@@ -35,6 +35,6 @@ export class ResetComponent {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    console.log("password", this.password, this.passwordConfirmation)
+    alert('Fonctionnalité en cours');
   };
 }
