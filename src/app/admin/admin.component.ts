@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ConnexionComponent } from './connexion/connexion.component';
+import { ConnexionComponent } from './auth/connexion/connexion.component';
 
 @Component({
   selector: 'app-admin',

@@ -1,17 +1,17 @@
 import { FormsModule } from '@angular/forms';
 import { Component, inject } from '@angular/core';
 
-import { URLS } from '../../components/helpers/url-constants';
-import { TagAComponent } from '../../components/tag-a/tag-a.component';
-import { TagButtonComponent } from '../../components/tag-button/tag-button.component';
-import { FormInputEmailComponent } from '../../components/form/form-input-email/form-input-email.component';
-import { FormInputPasswordComponent } from '../../components/form/form-input-password/form-input-password.component';
-import { AuthLayoutComponentComponent } from '../../layout/auth-layout-component/auth-layout-component.component';
+import { URLS } from '../../../components/helpers/url-constants';
+import { TagAComponent } from '../../../components/tag-a/tag-a.component';
+import { TagButtonComponent } from '../../../components/tag-button/tag-button.component';
+import { FormInputEmailComponent } from '../../../components/form/form-input-email/form-input-email.component';
+import { FormInputPasswordComponent } from '../../../components/form/form-input-password/form-input-password.component';
+import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-component/auth-layout-component.component';
 
-import { adminConnexion } from '../../model/admin-connexion.type';
+import { adminConnexion } from '../../../model/admin-connexion.type';
 
-import { ConnexionService } from '../../services/auth/connexion.service';
-import { ToastServiceService } from '../../services/toast/toast-service.service';
+import { AuthService } from '../service/auth.service';
+import { ToastServiceService } from '../../../services/toast/toast-service.service';
 
 
 @Component({
@@ -31,7 +31,7 @@ import { ToastServiceService } from '../../services/toast/toast-service.service'
 export class ConnexionComponent {
 
   private toastService = inject(ToastServiceService);
-  private connexionService = inject(ConnexionService);
+  private authService = inject(AuthService);
 
   resetPasswordUrl = URLS.PASSWORD_FORGET;
   email: string = '';
@@ -62,21 +62,21 @@ export class ConnexionComponent {
     if (!this.email || !this.password) return;
 
     if(!emailPattern.test(this.email)) {
-      this.toastService.showToast('Veuillez entrer un e-mail valide', 'error', '⚠️');
+      this.toastService.showToast('Veuillez entrer un e-mail valide', 'error', '⚠️'); // todo: change icon
       return;
     };
 
-    this.connexionService.login(credentials).subscribe({
+    this.authService.login(credentials).subscribe({
       next: (response) => {
-        this.toastService.showToast('Vous êtes connecté avec succès.','success', '✅');
+        this.toastService.showToast('Vous êtes connecté avec succès.','success', '✅'); // todo: change icon
         // todo: generate response of the user
         console.log(response);
       },
       error: ({status}) => {
         if(status === 404) {
-          this.toastService.showToast('Échec de la connexion, veuillez vérifier vos identifiants.', 'error', '❌');
+          this.toastService.showToast('Échec de la connexion, veuillez vérifier vos identifiants.', 'error', '❌'); // todo: change icon
         } else if (status === 401) {
-          this.toastService.showToast('Mot de passe incorrect. Essayez encore.','error', '❌');
+          this.toastService.showToast('Mot de passe incorrect. Essayez encore.','error', '❌'); // todo: change icon
         } else {
           alert("Internal server error");
         };
