@@ -1,13 +1,17 @@
-import { FormsModule } from '@angular/forms';
+import { NgClass } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { Component, inject } from '@angular/core';
+import {
+  FormGroup,
+  Validators,
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
-import { URLS } from '../../../components/helpers/url-constants';
-import { TagAComponent } from '../../../components/tag-a/tag-a.component';
-import { TagButtonComponent } from '../../../components/tag-button/tag-button.component';
-import { FormInputEmailComponent } from '../../../components/form/form-input-email/form-input-email.component';
-import { FormInputPasswordComponent } from '../../../components/form/form-input-password/form-input-password.component';
 import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-component/auth-layout-component.component';
 
+import { URLS } from '../../../components/helpers/url-constants';
 import { adminConnexion } from '../../../model/admin-connexion.type';
 
 import { AuthService } from '../service/auth.service';
@@ -18,11 +22,10 @@ import { ToastServiceService } from '../../../services/toast/toast-service.servi
   selector: 'connexion-auth',
   standalone: true,
   imports: [
+    NgClass,
+    RouterLink,
     FormsModule,
-    TagAComponent,
-    TagButtonComponent,
-    FormInputEmailComponent,
-    FormInputPasswordComponent,
+    ReactiveFormsModule,
     AuthLayoutComponentComponent,
   ],
   templateUrl: './connexion.component.html',
@@ -37,33 +40,17 @@ export class ConnexionComponent {
   email: string = '';
   password: string = '';
 
-  onEmailReceived(email: string): void {
-    this.email = email;
-  };
-
-  onPasswordReceived(password: string): void {
-    this.password = password;
-  };
-
-  isTagButtonDisabled(): boolean {
-    return !(this.email && this.password);
-  };
+  connexionForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+  })
 
   onSubmit(event: Event): void {
     event.preventDefault();
 
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
     const credentials: adminConnexion = {
       email: this.email,
       password: this.password,
-    };
-
-    if (!this.email || !this.password) return;
-
-    if(!emailPattern.test(this.email)) {
-      this.toastService.showToast('Veuillez entrer un e-mail valide', 'error', '⚠️'); // todo: change icon
-      return;
     };
 
     this.authService.login(credentials).subscribe({

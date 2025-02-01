@@ -1,18 +1,22 @@
+import { NgClass } from '@angular/common';
+import {
+  FormGroup,
+  Validators,
+  FormsModule,
+  FormControl,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
-import { FormInputEmailComponent } from '../../../components/form/form-input-email/form-input-email.component';
-import { TagButtonComponent } from '../../../components/tag-button/tag-button.component';
 import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-component/auth-layout-component.component';
-import { response } from 'express';
 
 @Component({
   selector: 'app-forget-password',
   standalone: true,
   imports: [
+    NgClass,
     FormsModule,
-    TagButtonComponent,
-    FormInputEmailComponent,
+    ReactiveFormsModule,
     AuthLayoutComponentComponent,
   ],
   templateUrl: './forget-password.component.html',
@@ -22,11 +26,11 @@ export class ForgetPasswordComponent {
 
   private authService = inject(AuthService)
 
-  email: string = '';
+  emailForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+  })
 
-  onEmailReceived(email: string): void {
-    this.email = email;
-  };
+  email: string = '';
 
   onSubmit(event: Event): void {
     event.preventDefault();
