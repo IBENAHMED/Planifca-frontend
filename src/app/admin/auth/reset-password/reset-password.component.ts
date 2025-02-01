@@ -1,6 +1,12 @@
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-component/auth-layout-component.component';
 
 @Component({

@@ -8,14 +8,11 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-
-import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-component/auth-layout-component.component';
-
+import { AuthService } from '../service/auth.service';
 import { URLS } from '../../../components/helpers/url-constants';
 import { adminConnexion } from '../../../model/admin-connexion.type';
-
-import { AuthService } from '../service/auth.service';
 import { ToastServiceService } from '../../../services/toast/toast-service.service';
+import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-component/auth-layout-component.component';
 
 
 @Component({
