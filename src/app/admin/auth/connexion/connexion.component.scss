@@ -21,7 +21,7 @@ input {
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
-  border-radius: calc($border-radius * 2);;
+  border-radius: calc($border-radius * 2);
   outline-color: $primary-color;
 }
 
@@ -33,7 +33,7 @@ a {
   color: $text-color;
   text-align: left;
   display: block;
-    text-decoration: underline;
+  text-decoration: underline;
   text-decoration-color: $text-color;
 }
 

@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormGroup,
   Validators,
@@ -28,7 +28,7 @@ import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-compon
   templateUrl: './connexion.component.html',
   styleUrl: './connexion.component.scss'
 })
-export class ConnexionComponent {
+export class ConnexionComponent implements OnInit {
 
   private toastService = inject(ToastServiceService);
   private authService = inject(AuthService);
@@ -40,7 +40,17 @@ export class ConnexionComponent {
   connexionForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
-  })
+  });
+
+  ngOnInit(): void {
+    this.connexionForm.get('email')?.valueChanges.subscribe(value => {
+      this.email = value || '';
+    });
+
+    this.connexionForm.get('password')?.valueChanges.subscribe(value => {
+      this.password = value || '';
+    });
+  };
 
   onSubmit(event: Event): void {
     event.preventDefault();
@@ -52,15 +62,15 @@ export class ConnexionComponent {
 
     this.authService.login(credentials).subscribe({
       next: (response) => {
-        this.toastService.showToast('Vous êtes connecté avec succès.','success', '✅'); // todo: change icon
+        this.toastService.showToast('Vous êtes connecté avec succès.', 'success', '✅'); // todo: change icon
         // todo: generate response of the user
         console.log(response);
       },
-      error: ({status}) => {
-        if(status === 404) {
+      error: ({ status }) => {
+        if (status === 404) {
           this.toastService.showToast('Échec de la connexion, veuillez vérifier vos identifiants.', 'error', '❌'); // todo: change icon
         } else if (status === 401) {
-          this.toastService.showToast('Mot de passe incorrect. Essayez encore.','error', '❌'); // todo: change icon
+          this.toastService.showToast('Mot de passe incorrect. Essayez encore.', 'error', '❌'); // todo: change icon
         } else {
           alert("Internal server error");
         };
