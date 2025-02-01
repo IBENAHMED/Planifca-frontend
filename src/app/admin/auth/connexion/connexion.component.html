@@ -1,31 +1,15 @@
 <app-auth-layout-component>
-  <form (ngSubmit)="onSubmit($event)">
-    <app-form-input-email
-      (emailEvent)="onEmailReceived($event)"
-      id="email"
-      label="Identifiant"
-      name="email"
-      placeholder="john.doe@gmail.com"
-      [required]="true"
-    />
-    <app-form-input-password
-      (passwordEvent)="onPasswordReceived($event)"
-      id="password"
-      label="Mot de passe"
-      name="password"
-      placeholder="**********"
-      [required]="true"
-    />
-    <app-tag-a
-      class="app-tag-a"
-      [routerLink]="resetPasswordUrl"
-      name="resetPassword"
-      text="Mot de passe oublié ?"
-    />
-    <app-tag-button
-      [disabled]="isTagButtonDisabled()"
-      label="Se connecter"
-      type="submit"
-    />
+  <form [formGroup]="connexionForm" (ngSubmit)="onSubmit($event)">
+    <label for="email">Identifiant</label>
+    <input formControlName="email" id="email" name="email" placeholder="john.doe@gmail.com" [required]="true"
+      type="email" />
+    <label for="password">Mot de passe</label>
+    <input formControlName="password" id="password" name="password" placeholder="**********" [required]="true"
+      type="password" />
+    <a [routerLink]="resetPasswordUrl" name="resetPassword">Mot de passe oublié ?</a>
+    <button type="submit" [disabled]="connexionForm.invalid"
+      [ngClass]="{'disabled': connexionForm.invalid, 'active': !connexionForm.invalid}">
+      Se connecter
+    </button>
   </form>
 </app-auth-layout-component>
