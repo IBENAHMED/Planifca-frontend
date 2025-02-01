@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FormInputTextComponent } from '../../components/form/form-input-text/form-input-text.component';
-import { TagButtonComponent } from '../../components/tag-button/tag-button.component';
-import { AuthLayoutComponentComponent } from '../../layout/auth-layout-component/auth-layout-component.component';
+import { FormInputTextComponent } from '../../../components/form/form-input-text/form-input-text.component';
+import { TagButtonComponent } from '../../../components/tag-button/tag-button.component';
+import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-component/auth-layout-component.component';
 
 @Component({
-  selector: 'app-reset',
+  selector: 'app-reset-password',
   standalone: true,
   imports: [
     FormsModule,
@@ -13,10 +13,10 @@ import { AuthLayoutComponentComponent } from '../../layout/auth-layout-component
     FormInputTextComponent,
     AuthLayoutComponentComponent,
   ],
-  templateUrl: './reset.component.html',
-  styleUrl: './reset.component.scss'
+  templateUrl: './reset-password.component.html',
+  styleUrl: './reset-password.component.scss'
 })
-export class ResetComponent {
+export class ResetPasswordComponent {
 
   password: string = '';
   passwordConfirmation: string = '';

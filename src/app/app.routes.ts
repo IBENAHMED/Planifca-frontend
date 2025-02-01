@@ -12,13 +12,13 @@ export const routes: Routes = [
   {
     path: URLS.PASSWORD_FORGET,
     loadComponent() {
-      return import("./admin/forget-password/forget-password.component").then((m) => m.ForgetPasswordComponent)
+      return import("./admin/auth/forget-password/forget-password.component").then((m) => m.ForgetPasswordComponent)
     },
   },
   {
     path: URLS.PASSWORD_RESET,
     loadComponent() {
-      return import("./admin/reset/reset.component").then((m) => m.ResetComponent)
+      return import("./admin/auth/reset-password/reset-password.component").then((m) => m.ResetPasswordComponent)
     },
   },
 ];
