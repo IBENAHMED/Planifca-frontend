@@ -8,7 +8,7 @@
       type="password" [ngClass]="{'error-border': isError}" />
     <a [routerLink]="resetPasswordUrl" name="resetPassword">Mot de passe oublié ?</a>
     <button type="submit" [disabled]="connexionForm.invalid"
-      [ngClass]="{'disabled': connexionForm.invalid, 'active': !connexionForm.invalid}">
+      [ngClass]="{'disabled': connexionForm.invalid}">
       Se connecter
     </button>
   </form>

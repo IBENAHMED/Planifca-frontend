@@ -49,7 +49,6 @@ export class ConnexionComponent {
     this.authService.login(credentials).subscribe({
       next: (response) => {
         // todo: generate response of the user
-        console.log(response);
       },
       error: ({ status }) => {
         if ([404, 401].includes(status)) {
