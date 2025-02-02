@@ -27,9 +27,26 @@ export class ResetPasswordComponent {
   private formBuilder = inject(FormBuilder);
 
   passwordForm: FormGroup = this.formBuilder.group({
-    newPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
-  });
+    newPassword: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{6,}$')
+
+    ]),
+    confirmPassword: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{6,}$')
+
+    ]),
+  }, { validators: this.passwordsMatchValidators });
+
+  passwordsMatchValidators(formGroup: FormGroup) {
+    const password = formGroup.get("newPassword")?.value;
+    const confirmPassword = formGroup.get("confirmPassword")?.value;
+
+    return password === confirmPassword ? null : { passwordsMismatch: true };
+  }
 
   onSubmit(): void {
     alert('Fonctionnalité en cours');

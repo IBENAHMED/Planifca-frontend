@@ -30,7 +30,6 @@ export class ForgetPasswordComponent {
   private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
 
-  email: string = '';
   isEmailSent: boolean = false;
 
   emailControl: FormControl = this.formBuilder.control('', [Validators.required, Validators.email]);
@@ -38,7 +37,6 @@ export class ForgetPasswordComponent {
   onSubmit(): void {
     this.authService.forgetPassword(this.emailControl.value).subscribe({
       next: () => {
-        this.email = this.emailControl.value;
         this.isEmailSent = true;
       },
       error: () => {
