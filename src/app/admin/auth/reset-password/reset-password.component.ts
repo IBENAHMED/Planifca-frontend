@@ -26,7 +26,7 @@ export class ResetPasswordComponent {
 
   private formBuilder = inject(FormBuilder);
 
-  passwordForm = this.formBuilder.group({
+  passwordForm: FormGroup = this.formBuilder.group({
     newPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
