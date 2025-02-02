@@ -7,6 +7,7 @@ import {
   FormControl,
   FormsModule,
   ReactiveFormsModule,
+  FormBuilder,
 } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { URLS } from '../../../components/helpers/url-constants';
@@ -28,15 +29,16 @@ import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-compon
 })
 export class ConnexionComponent {
 
+  private authService = inject(AuthService);
+  private formBuilder = inject(FormBuilder);
+
   isError: boolean = false;
   resetPasswordUrl = URLS.PASSWORD_FORGET;
 
-  connexionForm: FormGroup = new FormGroup({
+  connexionForm: FormGroup = this.formBuilder.group({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
-
-  private authService = inject(AuthService);
 
   onSubmit(): void {
     const credentials: adminConnexion = {
