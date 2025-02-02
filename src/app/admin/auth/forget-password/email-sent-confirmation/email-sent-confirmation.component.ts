@@ -11,11 +11,11 @@ import { AuthService } from '../../service/auth.service';
 })
 export class EmailSentConfirmationComponent {
 
+  private authService = inject(AuthService);
+
   @Input() email: string = '';
 
   isEmailResent: boolean = false;
-
-  private authService = inject(AuthService);
 
   resendEmail() {
     this.authService.forgetPassword(this.email).subscribe({

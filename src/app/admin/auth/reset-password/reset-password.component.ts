@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
+  FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
@@ -23,7 +24,9 @@ import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-compon
 })
 export class ResetPasswordComponent {
 
-  passwordForm = new FormGroup({
+  private formBuilder = inject(FormBuilder);
+
+  passwordForm = this.formBuilder.group({
     newPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });

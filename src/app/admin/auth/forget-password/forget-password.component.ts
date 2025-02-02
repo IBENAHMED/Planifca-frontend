@@ -4,6 +4,7 @@ import {
   Validators,
   FormsModule,
   FormControl,
+  FormBuilder,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
@@ -26,12 +27,13 @@ import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-compon
 })
 export class ForgetPasswordComponent {
 
+  private authService = inject(AuthService);
+  private formBuilder = inject(FormBuilder);
+
   email: string = '';
   isEmailSent: boolean = false;
 
-  emailControl: FormControl = new FormControl('', [Validators.required, Validators.email]);
-
-  private authService = inject(AuthService)
+  emailControl: FormControl = this.formBuilder.control('', [Validators.required, Validators.email]);
 
   onSubmit(): void {
     this.authService.forgetPassword(this.emailControl.value).subscribe({
