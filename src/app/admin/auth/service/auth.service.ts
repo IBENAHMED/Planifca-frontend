@@ -9,13 +9,15 @@ import { environment } from '../../../../environments/environment';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { };
 
   login(credentials: adminConnexion): Observable<any> {
-    return this.http.post(`${environment.baseUrl}/api/internal/auth/login`, credentials);
+    return this.http
+      .post(`${environment.baseUrl}/api/internal/auth/login`, credentials);
   };
 
   forgetPassword(email: string): Observable<any> {
-    return this.http.post(`${environment.baseUrl}/api/internal/auth/forgot-password`, { email: email }); //todo: chnage forgot to forget
+    return this.http
+      .post(`${environment.baseUrl}/api/internal/auth/forget-password`, { email: email });
   };
 };

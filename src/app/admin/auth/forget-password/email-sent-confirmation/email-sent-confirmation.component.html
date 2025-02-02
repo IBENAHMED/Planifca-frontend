@@ -1,0 +1,15 @@
+<article class="EmailSentConfirmationComponent">
+  <h1>Consulter vos emails</h1>
+  <div *ngIf="!isEmailResent; else isEmailNotResent">
+    <p>
+      Nous venons de vous envoyer un email à l’adresse <span>{{email}}</span>. Cliquez sur le lien dans
+      celui-ci pour
+      configurer
+      votre mot de passe.
+    </p>
+    <span>Vous n’avez rien reçu ? <button (click)="resendEmail()">Envoyer à nouveau</button></span>
+  </div>
+  <ng-template #isEmailNotResent>
+    <p>Un nouveau lien de réinitialisation de mot de passe a été envoyé !</p>
+  </ng-template>
+</article>

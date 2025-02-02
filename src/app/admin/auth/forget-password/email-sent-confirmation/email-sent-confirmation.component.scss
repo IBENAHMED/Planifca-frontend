@@ -1,0 +1,44 @@
+@import 'variables';
+
+article {
+  display: flex;
+  margin-top: -30px;
+  justify-content: center;
+  flex-direction: column;
+}
+
+article div {
+  text-align: center;
+}
+
+article h1 {
+  font-size: $font-2xl;
+  font-weight: $font-medium;
+}
+
+article p {
+  margin-top: -10px;
+  font-size: $font-sm;
+  font-weight: $font-normal;
+}
+
+article p span {
+  font-size: $font-sm;
+  font-weight: $font-semibold;
+}
+
+article span {
+  font-size: $font-xs;
+  font-weight: $font-normal;
+}
+
+article span button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: $text-color;
+  font-size: $font-xs;
+  font-weight: $font-normal;
+  text-decoration: underline;
+  background-color: transparent;
+}
