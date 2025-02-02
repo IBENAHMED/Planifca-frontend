@@ -2,10 +2,10 @@
   <form [formGroup]="connexionForm" (ngSubmit)="onSubmit()">
     <label for="email">Identifiant</label>
     <input formControlName="email" id="email" name="email" placeholder="john.doe@gmail.com" [required]="true"
-      type="email" />
+      type="email" [ngClass]="{'error-border': isError}" />
     <label for="password">Mot de passe</label>
     <input formControlName="password" id="password" name="password" placeholder="**********" [required]="true"
-      type="password" />
+      type="password" [ngClass]="{'error-border': isError}" />
     <a [routerLink]="resetPasswordUrl" name="resetPassword">Mot de passe oublié ?</a>
     <button type="submit" [disabled]="connexionForm.invalid"
       [ngClass]="{'disabled': connexionForm.invalid, 'active': !connexionForm.invalid}">

@@ -28,8 +28,8 @@ export class ResetPasswordComponent {
 
   passwordForm = new FormGroup({
     newPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
-  })
+    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
+  });
 
   onSubmit(): void {
     alert('Fonctionnalité en cours');

@@ -1,7 +1,6 @@
 import { NgClass, NgIf } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
-  FormGroup,
   Validators,
   FormsModule,
   FormControl,
@@ -25,32 +24,24 @@ import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-compon
   templateUrl: './forget-password.component.html',
   styleUrl: './forget-password.component.scss'
 })
-export class ForgetPasswordComponent implements OnInit {
+export class ForgetPasswordComponent {
+
+  email: string = '';
+  isEmailSent: boolean = false;
+
+  emailControl: FormControl = new FormControl('', [Validators.required, Validators.email]);
 
   private authService = inject(AuthService)
 
-  isEmailSent: boolean = false;
-  email: string = '';
-
-  emailForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-  })
-
-  ngOnInit(): void {
-    this.emailForm.get('email')?.valueChanges.subscribe(value => {
-      this.email = value || '';
+  onSubmit(): void {
+    this.authService.forgetPassword(this.emailControl.value).subscribe({
+      next: () => {
+        this.email = this.emailControl.value;
+        this.isEmailSent = true;
+      },
+      error: () => {
+        alert("Internal server error");
+      },
     });
   };
-
-  onSubmit(): void {
-    this.authService.forgetPassword(this.email).subscribe({
-      next: (response) => {
-        this.isEmailSent = true;
-        console.log("Email sent successfully:", response);
-      },
-      error: (error) => {
-        console.error("Error sending email:", error);
-      }
-    });
-  }
 };
