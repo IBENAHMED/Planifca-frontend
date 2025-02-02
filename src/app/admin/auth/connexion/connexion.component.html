@@ -1,5 +1,5 @@
 <app-auth-layout-component>
-  <form [formGroup]="connexionForm" (ngSubmit)="onSubmit($event)">
+  <form [formGroup]="connexionForm" (ngSubmit)="onSubmit()">
     <label for="email">Identifiant</label>
     <input formControlName="email" id="email" name="email" placeholder="john.doe@gmail.com" [required]="true"
       type="email" />

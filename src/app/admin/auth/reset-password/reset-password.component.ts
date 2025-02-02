@@ -31,8 +31,7 @@ export class ResetPasswordComponent {
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
   })
 
-  onSubmit(event: Event): void {
-    event.preventDefault();
+  onSubmit(): void {
     alert('Fonctionnalité en cours');
   };
 };

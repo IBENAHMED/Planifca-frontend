@@ -52,8 +52,7 @@ export class ConnexionComponent implements OnInit {
     });
   };
 
-  onSubmit(event: Event): void {
-    event.preventDefault();
+  onSubmit(): void {
 
     const credentials: adminConnexion = {
       email: this.email,
