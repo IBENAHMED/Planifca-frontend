@@ -28,12 +28,12 @@ import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-compon
 })
 export class ConnexionComponent {
 
-  resetPasswordUrl = URLS.PASSWORD_FORGET;
   isError: boolean = false;
+  resetPasswordUrl = URLS.PASSWORD_FORGET;
 
   connexionForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
 
   private authService = inject(AuthService);
