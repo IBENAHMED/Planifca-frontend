@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { URLS } from '../helpers/url-constants';
 
 @Component({
   selector: 'app-not-found',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './not-found.component.scss'
 })
 export class NotFoundComponent {
-
+  loginUrl: string = URLS.DEFAULT;
 }
