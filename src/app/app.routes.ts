@@ -3,6 +3,13 @@ import { URLS } from './components/helpers/url-constants';
 
 export const routes: Routes = [
   {
+    path: ':userType',
+    pathMatch: 'full',
+    loadComponent() {
+      return import("./admin/admin.component").then((m) => m.AdminComponent)
+    },
+  },
+  {
     path: URLS.ADMIN,
     pathMatch: 'full',
     loadComponent() {
