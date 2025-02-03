@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { adminConnexion } from '../../../model/admin-connexion.type';
-import { environment } from '../../../../environments/environment';
+import { connexion } from '../../model/connexion.type';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +11,9 @@ export class AuthService {
 
   private readonly urlApi: string = `${environment.baseUrl}/api/internal/auth`;
 
-  constructor(private http: HttpClient) { };
+  private http = inject(HttpClient)
 
-  login(credentials: adminConnexion): Observable<any> {
+  login(credentials: connexion): Observable<any> {
     return this.http.post(`${this.urlApi}/login`, credentials);
   };
 
@@ -27,7 +27,6 @@ export class AuthService {
       'Content-Type': 'application/json',
       'X-Requested-With': token,
     });
-    console.log({ "url": url, "newPassword": { newPassword }, "headers": { headers } })
 
     return this.http.post(url, { newPassword }, { headers });
   }
