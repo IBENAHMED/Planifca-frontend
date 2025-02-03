@@ -1,0 +1,29 @@
+@import "variables";
+
+.container-email {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  text-align: left;
+  margin-bottom: 3px;
+  font-size: $font-xs;
+  font-weight: $font-normal;
+}
+
+span {
+  color: red;
+}
+
+input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  outline-color: $primary-color;
+  border-radius: calc($border-radius * 2);
+}
+
+.error-border {
+  border: 1px solid rgba(255, 0, 0, 0.696);
+}

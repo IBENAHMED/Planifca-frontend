@@ -1,0 +1,13 @@
+@import "variables";
+
+a {
+  display: block;
+  font-size: small;
+  text-align: left;
+  width: fit-content;
+  color: $text-color;
+  text-decoration: none;
+  font-weight: $font-normal;
+  text-decoration: underline;
+  text-decoration-color: $text-color;
+}

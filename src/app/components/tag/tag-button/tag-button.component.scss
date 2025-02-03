@@ -1,0 +1,21 @@
+@import "variables";
+
+button {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  color: #fff;
+  outline: none;
+  opacity: none;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: $font-xs;
+  font-weight: $font-normal;
+  background: $primary-color;
+  border-radius: $border-radius;
+}
+
+.disabled {
+  opacity: 0.7;
+  cursor: no-drop;
+}

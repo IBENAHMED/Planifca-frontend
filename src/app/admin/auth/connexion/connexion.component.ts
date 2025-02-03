@@ -1,5 +1,4 @@
 import { NgClass } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { Component, inject } from '@angular/core';
 import {
   FormGroup,
@@ -12,16 +11,23 @@ import {
 import { AuthService } from '../service/auth.service';
 import { URLS } from '../../../components/helpers/url-constants';
 import { adminConnexion } from '../../../model/admin-connexion.type';
+import { FormInputEmailComponent } from '../../../components/form/form-input-email/form-input-email.component';
 import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-component/auth-layout-component.component';
+import { FormInputPasswordComponent } from "../../../components/form/form-input-password/form-input-password.component";
+import { TagAComponent } from "../../../components/tag/tag-a/tag-a.component";
+import { TagButtonComponent } from "../../../components/tag/tag-button/tag-button.component";
 
 @Component({
   selector: 'connexion-auth',
   standalone: true,
   imports: [
     NgClass,
-    RouterLink,
     FormsModule,
+    TagAComponent,
+    TagButtonComponent,
     ReactiveFormsModule,
+    FormInputEmailComponent,
+    FormInputPasswordComponent,
     AuthLayoutComponentComponent,
   ],
   templateUrl: './connexion.component.html',
@@ -39,6 +45,14 @@ export class ConnexionComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
+
+  get emailControl(): FormControl {
+    return this.connexionForm.get('email') as FormControl;
+  };
+
+  get passwordControl(): FormControl {
+    return this.connexionForm.get('password') as FormControl;
+  };
 
   onSubmit(): void {
     const credentials: adminConnexion = {
