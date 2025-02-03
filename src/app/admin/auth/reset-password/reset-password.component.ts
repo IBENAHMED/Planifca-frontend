@@ -1,4 +1,5 @@
 import { NgClass } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
@@ -8,9 +9,10 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+import { AuthService } from '../service/auth.service';
+import { TagButtonComponent } from "../../../components/tag/tag-button/tag-button.component";
 import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-component/auth-layout-component.component';
 import { FormInputPasswordComponent } from "../../../components/form/form-input-password/form-input-password.component";
-import { TagButtonComponent } from "../../../components/tag/tag-button/tag-button.component";
 
 @Component({
   selector: 'app-reset-password',
@@ -28,7 +30,10 @@ import { TagButtonComponent } from "../../../components/tag/tag-button/tag-butto
 })
 export class ResetPasswordComponent {
 
+  private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
+
+  token: string | null = null;
 
   passwordForm: FormGroup = this.formBuilder.group({
     newPassword: new FormControl('', [
@@ -38,6 +43,10 @@ export class ResetPasswordComponent {
     ]),
     confirmPassword: new FormControl('', [Validators.required]),
   }, { validators: this.passwordsMatchValidators });
+
+  constructor(private route: ActivatedRoute) {
+    this.token = this.route.snapshot.queryParamMap.get('token');
+  };
 
   get newPasswordControl(): FormControl {
     return this.passwordForm.get('newPassword') as FormControl;
@@ -50,11 +59,23 @@ export class ResetPasswordComponent {
   passwordsMatchValidators(formGroup: FormGroup) {
     const password = formGroup.get("newPassword")?.value;
     const confirmPassword = formGroup.get("confirmPassword")?.value;
-
     return password === confirmPassword ? null : { passwordsMismatch: true };
   }
 
+  resetPassword(newPassword: string, token: string) {
+    this.authService.resetPassword(newPassword, token).subscribe({
+      next: (response) => {
+        console.log("response", response);
+      },
+      error: (error) => {
+        console.log("error", error)
+      },
+    });
+  };
+
   onSubmit(): void {
-    alert('Fonctionnalité en cours');
+    if (!this.passwordForm.valid || !this.token) return;
+    const newPassword = this.passwordForm.get('newPassword')?.value;
+    this.resetPassword(newPassword, this.token);
   };
 };
