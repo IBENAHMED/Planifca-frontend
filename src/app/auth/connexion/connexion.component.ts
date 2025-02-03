@@ -9,15 +9,15 @@ import {
   ReactiveFormsModule,
   FormBuilder,
 } from '@angular/forms';
-import constants from '../../../components/constants';
+import constants from '../../components/constants';
 import { AuthService } from '../service/auth.service';
-import { URLS } from '../../../components/helpers/url-constants';
-import { adminConnexion } from '../../../model/admin-connexion.type';
-import { TagAComponent } from "../../../components/tag/tag-a/tag-a.component";
-import { TagButtonComponent } from "../../../components/tag/tag-button/tag-button.component";
-import { FormInputEmailComponent } from '../../../components/form/form-input-email/form-input-email.component';
-import { FormInputPasswordComponent } from "../../../components/form/form-input-password/form-input-password.component";
-import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-component/auth-layout-component.component';
+import { URLS } from '../../components/helpers/url-constants';
+import { connexion } from '../../model/connexion.type';
+import { TagAComponent } from "../../components/tag/tag-a/tag-a.component";
+import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
+import { FormInputEmailComponent } from '../../components/form/form-input-email/form-input-email.component';
+import { FormInputPasswordComponent } from "../../components/form/form-input-password/form-input-password.component";
+import { AuthLayoutComponentComponent } from '../../layout/auth-layout-component/auth-layout-component.component';
 
 
 
@@ -67,15 +67,16 @@ export class ConnexionComponent implements OnInit {
   };
 
   onSubmit(): void {
-    const credentials: adminConnexion = {
+    const credentials: connexion = {
       email: this.connexionForm.get('email')?.value,
       password: this.connexionForm.get('password')?.value,
-      // todo userType: this.userType, #active type when get ready on backend
+      // userType: this.userType, #todo active type when get ready on backend
     };
 
     this.authService.login(credentials).subscribe({
-      next: () => {
+      next: (response) => {
         // todo: generate response of the user
+        console.log(response)
       },
       error: ({ status }) => {
         if ([404, 401].includes(status)) {

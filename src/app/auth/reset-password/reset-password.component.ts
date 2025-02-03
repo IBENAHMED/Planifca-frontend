@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -10,9 +10,9 @@ import {
   Validators
 } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
-import { TagButtonComponent } from "../../../components/tag/tag-button/tag-button.component";
-import { AuthLayoutComponentComponent } from '../../../layout/auth-layout-component/auth-layout-component.component';
-import { FormInputPasswordComponent } from "../../../components/form/form-input-password/form-input-password.component";
+import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
+import { AuthLayoutComponentComponent } from '../../layout/auth-layout-component/auth-layout-component.component';
+import { FormInputPasswordComponent } from "../../components/form/form-input-password/form-input-password.component";
 
 @Component({
   selector: 'app-reset-password',
@@ -28,10 +28,11 @@ import { FormInputPasswordComponent } from "../../../components/form/form-input-
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.scss'
 })
-export class ResetPasswordComponent {
+export class ResetPasswordComponent implements OnInit {
 
   private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
+  private route = inject(ActivatedRoute)
 
   token: string | null = null;
 
@@ -44,7 +45,7 @@ export class ResetPasswordComponent {
     confirmPassword: new FormControl('', [Validators.required]),
   }, { validators: this.passwordsMatchValidators });
 
-  constructor(private route: ActivatedRoute) {
+  ngOnInit(): void {
     this.token = this.route.snapshot.queryParamMap.get('token');
   };
 
@@ -64,11 +65,11 @@ export class ResetPasswordComponent {
 
   resetPassword(newPassword: string, token: string) {
     this.authService.resetPassword(newPassword, token).subscribe({
-      next: (response) => {
-        console.log("response", response);
+      next: () => {
+        //todo: generate response
       },
-      error: (error) => {
-        console.log("error", error)
+      error: () => {
+        alert("Internal server error");
       },
     });
   };
