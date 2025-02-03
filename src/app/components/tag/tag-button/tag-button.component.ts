@@ -10,7 +10,8 @@ import { Component, Input } from '@angular/core';
 })
 export class TagButtonComponent {
 
-  @Input() disabled!: boolean;
+  @Input() disabled: boolean = false;
   @Input() ngClass!: any;
+  @Input() text!: string;
   @Input() type!: string;
 }

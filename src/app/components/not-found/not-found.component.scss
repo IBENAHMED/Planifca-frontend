@@ -1,0 +1,32 @@
+@import 'variables';
+
+.NotFoundComponent {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+}
+
+.not-found {
+  width: 500px;
+  width: 500px;
+  padding-top: 35px;
+}
+
+p {
+  margin-top: -10px;
+  color: $text-color;
+}
+
+a {
+  color: white;
+  padding-top: 7px;
+  margin-top: 15px;
+  padding-left: 25px;
+  padding-bottom: 7px;
+  padding-right: 25px;
+  text-decoration: none;
+  border-radius: calc($border-radius*2);
+  background-color: $primary-color;
+}

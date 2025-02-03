@@ -28,4 +28,10 @@ export const routes: Routes = [
       return import("./auth/reset-password/reset-password.component").then((m) => m.ResetPasswordComponent)
     },
   },
+  {
+    path: URLS.NOTFOUND,
+    loadComponent() {
+      return import("./components/not-found/not-found.component").then((m) => m.NotFoundComponent)
+    },
+  },
 ];
