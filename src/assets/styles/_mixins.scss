@@ -1,0 +1,27 @@
+@mixin flex($justify: center, $algin: center, $gap: 0, $direction: row) {
+  gap: $gap;
+  display: flex;
+  align-items: $algin;
+  justify-content: $justify;
+  flex-direction: $direction;
+}
+
+@mixin font-style($size, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+}
+
+@mixin padding-x($value) {
+  padding-left: $value;
+  padding-right: $value;
+}
+
+@mixin padding-y($value) {
+  padding-top: $value;
+  padding-bottom: $value;
+}
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}

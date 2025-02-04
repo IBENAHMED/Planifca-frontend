@@ -11,9 +11,8 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
-import { AuthLayoutComponentComponent } from '../../layout/auth-layout-component/auth-layout-component.component';
+import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.component';
 import { FormInputPasswordComponent } from "../../components/form/form-input-password/form-input-password.component";
-
 @Component({
   selector: 'app-reset-password',
   standalone: true,

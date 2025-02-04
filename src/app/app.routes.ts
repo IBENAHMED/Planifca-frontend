@@ -3,10 +3,9 @@ import { URLS } from './components/helpers/url-constants';
 
 export const routes: Routes = [
   {
-    path: ':userType',
-    pathMatch: 'full',
+    path: URLS.ADMIN,
     loadComponent() {
-      return import("./auth/connexion/connexion.component").then((m) => m.ConnexionComponent)
+      return import("./admin/clubs/admin-clubs.component").then((m) => m.AdminClubsComponent)
     },
   },
   {
@@ -32,6 +31,13 @@ export const routes: Routes = [
     path: URLS.NOTFOUND,
     loadComponent() {
       return import("./components/not-found/not-found.component").then((m) => m.NotFoundComponent)
+    },
+  },
+  {
+    path: ':userType',
+    pathMatch: 'full',
+    loadComponent() {
+      return import("./auth/connexion/connexion.component").then((m) => m.ConnexionComponent)
     },
   },
 ];

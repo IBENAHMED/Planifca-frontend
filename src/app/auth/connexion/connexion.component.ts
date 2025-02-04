@@ -1,5 +1,5 @@
-import { ActivatedRoute } from '@angular/router';
 import { NgClass } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -11,15 +11,13 @@ import {
 } from '@angular/forms';
 import constants from '../../components/constants';
 import { AuthService } from '../service/auth.service';
-import { URLS } from '../../components/helpers/url-constants';
 import { connexion } from '../../model/connexion.type';
+import { URLS } from '../../components/helpers/url-constants';
 import { TagAComponent } from "../../components/tag/tag-a/tag-a.component";
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
 import { FormInputEmailComponent } from '../../components/form/form-input-email/form-input-email.component';
 import { FormInputPasswordComponent } from "../../components/form/form-input-password/form-input-password.component";
-import { AuthLayoutComponentComponent } from '../../layout/auth-layout-component/auth-layout-component.component';
-
-
+import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.component';
 
 @Component({
   selector: 'connexion-auth',
@@ -39,7 +37,8 @@ import { AuthLayoutComponentComponent } from '../../layout/auth-layout-component
 })
 export class ConnexionComponent implements OnInit {
 
-  private route = inject(ActivatedRoute);
+  private route = inject(Router)
+  private activatedRoute = inject(ActivatedRoute);
   private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
 
@@ -53,7 +52,7 @@ export class ConnexionComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(param => {
+    this.activatedRoute.paramMap.subscribe(param => {
       this.userType = param.get('userType') || constants.USER.Admin;
     });
   };
@@ -75,8 +74,8 @@ export class ConnexionComponent implements OnInit {
 
     this.authService.login(credentials).subscribe({
       next: (response) => {
-        // todo: generate response of the user
-        console.log(response)
+        localStorage.setItem("token", response.token);
+        this.route.navigate([URLS.ADMIN]);
       },
       error: ({ status }) => {
         if ([404, 401].includes(status)) {

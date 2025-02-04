@@ -1,25 +1,25 @@
 $border-radius: 5px;
 $primary-color: #2563eb;
-$secondary-color: #f0f2f5;
+$secondary-color: #F5F5F5;
 $text-color: #666;
 
 $sm: "max-width:768px";
 $md: "max-width:992px";
 $lg: "max-width:1200px";
 
-$font-xs: 0.75rem; // 12px
-$font-sm: 0.875rem; // 14px
-$font-base: 1rem; // 16px
-$font-lg: 1.125rem; // 18px
-$font-xl: 1.25rem; // 20px
-$font-2xl: 1.5rem; // 24px
-$font-3xl: 1.875rem; // 30px
-$font-4xl: 2.25rem; // 36px
-$font-5xl: 3rem; // 48px
-$font-6xl: 3.75rem; // 60px
-$font-7xl: 4.5rem; // 72px
-$font-8xl: 6rem; // 96px
-$font-9xl: 8rem; // 128px
+$text-xs: 0.75rem; // 12px
+$text-sm: 0.875rem; // 14px
+$text-base: 1rem; // 16px
+$text-lg: 1.125rem; // 18px
+$text-xl: 1.25rem; // 20px
+$text-2xl: 1.5rem; // 24px
+$text-3xl: 1.875rem; // 30px
+$text-4xl: 2.25rem; // 36px
+$text-5xl: 3rem; // 48px
+$text-6xl: 3.75rem; // 60px
+$text-7xl: 4.5rem; // 72px
+$text-8xl: 6rem; // 96px
+$text-9xl: 8rem; // 128px
 
 $font-thin: 100;
 $font-extralight: 200;
@@ -30,3 +30,5 @@ $font-semibold: 600;
 $font-bold: 700;
 $font-extrabold: 800;
 $font-black: 900;
+
+$transition: 0.3s;
