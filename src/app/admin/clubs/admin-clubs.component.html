@@ -1,21 +1,5 @@
-<article class="adminComponent">
-  <div class="container">
-    <div class="sidebar">
-      <div>
-        <img class="sidebar_logo" src="images/not-found.svg" alt="images logo" />
-        <ul>
-          <li (click)="mesClubs()">
-            <img src="/icon/icon-club.svg" alt="icon-club" />
-            <p>Mes clubs</p>
-          </li>
-        </ul>
-      </div>
-      <div class="sidebar_btn">
-        <app-tag-button text="Créer un club" (click)="createClub()">
-          <img src="/icon/icon-plus.svg" alt="icon-plus" />
-        </app-tag-button>
-      </div>
-    </div>
+<app-admin-layout>
+  <article class="adminClubsComponent">
     <div class="adminComponent-content">/src/app/admin</div>
-  </div>
-</article>
+  </article>
+</app-admin-layout>
