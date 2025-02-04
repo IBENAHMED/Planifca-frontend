@@ -38,9 +38,9 @@ import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.co
 export class ConnexionComponent implements OnInit {
 
   private route = inject(Router)
-  private activatedRoute = inject(ActivatedRoute);
   private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
+  private activatedRoute = inject(ActivatedRoute);
 
   userType: string = '';
   isError: boolean = false;
