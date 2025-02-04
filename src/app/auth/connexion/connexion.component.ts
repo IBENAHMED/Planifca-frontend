@@ -13,10 +13,10 @@ import constants from '../../components/constants';
 import { AuthService } from '../service/auth.service';
 import { connexion } from '../../model/connexion.type';
 import { URLS } from '../../components/helpers/url-constants';
-import { TagAComponent } from "../../components/tag/tag-a/tag-a.component";
-import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
+import { TagAComponent } from '../../components/tag/tag-a/tag-a.component';
+import { TagButtonComponent } from '../../components/tag/tag-button/tag-button.component';
 import { FormInputEmailComponent } from '../../components/form/form-input-email/form-input-email.component';
-import { FormInputPasswordComponent } from "../../components/form/form-input-password/form-input-password.component";
+import { FormInputPasswordComponent } from '../../components/form/form-input-password/form-input-password.component';
 import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.component';
 
 @Component({
