@@ -8,10 +8,10 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
-import { EmailSentConfirmationComponent } from './email-sent-confirmation/email-sent-confirmation.component';
-import { AuthLayoutComponentComponent } from '../../layout/auth-layout-component/auth-layout-component.component';
-import { FormInputEmailComponent } from '../../components/form/form-input-email/form-input-email.component';
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
+import { EmailSentConfirmationComponent } from './email-sent-confirmation/email-sent-confirmation.component';
+import { FormInputEmailComponent } from '../../components/form/form-input-email/form-input-email.component';
+import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.component';
 
 @Component({
   selector: 'app-forget-password',

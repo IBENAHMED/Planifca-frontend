@@ -1,10 +1,9 @@
 @import 'variables';
+@import "mixins";
 
 article {
-  display: flex;
   margin-top: -30px;
-  justify-content: center;
-  flex-direction: column;
+  @include flex($justify: center, $algin: center, $gap: 3, $direction: column);
 }
 
 article div {
@@ -12,24 +11,20 @@ article div {
 }
 
 article h1 {
-  font-size: $font-2xl;
-  font-weight: $font-medium;
+  @include font-style($text-2xl, $font-medium);
 }
 
 article p {
   margin-top: -10px;
-  font-size: $font-sm;
-  font-weight: $font-normal;
+  @include font-style($text-sm, $font-normal);
 }
 
 article p span {
-  font-size: $font-sm;
-  font-weight: $font-semibold;
+  @include font-style($text-sm, $font-semibold);
 }
 
 article span {
-  font-size: $font-xs;
-  font-weight: $font-normal;
+  @include font-style($text-xs, $font-normal);
 }
 
 article span button {
@@ -37,8 +32,7 @@ article span button {
   outline: none;
   cursor: pointer;
   color: $text-color;
-  font-size: $font-xs;
-  font-weight: $font-normal;
   text-decoration: underline;
   background-color: transparent;
+  @include font-style($text-xs, $font-normal);
 }
