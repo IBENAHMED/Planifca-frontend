@@ -1,5 +1,11 @@
 <app-admin-layout>
   <article class="adminClubsComponent">
-    <div class="adminComponent-content">/src/app/admin</div>
+    <div class="adminComponent-content">
+      <div class="adminComponent_btn">
+        <app-tag-button text="Créer un club" (click)="createClub()">
+          <img src="/icon/icon-plus.svg" alt="icon-plus" />
+        </app-tag-button>
+      </div>
+    </div>
   </article>
 </app-admin-layout>

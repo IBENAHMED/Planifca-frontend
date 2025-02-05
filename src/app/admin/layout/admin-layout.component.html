@@ -17,6 +17,13 @@
       </div>
     </div>
     <div class="ng-content">
+      <nav>
+        <a [routerLink]="['/' + urlAdminClubs]">
+          <img src="/icon/icon-left-arrow-shield.svg" alt="icon-club" />
+          <span>Mes clubs</span>
+        </a>
+        <span (click)="logOut()">Déconnexion</span>
+      </nav>
       <ng-content></ng-content>
     </div>
   </div>

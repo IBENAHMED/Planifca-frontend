@@ -69,6 +69,7 @@ export class ConnexionComponent implements OnInit {
     const credentials: connexion = {
       email: this.connexionForm.get('email')?.value,
       password: this.connexionForm.get('password')?.value,
+      // # todo create middleweare
       // userType: this.userType, #todo active type when get ready on backend
     };
 
