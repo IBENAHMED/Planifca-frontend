@@ -69,7 +69,8 @@ export class ConnexionComponent implements OnInit {
     const credentials: connexion = {
       email: this.connexionForm.get('email')?.value,
       password: this.connexionForm.get('password')?.value,
-      // # todo create middleweare
+      // # todo already you craeted layout now you need to create middleweare
+      // todo: avaner dans espace club (ceconnection adn design)
       // userType: this.userType, #todo active type when get ready on backend
     };
 
