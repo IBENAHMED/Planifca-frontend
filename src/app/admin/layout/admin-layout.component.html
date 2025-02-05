@@ -16,13 +16,35 @@
         </app-tag-button>
       </div>
     </div>
+    <div id="offcanvasScrolling" class="offcanvas-container" [class.active]="isOffcanvasOpen">
+      <div class="offcanvas-header">
+        <span class="offcanvas-title">Offcanvas Fullscreen</span>
+        <button type="button" class="btn-close" (click)="closeOffcanvas()">X</button>
+      </div>
+      <div class="offcanvas-body">
+        <app-tag-button text="Créer un club" (click)="createClub()">
+          <img src="/icon/icon-plus.svg" alt="icon-plus" />
+        </app-tag-button>
+        <span></span>
+        <ul>
+          <li (click)="mesClubs()">
+            <img src="/icon/icon-club.svg" alt="icon-club" />
+            <p>Mes clubs</p>
+          </li>
+        </ul>
+      </div>
+    </div>
     <div class="ng-content">
       <nav>
-        <a [routerLink]="['/' + urlAdminClubs]">
-          <img src="/icon/icon-left-arrow-shield.svg" alt="icon-club" />
-          <span>Mes clubs</span>
-        </a>
-        <span (click)="logOut()">Déconnexion</span>
+        <div>
+          <a [routerLink]="['/' + urlAdminClubs]">
+            <img src="/icon/icon-left-arrow-shield.svg" alt="icon-club" />
+            <span>Mes clubs</span>
+          </a>
+          <span class="logo">...........</span>
+          <span class="logOut" (click)="logOut()">Déconnexion</span>
+          <button (click)="openOffcanvas()"><img src="/icon/icon-burger.svg" alt="icon-burger" /></button>
+        </div>
       </nav>
       <ng-content></ng-content>
     </div>

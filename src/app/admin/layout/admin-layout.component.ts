@@ -12,7 +12,16 @@ import { TagButtonComponent } from '../../components/tag/tag-button/tag-button.c
 })
 export class AdminLayoutComponent {
 
+  isOffcanvasOpen = false;
   urlAdminClubs = URLS.ADMIN_CLUB;
+
+  openOffcanvas() {
+    this.isOffcanvasOpen = true;
+  }
+
+  closeOffcanvas() {
+    this.isOffcanvasOpen = false;
+  }
 
   logOut(): void {
     alert("Fonctionnalités en cours");
