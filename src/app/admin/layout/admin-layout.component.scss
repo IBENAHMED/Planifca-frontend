@@ -39,13 +39,13 @@
       display: flex;
       cursor: pointer;
       margin-bottom: 3px;
-      border-radius: $border-radius;
       @include padding-x(15px);
+      border-radius: $border-radius;
       @include font-style($text-sm, $font-medium);
 
       &:hover {
-        background-color: $secondary-color;
         transition: $transition;
+        background-color: $secondary-color;
       }
     }
   }
@@ -67,22 +67,126 @@
   }
 }
 
+@media ($md) {
+  .sidebar {
+    display: none;
+  }
+}
+
+.offcanvas-container {
+  top: 0;
+  left: -100vw;
+  width: 100vw;
+  display: flex;
+  height: 100vh;
+  position: fixed;
+  background: white;
+  flex-direction: column;
+  transition: left 0.3s ease-in-out;
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+
+  &.active {
+    left: 0;
+  }
+
+  .offcanvas-header {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+
+    .btn-close {
+      border: none;
+      outline: none;
+      background-color: transparent;
+    }
+  }
+
+  .offcanvas-body {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+
+    span {
+      width: 100%;
+      color: #ccc;
+      height: 0.25px;
+      margin-top: 25px;
+      display: inline-block;
+      background-color: #ccc;
+    }
+  }
+}
+
 .ng-content {
   flex: 1;
   height: inherit;
 
   nav {
-    border-bottom: 1px solid #d1d1d1c8;
-    @include padding-x(15px);
-    @include padding-y(15px);
-    @include flex(space-between, center, 0);
+    div {
+      border-bottom: 1px solid #d1d1d1c8;
+      @include padding-x(15px);
+      @include padding-y(15px);
+      @include flex(space-between, center, 0);
 
-    a {
-      gap: 10px;
-      display: flex;
+      a {
+        gap: 10px;
+        display: flex;
+        cursor: pointer;
+        color: $text-color;
+        text-decoration: none;
+      }
+
+      button {
+        border: none;
+        display: none;
+        outline: none;
+        background-color: transparent;
+      }
+
+      @media ($md) {
+        button {
+          display: block;
+        }
+
+        a {
+          display: none;
+        }
+      }
+    }
+
+    .logo {
+      display: none;
+    }
+
+    .logOut {
       cursor: pointer;
-      color: $text-color;
-      text-decoration: none;
+    }
+
+    @media ($md) {
+      div {
+        border-bottom: none;
+
+        .logo {
+          display: block;
+        }
+      }
+
+      .logOut {
+        display: none;
+      }
+    }
+  }
+
+  @media ($md) {
+    nav {
+      display: flex;
+      justify-content: end;
+      border-bottom: 1px solid #d1d1d1c8;
+
+      div {
+        width: 50%;
+      }
     }
   }
 }
