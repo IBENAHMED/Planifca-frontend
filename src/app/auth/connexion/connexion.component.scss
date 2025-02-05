@@ -1,0 +1,11 @@
+@import "mixins";
+
+form {
+  text-align: left
+}
+
+app-tag-a {
+  text-align: left;
+  display: inline-block;
+  @include padding-y(10px);
+}
