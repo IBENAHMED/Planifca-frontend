@@ -1,0 +1,7 @@
+@import "mixins";
+
+.adminComponent {
+  &_btn {
+    margin: 15px;
+  }
+}

@@ -7,11 +7,13 @@ import {
   FormBuilder,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import { URLS } from '../../components/helpers/url-constants';
+import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.component';
 import { TagButtonComponent } from '../../components/tag/tag-button/tag-button.component';
 import { EmailSentConfirmationComponent } from './email-sent-confirmation/email-sent-confirmation.component';
 import { FormInputEmailComponent } from '../../components/form/form-input-email/form-input-email.component';
-import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.component';
 
 @Component({
   selector: 'app-forget-password',
@@ -19,6 +21,7 @@ import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.co
   imports: [
     NgIf,
     NgClass,
+    RouterLink,
     FormsModule,
     TagButtonComponent,
     ReactiveFormsModule,
@@ -35,6 +38,7 @@ export class ForgetPasswordComponent {
   private formBuilder = inject(FormBuilder);
 
   isEmailSent: boolean = false;
+  urlDefault = URLS.DEFAULT;
 
   emailControl: FormControl = this.formBuilder.control('', [Validators.required, Validators.email]);
 

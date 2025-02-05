@@ -70,5 +70,19 @@
 .ng-content {
   flex: 1;
   height: inherit;
-  @include padding-x(15px);
+
+  nav {
+    border-bottom: 1px solid #d1d1d1c8;
+    @include padding-x(15px);
+    @include padding-y(15px);
+    @include flex(space-between, center, 0);
+
+    a {
+      gap: 10px;
+      display: flex;
+      cursor: pointer;
+      color: $text-color;
+      text-decoration: none;
+    }
+  }
 }
