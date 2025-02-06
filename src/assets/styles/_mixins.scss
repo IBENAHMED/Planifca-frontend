@@ -16,6 +16,11 @@
   padding-right: $value;
 }
 
+@mixin margin-x($value) {
+  margin-left: $value;
+  margin-right: $value;
+}
+
 @mixin padding-y($value) {
   padding-top: $value;
   padding-bottom: $value;
