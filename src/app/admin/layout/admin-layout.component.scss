@@ -1,192 +1,245 @@
 @import "variables";
 @import "mixins";
 
-.container {
-  height: 100vh;
-  @include flex(space-between, center, 3, row);
+.AdminLayout {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-.sidebar {
-  width: 250px;
-  height: inherit;
+.navbar {
   background-color: white;
-  border-right: 1px solid #d1d1d1c8;
-  @include flex(space-between, flex-start, 0, column);
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
 
-  div {
-    width: 100%;
+  .navbar-brand {
+    font-weight: bold;
+    color: $primary-color;
   }
 
-  &_logo {
-    margin-top: 10px;
-    margin-left: 8px;
+  .navbar-toggler {
+    border: none;
+    outline: none;
+    font-size: 13px;
+  }
+
+  .collapse {
     position: relative;
-    @include size(50px);
-    @include padding-x(15px);
-  }
+    padding-right: 15px;
 
-  ul {
-    margin: 0;
-    padding: 0;
-    margin-top: 25px;
-    list-style: none;
-    font-display: none;
-    @include flex(center, center, 0, column);
-
-    li {
-      gap: 10px;
-      width: 80%;
-      display: flex;
-      cursor: pointer;
-      margin-bottom: 3px;
-      @include padding-x(15px);
-      border-radius: $border-radius;
-      @include font-style($text-sm, $font-medium);
-
-      &:hover {
-        transition: $transition;
-        background-color: $secondary-color;
-      }
+    &::before {
+      content: '';
+      top: 50%;
+      right: 2px;
+      width: 1px;
+      height: 13px;
+      position: absolute;
+      transform: translateY(-50%);
+      background-color: $text-color;
     }
   }
 
-  &_btn {
-    @include flex(center, center, 0);
+  .container-profile {
+    display: flex;
   }
 
-  app-tag-button {
-    width: 90%;
-    text-align: center;
-    padding-bottom: 10px;
+  .profile .notification {
+    display: none;
+  }
 
-    img {
-      top: 1px;
-      right: 2px;
+  @media (min-width: 992px) {
+    .profile .notification {
+      gap: 15px;
+      display: flex;
+      align-items: center;
       position: relative;
     }
   }
 }
 
-@media ($md) {
-  .sidebar {
-    display: none;
+.profile {
+  gap: 5px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+}
+
+.profile span {
+  @include font-style($text-sm, $font-bold)
+}
+
+.profile .icon-profile {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background-color: $primary-color;
+  @include font-style($text-sm, $font-bold)
+}
+
+i {
+  cursor: pointer;
+  color: $text-color;
+  @include padding-x(5px);
+}
+
+@media (min-width: 992px) {
+  i {
+    @include padding-x(15px);
   }
 }
 
-.offcanvas-container {
+.navbar-nav {
+  .nav-item {
+    margin-left: 2px;
+    font-size: $text-sm;
+    font-weight: $font-semibold;
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      transition: color 0.3s ease;
+      font-weight: $font-bold;
+      font-size: 13px;
+      color: $text-color;
+
+      i {
+        text-align: left;
+        color: $text-color;
+        width: 35px;
+      }
+    }
+
+    .nav-link:hover,
+    .nav-link:hover i {
+      color: $primary-color;
+    }
+  }
+}
+
+.mobile-menu {
   top: 0;
-  left: -100vw;
-  width: 100vw;
-  display: flex;
-  height: 100vh;
+  width: 250px;
+  height: 100%;
+  right: -250px;
   position: fixed;
   background: white;
-  flex-direction: column;
-  transition: left 0.3s ease-in-out;
-  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+  transition: right 0.3s ease-in-out;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
 
-  &.active {
-    left: 0;
+  &.show {
+    right: 0;
   }
 
-  .offcanvas-header {
-    display: flex;
-    padding: 1rem;
-    justify-content: space-between;
-    border-bottom: 1px solid #ccc;
+  .close-btn {
+    top: 10px;
+    right: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    background: none;
+    color: #282c34;
+    position: absolute;
+    transition: color 0.3s;
+    color: $text-color;
 
-    .btn-close {
-      border: none;
-      outline: none;
-      background-color: transparent;
+    &:hover {
+      color: $primary-color;
     }
   }
 
-  .offcanvas-body {
-    flex: 1;
-    padding: 1rem;
-    overflow-y: auto;
+  .container-list-unstyled {
+    border-top: 1px solid $primary-color;
+  }
 
-    span {
-      width: 100%;
-      color: #ccc;
-      height: 0.25px;
-      margin-top: 25px;
-      display: inline-block;
-      background-color: #ccc;
+  .mobile-sidebar {
+    background-color: $secondary-color;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      position: relative;
+      padding: 0;
+      margin: 0;
+      right: 10px;
+      top: 50%;
+
+      i {
+        &:hover {
+          transition: 0.3s;
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  .list-unstyled {
+    gap: 10px;
+    display: flex;
+    margin-top: 15px;
+    flex-direction: column;
+
+    li {
+      cursor: pointer;
+      margin-left: 10px;
+      margin-right: 10px;
+      border-radius: 5px;
+      font-size: $text-sm;
+      font-weight: $font-semibold;
+      transition: background 0.3s;
+      @include padding-y(10px);
+      @include padding-x(10px);
+
+      &:hover {
+        background-color: $secondary-color;
+      }
+
+      a {
+        display: flex;
+        color: $text-color;
+        align-items: center;
+        text-decoration: none;
+        transition: color 0.3s;
+        color: $primary-color;
+
+        i {
+          margin-right: 10px;
+          color: $primary-color;
+        }
+      }
+
+    }
+
+    li:hover a,
+    li:hover a i {
+      color: $text-color;
     }
   }
 }
 
 .ng-content {
-  flex: 1;
-  height: inherit;
+  flex-grow: 1;
+  @include padding-x(12px);
+}
 
-  nav {
-    div {
-      border-bottom: 1px solid #d1d1d1c8;
-      @include padding-x(15px);
-      @include padding-y(15px);
-      @include flex(space-between, center, 0);
+.footer {
+  @include padding-x(12px);
+  color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
 
-      a {
-        gap: 10px;
-        display: flex;
-        cursor: pointer;
-        color: $text-color;
-        text-decoration: none;
-      }
-
-      button {
-        border: none;
-        display: none;
-        outline: none;
-        background-color: transparent;
-      }
-
-      @media ($md) {
-        button {
-          display: block;
-        }
-
-        a {
-          display: none;
-        }
-      }
-    }
-
-    .logo {
-      display: none;
-    }
-
-    .logOut {
-      cursor: pointer;
-    }
-
-    @media ($md) {
-      div {
-        border-bottom: none;
-
-        .logo {
-          display: block;
-        }
-      }
-
-      .logOut {
-        display: none;
-      }
-    }
+  span {
+    font-style: italic;
   }
 
-  @media ($md) {
-    nav {
-      display: flex;
-      justify-content: end;
-      border-bottom: 1px solid #d1d1d1c8;
-
-      div {
-        width: 50%;
-      }
-    }
+  .logo {
+    position: relative;
+    top: 4px;
   }
 }
