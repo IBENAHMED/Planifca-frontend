@@ -81,6 +81,11 @@ i {
   cursor: pointer;
   color: $text-color;
   @include padding-x(5px);
+
+  &:hover {
+    transition: $transition;
+    color: $primary-color;
+  }
 }
 
 @media (min-width: 992px) {
@@ -101,7 +106,7 @@ i {
       color: $text-color;
       align-items: center;
       font-weight: $font-bold;
-      transition: color 0.3s ease;
+      transition: color $transition ease;
 
       i {
         width: 35px;
@@ -124,7 +129,7 @@ i {
   right: -250px;
   position: fixed;
   background: white;
-  transition: right 0.3s ease-in-out;
+  transition: right $transition ease-in-out;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
 
   &.show {
@@ -141,7 +146,7 @@ i {
     color: $text-color;
     position: absolute;
     font-size: $text-base;
-    transition: color 0.3s;
+    transition: color $transition;
 
     &:hover {
       color: $primary-color;
@@ -168,7 +173,7 @@ i {
 
       i {
         &:hover {
-          transition: 0.3s;
+          transition: $transition;
           color: $primary-color;
         }
       }
@@ -186,7 +191,7 @@ i {
       font-size: $text-sm;
       @include margin-x(10px);
       font-weight: $font-semibold;
-      transition: background 0.3s;
+      transition: background $transition;
       border-radius: $border-radius;
       @include padding-y(10px);
       @include padding-x(10px);
@@ -201,7 +206,7 @@ i {
         align-items: center;
         color: $primary-color;
         text-decoration: none;
-        transition: color 0.3s;
+        transition: color $transition;
 
         i {
           margin-right: 10px;
