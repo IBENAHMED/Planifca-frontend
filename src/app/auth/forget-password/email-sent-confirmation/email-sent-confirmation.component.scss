@@ -36,3 +36,7 @@ article span button {
   background-color: transparent;
   @include font-style($text-xs, $font-normal);
 }
+
+article .emailResent {
+  margin-top: 5px;
+}

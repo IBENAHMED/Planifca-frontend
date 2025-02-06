@@ -1,52 +1,83 @@
-<article class="AdminLayoutComponent">
-  <div class="container">
-    <div class="sidebar">
-      <div>
-        <img class="sidebar_logo" src="images/not-found.svg" alt="images logo" />
-        <ul>
-          <li (click)="mesClubs()">
-            <img src="/icon/icon-club.svg" alt="icon-club" />
-            <p>Mes clubs</p>
+<article class="AdminLayout">
+  <nav class="navbar navbar-expand-lg navbar-white bg-white">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/space/admin">Planifca en ligne</a>
+
+      <div class="collapse navbar-collapse d-none d-lg-block">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/space/admin">
+              <i class="fas fa-home"></i>
+              <span>Clubs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/space/admin">
+              <i class="fas fa-user"></i>
+              <span>Administration</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/space/admin">
+              <i class="fas fa-cogs"></i>
+              <span>Réservation</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/space/admin">
+              <i class="fas fa-envelope"></i>
+              <span>Statistics</span>
+            </a>
           </li>
         </ul>
       </div>
-      <div class="sidebar_btn">
-        <app-tag-button text="Créer un club" (click)="createClub()">
-          <img src="/icon/icon-plus.svg" alt="icon-plus" />
-        </app-tag-button>
-      </div>
-    </div>
-    <div id="offcanvasScrolling" class="offcanvas-container" [class.active]="isOffcanvasOpen">
-      <div class="offcanvas-header">
-        <span class="offcanvas-title">Offcanvas Fullscreen</span>
-        <button type="button" class="btn-close" (click)="closeOffcanvas()">X</button>
-      </div>
-      <div class="offcanvas-body">
-        <app-tag-button text="Créer un club" (click)="createClub()">
-          <img src="/icon/icon-plus.svg" alt="icon-plus" />
-        </app-tag-button>
-        <span></span>
-        <ul>
-          <li (click)="mesClubs()">
-            <img src="/icon/icon-club.svg" alt="icon-club" />
-            <p>Mes clubs</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="ng-content">
-      <nav>
-        <div>
-          <a [routerLink]="['/' + urlAdminClubs]">
-            <img src="/icon/icon-left-arrow-shield.svg" alt="icon-club" />
-            <span>Mes clubs</span>
-          </a>
-          <span class="logo">...........</span>
-          <span class="logOut" (click)="logOut()">Déconnexion</span>
-          <button (click)="openOffcanvas()"><img src="/icon/icon-burger.svg" alt="icon-burger" /></button>
+
+      <div class="container-profile">
+        <div class="profile">
+          <i class="fas fa-bell"></i>
+          <div class="notification">
+            <div class="icon-profile">RI</div>
+            <span>Reda IBENAHMED</span>
+          </div>
         </div>
-      </nav>
-      <ng-content></ng-content>
+
+        <a class="navbar-toggler border-0" type="button" (click)="toggleMenu()">
+          <span class="navbar-toggler-icon"></span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="overlay" *ngIf="isOpen" (click)="toggleMenu()"></div>
+  <div class="mobile-menu" [class.show]="isOpen">
+    <div class="mobile-sidebar">
+      <li class="nav-link">
+        <div class="profile">
+          <div class="icon-profile">RI</div>
+          <span>IBENAHMED</span>
+        </div>
+      </li>
+      <button class="close-btn" (click)="toggleMenu()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="container-list-unstyled">
+      <ul class="list-unstyled">
+        <li><a routerLink="/space/admin" class="nav-link"><i class="fas fa-home"></i> Clubs</a></li>
+        <li><a routerLink="/space/admin" class="nav-link"><i class="fas fa-user"></i> About</a></li>
+        <li><a routerLink="/space/admin" class="nav-link"><i class="fas fa-cogs"></i> Services</a></li>
+        <li><a routerLink="/space/admin" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
     </div>
   </div>
+
+  <div class="ng-content">
+    <ng-content></ng-content>
+  </div>
+
+  <footer class="footer bg-white text-dark">
+    <div class="d-flex justify-content-between align-items-center">
+      <span class="small fst-italic">Version 1.0.1</span>
+      <span class="logo h5 fw-bold fst-italic">Planifica</span>
+    </div>
+  </footer>
+
 </article>
