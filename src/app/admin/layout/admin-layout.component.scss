@@ -12,8 +12,8 @@
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
 
   .navbar-brand {
-    font-weight: bold;
     color: $primary-color;
+    font-weight: $font-bold;
   }
 
   .navbar-toggler {
@@ -61,23 +61,20 @@
   display: flex;
   cursor: pointer;
   align-items: center;
-}
 
-.profile span {
-  @include font-style($text-sm, $font-bold)
-}
+  span {
+    @include font-style($text-sm, $font-bold)
+  }
 
-.profile .icon-profile {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  color: white;
-  text-align: center;
-  border-radius: 50%;
-  align-items: center;
-  justify-content: center;
-  background-color: $primary-color;
-  @include font-style($text-sm, $font-bold)
+  .icon-profile {
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    @include size(30px);
+    background-color: $primary-color;
+    @include flex(center, center, 0, row);
+    @include font-style($text-sm, $font-bold)
+  }
 }
 
 i {
@@ -100,16 +97,16 @@ i {
 
     .nav-link {
       display: flex;
-      align-items: center;
-      transition: color 0.3s ease;
-      font-weight: $font-bold;
       font-size: 13px;
       color: $text-color;
+      align-items: center;
+      font-weight: $font-bold;
+      transition: color 0.3s ease;
 
       i {
+        width: 35px;
         text-align: left;
         color: $text-color;
-        width: 35px;
       }
     }
 
@@ -139,12 +136,12 @@ i {
     right: 20px;
     border: none;
     cursor: pointer;
-    font-size: 16px;
     background: none;
     color: #282c34;
-    position: absolute;
-    transition: color 0.3s;
     color: $text-color;
+    position: absolute;
+    font-size: $text-base;
+    transition: color 0.3s;
 
     &:hover {
       color: $primary-color;
@@ -156,20 +153,18 @@ i {
   }
 
   .mobile-sidebar {
-    background-color: $secondary-color;
     padding-top: 15px;
-    padding-bottom: 10px;
     padding-left: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding-bottom: 10px;
+    background-color: $secondary-color;
+    @include flex(space-between, center, 0, row);
 
     button {
-      position: relative;
-      padding: 0;
-      margin: 0;
-      right: 10px;
       top: 50%;
+      margin: 0;
+      padding: 0;
+      right: 10px;
+      position: relative;
 
       i {
         &:hover {
@@ -188,12 +183,11 @@ i {
 
     li {
       cursor: pointer;
-      margin-left: 10px;
-      margin-right: 10px;
-      border-radius: 5px;
       font-size: $text-sm;
+      @include margin-x(10px);
       font-weight: $font-semibold;
       transition: background 0.3s;
+      border-radius: $border-radius;
       @include padding-y(10px);
       @include padding-x(10px);
 
@@ -205,16 +199,15 @@ i {
         display: flex;
         color: $text-color;
         align-items: center;
+        color: $primary-color;
         text-decoration: none;
         transition: color 0.3s;
-        color: $primary-color;
 
         i {
           margin-right: 10px;
           color: $primary-color;
         }
       }
-
     }
 
     li:hover a,
@@ -239,7 +232,7 @@ i {
   }
 
   .logo {
-    position: relative;
     top: 4px;
+    position: relative;
   }
 }
