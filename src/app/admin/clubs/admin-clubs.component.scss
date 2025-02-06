@@ -57,7 +57,7 @@
   tbody {
     tr {
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      transition: background 0.3s ease-in-out;
+      transition: background $transition ease-in-out;
 
       &:hover {
         background: rgba($primary-color, 0.1);
@@ -94,7 +94,7 @@
       cursor: pointer;
       font-size: 18px;
       padding: 6px;
-      transition: 0.2s ease-in-out;
+      transition: $transition ease-in-out;
       border-radius: 5px;
 
       &.edit {
