@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './admin-layout.component.scss'
 })
 export class AdminLayoutComponent {
-  isOpen = false;
+  isOpen: boolean = false;
 
   toggleMenu() {
     this.isOpen = !this.isOpen;
