@@ -7,6 +7,7 @@ export const adminRoutes: Routes = [
   {
     path: URLS.ADMIN,
     canActivate: [guardsGuard],
-    component: AdminClubsComponent
+    component: AdminClubsComponent,
+    data: { role: 'admin' }
   },
 ];

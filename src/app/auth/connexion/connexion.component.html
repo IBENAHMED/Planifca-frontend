@@ -6,7 +6,7 @@
     <app-form-input-password id="password" label="Mot de passe" name="password" placeholder="**********"
       [required]="true" [ngClass]="{'error-border': isError}" [control]="passwordControl" />
 
-    <app-tag-a [url]="resetPasswordUrl" name="resetPassword" text="Mot de passe oublié ?" />
+    <app-tag-a [url]="'/' + resetPasswordUrl" name="resetPassword" text="Mot de passe oublié ?" />
 
     <app-tag-button type="submit" text="Se connecter" [disabled]="connexionForm.invalid"
       [ngClass]="{'disabled': connexionForm.invalid}" />

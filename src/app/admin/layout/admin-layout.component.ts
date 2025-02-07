@@ -13,8 +13,8 @@ import { AuthService } from '../../auth/service/auth.service';
 })
 export class AdminLayoutComponent {
 
-  private authService = inject(AuthService);
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   isCollapsed = false;
   isOpen: boolean = false;

@@ -35,6 +35,20 @@ export class AuthService {
     localStorage.removeItem(this.tokenKey);
   };
 
+  forgetPassword(email: string): Observable<any> {
+    return this.http.post(`${this.urlApi}/forget-password`, { email: email });
+  };
+
+  resetPassword(newPassword: string, token: string): Observable<any> {
+    const url = `${this.urlApi}/reset-password`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-Requested-With': token,
+    });
+
+    return this.http.post(url, { newPassword }, { headers });
+  };
+
   getUserRole(): string | null {
     const token = this.getToken();
     if (!token) return null;
@@ -49,19 +63,5 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!this.getToken();
-  };
-
-  forgetPassword(email: string): Observable<any> {
-    return this.http.post(`${this.urlApi}/forget-password`, { email: email });
-  };
-
-  resetPassword(newPassword: string, token: string): Observable<any> {
-    const url = `${this.urlApi}/reset-password`;
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'X-Requested-With': token,
-    });
-
-    return this.http.post(url, { newPassword }, { headers });
   };
 };

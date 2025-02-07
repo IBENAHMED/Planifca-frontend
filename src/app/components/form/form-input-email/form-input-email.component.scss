@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 .container-email {
   display: flex;
@@ -17,11 +18,12 @@ span {
 }
 
 input {
-  padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   outline-color: $primary-color;
   border-radius: calc($border-radius * 2);
+  @include padding-x(14px);
+  @include padding-y(7px);
 }
 
 .error-border {
