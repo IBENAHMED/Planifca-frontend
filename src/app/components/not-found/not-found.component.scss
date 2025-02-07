@@ -1,32 +1,38 @@
 @import 'variables';
 
 .NotFoundComponent {
+  padding: 20px;
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   flex-direction: column;
-}
 
-.not-found {
-  width: 500px;
-  width: 500px;
-  padding-top: 35px;
-}
+  img {
+    width: 300px;
+    height: 300px;
+  }
 
-p {
-  margin-top: -10px;
-  color: $text-color;
-}
+  @media ($sm) {
+    img {
+      width: 150px;
+      width: 150px;
+    }
+  }
 
-a {
-  color: white;
-  padding-top: 7px;
-  margin-top: 15px;
-  padding-left: 25px;
-  padding-bottom: 7px;
-  padding-right: 25px;
-  text-decoration: none;
-  border-radius: calc($border-radius*2);
-  background-color: $primary-color;
+  &_content {
+    text-align: center;
+  }
+
+  a {
+    color: white;
+    padding-top: 7px;
+    margin-top: 15px;
+    padding-left: 25px;
+    padding-bottom: 7px;
+    padding-right: 25px;
+    text-decoration: none;
+    border-radius: calc($border-radius*2);
+    background-color: $primary-color;
+  }
 }

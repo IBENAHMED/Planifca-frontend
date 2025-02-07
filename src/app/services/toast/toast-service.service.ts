@@ -10,6 +10,7 @@ export class ToastServiceService {
 
   constructor() { }
 
+  // todo: remove this toast and creae it with ng bootstrap or maniualy
   showToast(message: string, type: 'success' | 'error' = 'success', icon: any) {
     const backgroundColor = type === 'success'
       ? "linear-gradient(to right,rgba(37, 100, 235, 0.46),rgba(59, 59, 59, 0.42))"

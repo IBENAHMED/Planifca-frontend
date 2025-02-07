@@ -10,6 +10,5 @@ export const URLS = {
   PASSWORD_FORGET: 'account/password-forget',
 
   // ADMIN
-  ADMIN: 'space/admin',
-  ADMIN_CLUB: 'space/admin/clubs',
+  ADMIN: 'space-admin/club',
 };

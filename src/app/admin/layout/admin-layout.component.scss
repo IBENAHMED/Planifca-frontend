@@ -22,7 +22,7 @@
     font-size: 13px;
   }
 
-  .collapse {
+  .collapse.navbar-collapse {
     position: relative;
     padding-right: 15px;
 
@@ -40,6 +40,54 @@
 
   .container-profile {
     display: flex;
+
+    .card {
+      right: 8px;
+      top: 105%;
+      width: 190px;
+      position: absolute;
+
+      .card-body {
+        .check-profile i {
+          color: $primary-color;
+        }
+
+        .check-logout i {
+          color: $error-color;
+        }
+
+        button {
+          border: none;
+          background-color: transparent;
+          display: flex;
+          justify-content: start;
+          align-items: center;
+          @include font-style($text-sm, $font-bold);
+
+          i {
+            width: 5px;
+            position: relative;
+            right: 25px;
+            text-align: right;
+          }
+
+          span {
+            display: inline-block;
+            position: relative;
+            right: 20px;
+          }
+        }
+
+        .check-profile {
+          color: $primary-color;
+        }
+
+        .check-logout {
+          margin-top: 5px;
+          color: $error-color;
+        }
+      }
+    }
   }
 
   .profile .notification {

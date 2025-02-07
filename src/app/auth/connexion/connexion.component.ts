@@ -75,16 +75,12 @@ export class ConnexionComponent implements OnInit {
     };
 
     this.authService.login(credentials).subscribe({
-      next: (response) => {
-        localStorage.setItem("token", response.token);
+      next: () => {
         this.route.navigate([URLS.ADMIN]);
       },
       error: ({ status }) => {
-        if ([404, 401].includes(status)) {
-          this.isError = true;
-        } else {
-          alert("Internal server error");
-        };
+        this.isError = [404, 401].includes(status);
+        if (!this.isError) alert("Internal server error");
       },
     });
   };
