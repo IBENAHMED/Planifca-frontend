@@ -10,8 +10,8 @@ import {
   Validators
 } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
-import { TagButtonComponent } from '../../components/tag/tag-button/tag-button.component';
 import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.component';
+import { TagButtonComponent } from '../../components/tag/tag-button/tag-button.component';
 import { FormInputPasswordComponent } from '../../components/form/form-input-password/form-input-password.component';
 @Component({
   selector: 'app-reset-password',
@@ -29,9 +29,9 @@ import { FormInputPasswordComponent } from '../../components/form/form-input-pas
 })
 export class ResetPasswordComponent implements OnInit {
 
+  private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
-  private route = inject(ActivatedRoute)
 
   token: string | null = null;
 
@@ -60,7 +60,7 @@ export class ResetPasswordComponent implements OnInit {
     const password = formGroup.get("newPassword")?.value;
     const confirmPassword = formGroup.get("confirmPassword")?.value;
     return password === confirmPassword ? null : { passwordsMismatch: true };
-  }
+  };
 
   resetPassword(newPassword: string, token: string) {
     this.authService.resetPassword(newPassword, token).subscribe({
@@ -72,7 +72,6 @@ export class ResetPasswordComponent implements OnInit {
 
   onSubmit(): void {
     if (!this.passwordForm.valid || !this.token) return;
-    const newPassword = this.passwordForm.get('newPassword')?.value;
-    this.resetPassword(newPassword, this.token);
+    this.resetPassword(this.passwordForm.get('newPassword')?.value, this.token);
   };
 };

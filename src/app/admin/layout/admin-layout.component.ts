@@ -16,7 +16,7 @@ export class AdminLayoutComponent {
   private router = inject(Router);
   private authService = inject(AuthService);
 
-  isCollapsed = false;
+  isCollapsed = true;
   isOpen: boolean = false;
 
   toggleMenu() {

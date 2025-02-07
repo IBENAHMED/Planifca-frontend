@@ -1,9 +1,10 @@
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { inject, Injectable } from '@angular/core';
 import { connexion } from '../../model/connexion.type';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { error } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -23,30 +24,42 @@ export class AuthService {
     return localStorage.getItem(this.tokenKey);
   };
 
-  login(credentials: connexion): Observable<any> {
-    return this.http.post(`${this.urlApi}/login`, credentials).pipe(
-      tap((response: any) => {
-        this.setToken(response.token);
-      }),
-    );
-  };
-
   logout(): void {
     localStorage.removeItem(this.tokenKey);
   };
 
+  login(credentials: connexion): Observable<any> {
+    return this.http.post(`${this.urlApi}/login`, credentials).pipe(
+      tap((response: any) => this.setToken(response.token)),
+      catchError((error) => {
+        throw error;
+      }),
+    );
+  };
+
   forgetPassword(email: string): Observable<any> {
-    return this.http.post(`${this.urlApi}/forget-password`, { email: email });
+    return this.http.post(`${this.urlApi}/forget-password`, { email: email }).pipe(
+      catchError((error) => {
+        throw error;
+      })
+    );
   };
 
   resetPassword(newPassword: string, token: string): Observable<any> {
-    const url = `${this.urlApi}/reset-password`;
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'X-Requested-With': token,
-    });
-
-    return this.http.post(url, { newPassword }, { headers });
+    return this.http.post(
+      `${this.urlApi}/reset-password`,
+      { newPassword },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'X-Requested-With': token,
+        }),
+      },
+    ).pipe(
+      catchError((error) => {
+        throw error;
+      })
+    );
   };
 
   getUserRole(): string | null {
@@ -56,7 +69,7 @@ export class AuthService {
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
       return payload.role || null;
-    } catch (error) {
+    } catch {
       return null;
     }
   }
