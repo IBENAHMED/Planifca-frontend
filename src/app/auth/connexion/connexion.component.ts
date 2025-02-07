@@ -69,22 +69,16 @@ export class ConnexionComponent implements OnInit {
     const credentials: connexion = {
       email: this.connexionForm.get('email')?.value,
       password: this.connexionForm.get('password')?.value,
-      // # todo already you craeted layout now you need to create middleweare
-      // todo: avaner dans espace club (ceconnection adn design)
       // userType: this.userType, #todo active type when get ready on backend
     };
 
     this.authService.login(credentials).subscribe({
-      next: (response) => {
-        localStorage.setItem("token", response.token);
+      next: () => {
         this.route.navigate([URLS.ADMIN]);
       },
       error: ({ status }) => {
-        if ([404, 401].includes(status)) {
-          this.isError = true;
-        } else {
-          alert("Internal server error");
-        };
+        this.isError = [404, 401].includes(status);
+        if (!this.isError) alert("Internal server error");
       },
     });
   };

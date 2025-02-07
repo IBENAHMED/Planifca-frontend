@@ -39,7 +39,7 @@ export class ResetPasswordComponent implements OnInit {
     newPassword: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
-      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{6,}$') // todo: verifier regex
+      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{6,}$')
     ]),
     confirmPassword: new FormControl('', [Validators.required]),
   }, { validators: this.passwordsMatchValidators });
@@ -64,9 +64,6 @@ export class ResetPasswordComponent implements OnInit {
 
   resetPassword(newPassword: string, token: string) {
     this.authService.resetPassword(newPassword, token).subscribe({
-      next: () => {
-        //todo: generate response
-      },
       error: () => {
         alert("Internal server error");
       },

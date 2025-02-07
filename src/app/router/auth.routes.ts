@@ -1,31 +1,26 @@
 import { Routes } from '@angular/router';
 import { URLS } from '../components/helpers/url-constants';
+import { ConnexionComponent } from '../auth/connexion/connexion.component';
+import { ForgetPasswordComponent } from '../auth/forget-password/forget-password.component';
+import { ResetPasswordComponent } from '../auth/reset-password/reset-password.component';
 
 export const authRoutes: Routes = [
   {
     path: URLS.DEFAULT,
     pathMatch: 'full',
-    loadComponent() {
-      return import("../auth/connexion/connexion.component").then((m) => m.ConnexionComponent)
-    },
+    component: ConnexionComponent,
   },
   {
     path: URLS.PASSWORD_FORGET,
-    loadComponent() {
-      return import("../auth/forget-password/forget-password.component").then((m) => m.ForgetPasswordComponent)
-    },
+    component: ForgetPasswordComponent,
   },
   {
     path: URLS.PASSWORD_RESET,
-    loadComponent() {
-      return import("../auth/reset-password/reset-password.component").then((m) => m.ResetPasswordComponent)
-    },
+    component: ResetPasswordComponent,
   },
   {
-    path: ':userType',
+    path: ':userType/login',
     pathMatch: 'full',
-    loadComponent() {
-      return import("../auth/connexion/connexion.component").then((m) => m.ConnexionComponent)
-    },
+    component: ConnexionComponent,
   },
 ];

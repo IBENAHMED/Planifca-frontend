@@ -1,30 +1,30 @@
 <article class="AdminLayout">
   <nav class="navbar navbar-expand-lg navbar-white bg-white">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/space/admin">Planifca en ligne</a>
+      <a class="navbar-brand" routerLink="/space-admin/club">Planifca en ligne</a>
 
       <div class="collapse navbar-collapse d-none d-lg-block">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/space/admin">
+            <a class="nav-link" routerLink="/space-admin/club">
               <i class="fas fa-home"></i>
               <span>Clubs</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/space/admin">
+            <a class="nav-link" routerLink="/space-admin/club">
               <i class="fas fa-user"></i>
               <span>Administration</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/space/admin">
+            <a class="nav-link" routerLink="/space-admin/club">
               <i class="fas fa-cogs"></i>
               <span>Réservation</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/space/admin">
+            <a class="nav-link" routerLink="/space-admin/club">
               <i class="fas fa-envelope"></i>
               <span>Statistics</span>
             </a>
@@ -33,7 +33,8 @@
       </div>
 
       <div class="container-profile">
-        <div class="profile">
+        <div class="profile" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
+          aria-controls="collapseExample">
           <i class="fas fa-bell"></i>
           <div class="notification">
             <div class="icon-profile">RI</div>
@@ -41,6 +42,20 @@
           </div>
         </div>
 
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+          <div class="card">
+            <div class="card-body">
+              <button class="check-profile">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Voir mon profil</span>
+              </button>
+              <button class="check-logout" (click)="logOut()">
+                <i class="fas fa-user"></i>
+                <span>Déconnexion</span>
+              </button>
+            </div>
+          </div>
+        </div>
         <a class="navbar-toggler border-0" type="button" (click)="toggleMenu()">
           <span class="navbar-toggler-icon"></span>
         </a>
@@ -61,10 +76,10 @@
     </div>
     <div class="container-list-unstyled">
       <ul class="list-unstyled">
-        <li><a routerLink="/space/admin" class="nav-link"><i class="fas fa-home"></i> Clubs</a></li>
-        <li><a routerLink="/space/admin" class="nav-link"><i class="fas fa-user"></i> About</a></li>
-        <li><a routerLink="/space/admin" class="nav-link"><i class="fas fa-cogs"></i> Services</a></li>
-        <li><a routerLink="/space/admin" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li><a routerLink="/space-admin/club" class="nav-link"><i class="fas fa-home"></i> Clubs</a></li>
+        <li><a routerLink="/space-admin/club" class="nav-link"><i class="fas fa-user"></i> About</a></li>
+        <li><a routerLink="/space-admin/club" class="nav-link"><i class="fas fa-cogs"></i> Services</a></li>
+        <li><a routerLink="/space-admin/club" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
       </ul>
     </div>
   </div>
