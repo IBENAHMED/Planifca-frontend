@@ -1,6 +1,8 @@
 import { NgClass } from '@angular/common';
+import { takeUntil } from 'rxjs/operators';
+import { Subscription, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import {
   FormGroup,
   Validators,
@@ -35,7 +37,10 @@ import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.co
   templateUrl: './connexion.component.html',
   styleUrl: './connexion.component.scss'
 })
-export class ConnexionComponent implements OnInit {
+export class ConnexionComponent implements OnInit, OnDestroy {
+
+  private destroy$ = new Subject<void>();
+  private subscriptions: Subscription[] = [];
 
   private route = inject(Router)
   private authService = inject(AuthService);
@@ -52,9 +57,17 @@ export class ConnexionComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(param => {
+    const routeSubscription = this.activatedRoute.paramMap.subscribe(param => {
       this.userType = param.get('userType') || constants.USER.Admin;
     });
+
+    this.subscriptions.push(routeSubscription);
+  };
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.destroy$.next();
+    this.destroy$.complete();
   };
 
   get emailControl(): FormControl {
@@ -72,14 +85,18 @@ export class ConnexionComponent implements OnInit {
       // userType: this.userType, #todo active type when get ready on backend
     };
 
-    this.authService.login(credentials).subscribe({
-      next: () => {
-        this.route.navigate([URLS.ADMIN]);
-      },
-      error: ({ status }) => {
-        this.isError = [404, 401].includes(status);
-        if (!this.isError) alert("Internal server error");
-      },
-    });
+    const loginSubscription = this.authService.login(credentials)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.route.navigate([URLS.ADMIN]);
+        },
+        error: ({ status }) => {
+          this.isError = [404, 401].includes(status);
+          if (!this.isError) alert("Internal server error");
+        },
+      });
+
+    this.subscriptions.push(loginSubscription);
   };
 };

@@ -1,6 +1,8 @@
 import { NgIf } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import { Subscription, Subject } from 'rxjs';
 import { AuthService } from '../../service/auth.service';
+import { Component, inject, Input, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-email-sent-confirmation',
@@ -9,26 +11,36 @@ import { AuthService } from '../../service/auth.service';
   templateUrl: './email-sent-confirmation.component.html',
   styleUrl: './email-sent-confirmation.component.scss'
 })
-export class EmailSentConfirmationComponent {
+export class EmailSentConfirmationComponent implements OnDestroy {
+
+  private destroy$ = new Subject<void>();
+  private subscription: Subscription | null = null;
 
   private authService = inject(AuthService);
 
   @Input() email: string = '';
-
   isEmailResent: boolean = false;
 
-  resendEmail() {
-    this.authService.forgetPassword(this.email).subscribe({
-      next: () => {
-        this.isEmailResent = true;
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
+  };
 
-        setTimeout(() => {
-          this.isEmailResent = false;
-        }, 3000);
-      },
-      error: () => {
-        alert("Internal server error");
-      },
-    });
+  resendEmail() {
+    this.subscription = this.authService.forgetPassword(this.email)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.isEmailResent = true;
+
+          setTimeout(() => {
+            this.isEmailResent = false;
+          }, 3000);
+        },
+        error: () => {
+          alert("Internal server error");
+        },
+      });
   };
 };

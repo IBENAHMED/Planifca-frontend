@@ -1,6 +1,8 @@
 import { NgClass } from '@angular/common';
+import { takeUntil } from 'rxjs/operators';
+import { Subscription, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -27,7 +29,10 @@ import { FormInputPasswordComponent } from '../../components/form/form-input-pas
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.scss'
 })
-export class ResetPasswordComponent implements OnInit {
+export class ResetPasswordComponent implements OnInit, OnDestroy {
+
+  private destroy$ = new Subject<void>();
+  private subscription: Subscription | null = null;
 
   private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
@@ -48,6 +53,12 @@ export class ResetPasswordComponent implements OnInit {
     this.token = this.route.snapshot.queryParamMap.get('token');
   };
 
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
+  };
+
   get newPasswordControl(): FormControl {
     return this.passwordForm.get('newPassword') as FormControl;
   };
@@ -63,11 +74,13 @@ export class ResetPasswordComponent implements OnInit {
   };
 
   resetPassword(newPassword: string, token: string) {
-    this.authService.resetPassword(newPassword, token).subscribe({
-      error: () => {
-        alert("Internal server error");
-      },
-    });
+    this.subscription = this.authService.resetPassword(newPassword, token)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        error: () => {
+          alert("Internal server error");
+        },
+      });
   };
 
   onSubmit(): void {
