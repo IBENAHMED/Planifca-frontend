@@ -12,13 +12,5 @@ export const guardsGuard: CanActivateFn = (route, state) => {
     return false;
   };
 
-  const requiredRole = route.data['role'] // todo: you should pass this daynamique
-  const userRole: any = authService.getUserRole(); // todo: here shoudn't recive arry
-
-  if (requiredRole && userRole?.[0]?.name !== requiredRole) {
-    router.navigate(['/unauthorized']);
-    return false;
-  }
-
   return true;
 };

@@ -1,0 +1,5 @@
+<div class="container-text">
+  <label [for]="id">{{label}}<span *ngIf="required">*</span></label>
+  <input [formControl]="control" [id]="id" [name]="name" [placeholder]="placeholder" [required]="required" type="email"
+    [ngClass]="ngClass" />
+</div>

@@ -25,3 +25,14 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+#todo
+- fix error console on comder
+- fix error when you navigate between frontpath and he didn't catch it until you reload
+- build profile information section
+- drop click for navbar for section you can't click on it now
+- you can do create club
+- resposive for side bar and logout
+
+- reset and forget password
+- tableu for clubs

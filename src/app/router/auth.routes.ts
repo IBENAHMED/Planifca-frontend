@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { AppComponent } from '../app.component';
 import { URLS } from '../components/helpers/url-constants';
-import { ConnexionComponent } from '../auth/connexion/connexion.component';
-import { ForgetPasswordComponent } from '../auth/forget-password/forget-password.component';
+import { LoginComponent } from '../auth/login/login.component';
 import { ResetPasswordComponent } from '../auth/reset-password/reset-password.component';
+import { ForgetPasswordComponent } from '../auth/forget-password/forget-password.component';
 
 export const authRoutes: Routes = [
   {
     path: URLS.DEFAULT,
     pathMatch: 'full',
-    component: ConnexionComponent,
+    component: AppComponent
   },
   {
     path: URLS.PASSWORD_FORGET,
@@ -19,8 +20,8 @@ export const authRoutes: Routes = [
     component: ResetPasswordComponent,
   },
   {
-    path: ':userType/login',
+    path: ':frontPath/login',
     pathMatch: 'full',
-    component: ConnexionComponent,
+    component: LoginComponent,
   },
 ];
