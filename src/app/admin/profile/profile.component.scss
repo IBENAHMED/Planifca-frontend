@@ -1,0 +1,71 @@
+@import "variables";
+@import "mixins";
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.profile {
+  &_roles {
+    background-color: #cfe2ff;
+    border-radius: 5px;
+    margin-top: 15px;
+    @include padding-x(15px);
+    @include padding-y(15px);
+
+    h5 {
+      margin-bottom: 20px;
+      color: $primary-color;
+      @include font-style($text-lg, $font-bold);
+    }
+
+    div span {
+      @include font-style($text-sm, $font-normal);
+      color: $text-color;
+    }
+
+    ul li {
+      @include font-style($text-sm, $font-semibold);
+      color: $primary-color;
+    }
+  }
+
+  &_information {
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    form button {
+      width: fit-content;
+      border: none;
+      padding: 10px;
+      color: #fff;
+      outline: none;
+      opacity: none;
+      cursor: pointer;
+      padding-left: 25px;
+      padding-right: 25px;
+      font-size: $text-xs;
+      font-weight: $font-normal;
+      background: $primary-color;
+      border-radius: $border-radius;
+    }
+
+    &_list {
+      gap: 15px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      div {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.ngbAccordionButton {
+  outline: none;
+  box-shadow: none;
+}

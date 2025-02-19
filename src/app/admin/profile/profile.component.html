@@ -1,7 +1,7 @@
 <app-admin-layout>
   <article>
-    <div>
-      <h2>Mes droits</h2>
+    <div class="profile_roles">
+      <h5>Mes droits</h5>
       <div>
         <span>Mes roles</span>
         <ul>
@@ -10,30 +10,68 @@
         </ul>
       </div>
     </div>
-    <div>
-      <header>
-        <i class="fas fa-sign-out-alt"></i>
-        <span>Information</span>
-      </header>
-      <div>
-        <ul>
-          <li>
-            <app-form-input-text [control]="firstNameControl" id="firstName" name="firstName" label="Pénom" placeholder="Pénom"
-              [required]="true" />
-          </li>
-          <li>
-            <app-form-input-text [control]="lastNameControl" id="lastName" name="lastName" label="Nom" placeholder="Nom"
-              [required]="true" />
-          </li>
-          <li>
-            <app-form-input-text [control]="emailControl" id="email" name="email" label="email" placeholder="Email"
-              [required]="true" />
-          </li>
-          <li>
-            <app-form-input-text [control]="telephoneControl" id="telephone" name="telephone" label="telephone" placeholder="Telephone"
-              [required]="true" />
-          </li>
-        </ul>
+    <div class="profile_information">
+      <div ngbAccordion [closeOthers]="true">
+        <div ngbAccordionItem [collapsed]="false">
+          <h2 ngbAccordionHeader>
+            <button class="ngbAccordionButton" ngbAccordionButton>Informations</button>
+          </h2>
+          <div ngbAccordionCollapse>
+            <div ngbAccordionBody>
+              <form>
+                <ul class="profile_information_list">
+                  <div>
+                    <li>
+                      <app-form-input-text [control]="firstNameControl" id="firstName" name="firstName" label="Pénom"
+                        placeholder="Pénom" [required]="true" />
+                    </li>
+                    <li>
+                      <app-form-input-text [control]="lastNameControl" id="lastName" name="lastName" label="Nom"
+                        placeholder="Nom" [required]="true" />
+                    </li>
+                  </div>
+                  <div>
+                    <li>
+                      <app-form-input-text [control]="emailControl" id="email" name="email" label="email"
+                        placeholder="Email" [required]="true" />
+                    </li>
+                    <li>
+                      <app-form-input-text [control]="telephoneControl" id="telephone" name="telephone"
+                        label="telephone" placeholder="Telephone" [required]="true" />
+                    </li>
+                  </div>
+                </ul>
+                <button type="submit" [disabled]="true">Sauvegarder</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div ngbAccordionItem [collapsed]="true">
+          <h2 ngbAccordionHeader>
+            <button class="ngbAccordionButton" ngbAccordionButton>Mot de passe</button>
+          </h2>
+          <div ngbAccordionCollapse>
+            <div ngbAccordionBody>
+              <form>
+                <ul class="profile_information_list" style="align-items: end;">
+                  <div>
+                    <app-form-input-password id="current-password" label="Mot de passe actuel" name="current-password"
+                      placeholder="**********" [required]="true" />
+
+                    <app-form-input-password id="new-password" label="Nouveau mot de passe" name="new-password"
+                      placeholder="**********" [required]="true" />
+                  </div>
+                  <div>
+                    <app-form-input-password id="confirm-password" label="Confirmer le mot de passe"
+                      name="confirm-password" placeholder="**********" [required]="true" />
+                  </div>
+                </ul>
+                <button type="submit" [disabled]="true">Sauvegarder</button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </article>

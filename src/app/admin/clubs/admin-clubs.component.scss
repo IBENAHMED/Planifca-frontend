@@ -111,3 +111,40 @@
     }
   }
 }
+
+.modal-title {
+  color: $primary-color;
+}
+
+.container-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body {
+  label {
+    text-align: left;
+    margin-bottom: 3px;
+    font-size: $text-xs;
+    font-weight: $font-normal;
+  }
+
+  span {
+    color: $error-color;
+  }
+
+  input {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    outline-color: $primary-color;
+    border-radius: calc($border-radius * 2);
+    @include padding-x(14px);
+    @include padding-y(7px);
+  }
+}
+
+.btn-close {
+  outline: none;
+  box-shadow: none;
+  background-color: rgba(255, 0, 0, 0.096);
+}

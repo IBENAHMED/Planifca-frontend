@@ -2,11 +2,37 @@
   <article class="adminClubsComponent">
     <div class="adminComponent-content">
       <h3>Mes clubs</h3>
-      <app-tag-button text="Nouveaux club" (click)="createClub()">
+      <app-tag-button text="Nouveaux club" (click)="open(content)">
         <img src="/icon/icon-plus.svg" alt="icon-plus" />
       </app-tag-button>
     </div>
-    
+
+    <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Créez votre club</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="container-text">
+            <label for="name">Nom<span>*</span></label>
+            <input id="name" name="name" placeholder="Nom" [required]="true" type="text" />
+          </div>
+          <div class="container-text">
+            <label for="email">Email<span>*</span></label>
+            <input id="email" name="email" placeholder="Email" [required]="true" type="email" />
+          </div>
+          <div class="container-text">
+            <label for="frontPath">frontPath<span>*</span></label>
+            <input id="frontPath" name="frontPath" placeholder="frontPath" [required]="true" type="text" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="c('Save click')">Sauvegarder</button>
+      </div>
+    </ng-template>
+
     <div class="table-container mt-3">
       <table class="custom-table">
         <thead>
