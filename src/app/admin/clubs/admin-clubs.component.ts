@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, importProvidersFrom } from '@angular/core';
+import { Component } from '@angular/core';
 import { AdminLayoutComponent } from '../layout/admin-layout.component';
 import { NgbModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
-import { FormInputTextComponent } from '../../components/form/form-input-text/form-input-text.component';
 
 @Component({
   selector: 'app-admin',
@@ -13,7 +12,6 @@ import { FormInputTextComponent } from '../../components/form/form-input-text/fo
     CommonModule,
     TagButtonComponent,
     AdminLayoutComponent,
-    FormInputTextComponent,
   ],
   providers: [
     NgbModalConfig, NgbModal,
