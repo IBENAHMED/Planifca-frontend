@@ -1,53 +1,58 @@
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { inject, Injectable } from '@angular/core';
-import { connexion } from '../../model/connexion.type';
+import { login } from '../../model/auth/login-type';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { error } from 'console';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private readonly urlApi: string = `${environment.baseUrl}/api/internal/auth`;
+  private readonly urlApi: string = `${environment.baseUrl}`;
   private http = inject(HttpClient);
+  private router = inject(Router);
 
   private tokenKey = 'token';
+  private userContextKey = 'userContext';
+  private userContext: any = localStorage.getItem('userContext');
 
-  setToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
-  };
-
-  getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
-  };
-
-  logout(): void {
-    localStorage.removeItem(this.tokenKey);
-  };
-
-  login(credentials: connexion): Observable<any> {
-    return this.http.post(`${this.urlApi}/login`, credentials).pipe(
-      tap((response: any) => this.setToken(response.token)),
+  login(credentials: login): Observable<any> {
+    return this.http.post(
+      `${this.urlApi}/auth/login`,
+      credentials,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'clubRef': JSON.parse(this.userContext).reference,
+        }),
+      }
+    ).pipe(
+      tap((response: any) => localStorage.setItem(this.tokenKey, response.token)),
       catchError((error) => {
         throw error;
       }),
     );
   };
 
+  logout(): void {
+    localStorage.removeItem(this.tokenKey);
+    this.router.navigate([`/${JSON.parse(this.userContext).frontPath}/login`]);
+  };
+
   forgetPassword(email: string): Observable<any> {
-    return this.http.post(`${this.urlApi}/forget-password`, { email: email }).pipe(
+    return this.http.post(`${this.urlApi}/auth/forget-password`, { email: email }).pipe(
       catchError((error) => {
         throw error;
-      })
+      }),
     );
   };
 
   resetPassword(newPassword: string, token: string): Observable<any> {
     return this.http.post(
-      `${this.urlApi}/reset-password`,
+      `${this.urlApi}/auth/reset-password`,
       { newPassword },
       {
         headers: new HttpHeaders({
@@ -62,19 +67,16 @@ export class AuthService {
     );
   };
 
-  getUserRole(): string | null {
-    const token = this.getToken();
-    if (!token) return null;
-
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      return payload.role || null;
-    } catch {
-      return null;
-    }
-  }
+  checkUserRole(frontPath: string | null): Observable<any> {
+    return this.http.get(`${this.urlApi}/club/front/${frontPath}`).pipe(
+      tap((response) => localStorage.setItem(this.userContextKey, JSON.stringify(response))),
+      catchError((error) => {
+        throw error;
+      }),
+    );
+  };
 
   isAuthenticated(): boolean {
-    return !!this.getToken();
+    return !!localStorage.getItem(this.tokenKey);
   };
 };

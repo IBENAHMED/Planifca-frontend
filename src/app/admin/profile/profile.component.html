@@ -1,0 +1,40 @@
+<app-admin-layout>
+  <article>
+    <div>
+      <h2>Mes droits</h2>
+      <div>
+        <span>Mes roles</span>
+        <ul>
+          <li>Administrateur</li>
+          <li>Responsable métier</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <header>
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Information</span>
+      </header>
+      <div>
+        <ul>
+          <li>
+            <app-form-input-text [control]="firstNameControl" id="firstName" name="firstName" label="Pénom" placeholder="Pénom"
+              [required]="true" />
+          </li>
+          <li>
+            <app-form-input-text [control]="lastNameControl" id="lastName" name="lastName" label="Nom" placeholder="Nom"
+              [required]="true" />
+          </li>
+          <li>
+            <app-form-input-text [control]="emailControl" id="email" name="email" label="email" placeholder="Email"
+              [required]="true" />
+          </li>
+          <li>
+            <app-form-input-text [control]="telephoneControl" id="telephone" name="telephone" label="telephone" placeholder="Telephone"
+              [required]="true" />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</app-admin-layout>

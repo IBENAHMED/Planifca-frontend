@@ -1,5 +1,5 @@
 <app-auth-layout-component>
-  <form [formGroup]="connexionForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <app-form-input-email id="email" label="Identifiant" name="email" placeholder="john.doe@gmail.com" [required]="true"
       [ngClass]="{'error-border': isError}" [control]="emailControl" />
 
@@ -8,7 +8,7 @@
 
     <app-tag-a [url]="'/' + resetPasswordUrl" name="resetPassword" text="Mot de passe oublié ?" />
 
-    <app-tag-button type="submit" text="Se connecter" [disabled]="connexionForm.invalid"
-      [ngClass]="{'disabled': connexionForm.invalid}" />
+    <app-tag-button type="submit" text="Se connecter" [disabled]="loginForm.invalid"
+      [ngClass]="{'disabled': loginForm.invalid}" />
   </form>
 </app-auth-layout-component>

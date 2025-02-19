@@ -1,6 +1,6 @@
 export default {
   USER: {
-    Admin: "admin",
+    Admin: "SUPERADMIN", // todo: ask mohamed to chane this to admin
     Club: "club",
   },
 }

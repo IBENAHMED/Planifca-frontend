@@ -23,16 +23,4 @@
   &_content {
     text-align: center;
   }
-
-  a {
-    color: white;
-    padding-top: 7px;
-    margin-top: 15px;
-    padding-left: 25px;
-    padding-bottom: 7px;
-    padding-right: 25px;
-    text-decoration: none;
-    border-radius: calc($border-radius*2);
-    background-color: $primary-color;
-  }
 }

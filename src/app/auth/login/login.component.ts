@@ -13,16 +13,15 @@ import {
 } from '@angular/forms';
 import constants from '../../components/constants';
 import { AuthService } from '../service/auth.service';
-import { connexion } from '../../model/connexion.type';
+import { login } from '../../model/auth/login-type';
 import { URLS } from '../../components/helpers/url-constants';
 import { TagAComponent } from '../../components/tag/tag-a/tag-a.component';
+import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.component';
 import { TagButtonComponent } from '../../components/tag/tag-button/tag-button.component';
 import { FormInputEmailComponent } from '../../components/form/form-input-email/form-input-email.component';
 import { FormInputPasswordComponent } from '../../components/form/form-input-password/form-input-password.component';
-import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.component';
-
 @Component({
-  selector: 'connexion-auth',
+  selector: 'login-auth',
   standalone: true,
   imports: [
     NgClass,
@@ -34,10 +33,10 @@ import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.co
     FormInputPasswordComponent,
     AuthLayoutComponentComponent,
   ],
-  templateUrl: './connexion.component.html',
-  styleUrl: './connexion.component.scss'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
 })
-export class ConnexionComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
   private subscriptions: Subscription[] = [];
@@ -47,18 +46,26 @@ export class ConnexionComponent implements OnInit, OnDestroy {
   private formBuilder = inject(FormBuilder);
   private activatedRoute = inject(ActivatedRoute);
 
-  userType: string = '';
+  frontPath: string | null = null;
   isError: boolean = false;
   resetPasswordUrl = URLS.PASSWORD_FORGET;
 
-  connexionForm: FormGroup = this.formBuilder.group({
+  loginForm: FormGroup = this.formBuilder.group({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
 
   ngOnInit(): void {
     const routeSubscription = this.activatedRoute.paramMap.subscribe(param => {
-      this.userType = param.get('userType') || constants.USER.Admin;
+      this.frontPath = param.get('frontPath');
+
+      if (this.frontPath) {
+        this.authService.checkUserRole(this.frontPath).subscribe({
+          error: () => {
+            this.route.navigate([URLS.DEFAULT])
+          },
+        });
+      }
     });
 
     this.subscriptions.push(routeSubscription);
@@ -71,18 +78,17 @@ export class ConnexionComponent implements OnInit, OnDestroy {
   };
 
   get emailControl(): FormControl {
-    return this.connexionForm.get('email') as FormControl;
+    return this.loginForm.get('email') as FormControl;
   };
 
   get passwordControl(): FormControl {
-    return this.connexionForm.get('password') as FormControl;
+    return this.loginForm.get('password') as FormControl;
   };
 
   onSubmit(): void {
-    const credentials: connexion = {
-      email: this.connexionForm.get('email')?.value,
-      password: this.connexionForm.get('password')?.value,
-      // userType: this.userType, #todo active type when get ready on backend
+    const credentials: login = {
+      email: this.loginForm.get('email')?.value,
+      password: this.loginForm.get('password')?.value,
     };
 
     const loginSubscription = this.authService.login(credentials)
