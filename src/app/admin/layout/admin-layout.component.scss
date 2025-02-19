@@ -10,6 +10,9 @@
 .navbar {
   background-color: white;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 50;
 
   .navbar-brand {
     color: $primary-color;

@@ -6,6 +6,6 @@ export const URLS = {
   PASSWORD_RESET: 'account/password-reset',
   PASSWORD_FORGET: 'account/password-forget',
 
-  ADMIN: 'space-admin/club',
-  PROFILE: 'space-admin/profile',
+  ADMIN: 'space-clients/club',
+  PROFILE: 'space-clients/profile',
 };

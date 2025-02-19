@@ -1,17 +1,27 @@
+import { NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminLayoutComponent } from '../layout/admin-layout.component';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { TagButtonComponent } from '../../components/tag/tag-button/tag-button.component';
 import { FormInputTextComponent } from '../../components/form/form-input-text/form-input-text.component';
+import { FormInputPasswordComponent } from '../../components/form/form-input-password/form-input-password.component';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [AdminLayoutComponent, FormInputTextComponent],
+  imports: [
+    NgIf,
+    TagButtonComponent,
+    NgbAccordionModule,
+    AdminLayoutComponent,
+    FormInputTextComponent,
+    FormInputPasswordComponent,
+  ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
-
   private formbuilder = inject(FormBuilder);
 
   myProfileInformation: FormGroup = this.formbuilder.group({
