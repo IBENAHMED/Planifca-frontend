@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { login } from '../model/login-type';
 import { catchError, tap } from 'rxjs/operators';
 import { inject, Injectable } from '@angular/core';
-import { login } from '../../model/auth/login-type';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
@@ -17,7 +17,7 @@ export class AuthService {
 
   private tokenKey = 'token';
   private userContextKey = 'userContext';
-  private userContext: any = localStorage.getItem('userContext');
+  private userContext: any = localStorage.getItem(this.userContextKey);
 
   login(credentials: login): Observable<any> {
     return this.http.post(
@@ -69,7 +69,6 @@ export class AuthService {
 
   checkUserRole(frontPath: string | null): Observable<any> {
     return this.http.get(`${this.urlApi}/club/front/${frontPath}`).pipe(
-      tap((response) => localStorage.setItem(this.userContextKey, JSON.stringify(response))),
       catchError((error) => {
         throw error;
       }),

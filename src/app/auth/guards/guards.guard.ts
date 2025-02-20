@@ -6,9 +6,14 @@ export const guardsGuard: CanActivateFn = (route, state) => {
 
   const router = inject(Router);
   const authService = inject(AuthService);
+  const userContext = localStorage.getItem('userContext');
 
   if (!authService.isAuthenticated()) {
-    router.navigate(['/space-admin/login']);
+    if (userContext) {
+      router.navigate([`/${JSON.parse(userContext).frontPath}/login`]);
+      return false;
+    };
+    router.navigate(['/unauthorized']);
     return false;
   };
 

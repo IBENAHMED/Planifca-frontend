@@ -134,6 +134,7 @@
   }
 
   input {
+    width: 100%;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     outline-color: $primary-color;
@@ -146,4 +147,11 @@
 .btn-close {
   outline: none;
   box-shadow: none;
+}
+
+ngb-alert {
+  margin-left: 15px;
+  margin-right: 15px;
+  @include padding-x(15px);
+  @include padding-y(7px);
 }
