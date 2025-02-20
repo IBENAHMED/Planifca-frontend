@@ -33,6 +33,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - drop click for navbar for section you can't click on it now
 - you can do create club
 - resposive for side bar and logout
+- ask atyq to give you request to get frontpath before login
 
 - reset and forget password
 - tableu for clubs

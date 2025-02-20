@@ -11,9 +11,8 @@ import {
   ReactiveFormsModule,
   FormBuilder,
 } from '@angular/forms';
-import constants from '../../components/constants';
+import { login } from '../model/login-type';
 import { AuthService } from '../service/auth.service';
-import { login } from '../../model/auth/login-type';
 import { URLS } from '../../components/helpers/url-constants';
 import { TagAComponent } from '../../components/tag/tag-a/tag-a.component';
 import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.component';
@@ -45,9 +44,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
   private activatedRoute = inject(ActivatedRoute);
+  private userContext: any = localStorage.getItem('userContext');
 
-  frontPath: string | null = null;
   isError: boolean = false;
+  frontPath: string | null = null;
   resetPasswordUrl = URLS.PASSWORD_FORGET;
 
   loginForm: FormGroup = this.formBuilder.group({
@@ -61,8 +61,15 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       if (this.frontPath) {
         this.authService.checkUserRole(this.frontPath).subscribe({
+          next: (response) => {
+            localStorage.setItem('userContext', JSON.stringify(response))
+          },
           error: () => {
-            this.route.navigate([URLS.DEFAULT])
+            this.userContext ? (
+              this.route.navigate([`${JSON.parse(this.userContext).frontPath}/login`])
+            ) : (
+              this.route.navigate(['/unauthorized'])
+            );
           },
         });
       }
@@ -95,7 +102,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.route.navigate([URLS.ADMIN]);
+          this.route.navigate([`${this.frontPath}/club`]);
         },
         error: ({ status }) => {
           this.isError = [404, 401].includes(status);

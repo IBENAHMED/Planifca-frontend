@@ -18,31 +18,29 @@
           </h2>
           <div ngbAccordionCollapse>
             <div ngbAccordionBody>
-              <form>
-                <ul class="profile_information_list">
-                  <div>
-                    <li>
-                      <app-form-input-text [control]="firstNameControl" id="firstName" name="firstName" label="Pénom"
-                        placeholder="Pénom" [required]="true" />
-                    </li>
-                    <li>
-                      <app-form-input-text [control]="lastNameControl" id="lastName" name="lastName" label="Nom"
-                        placeholder="Nom" [required]="true" />
-                    </li>
-                  </div>
-                  <div>
-                    <li>
-                      <app-form-input-text [control]="emailControl" id="email" name="email" label="email"
-                        placeholder="Email" [required]="true" />
-                    </li>
-                    <li>
-                      <app-form-input-text [control]="telephoneControl" id="telephone" name="telephone"
-                        label="telephone" placeholder="Telephone" [required]="true" />
-                    </li>
-                  </div>
-                </ul>
-                <button type="submit" [disabled]="true">Sauvegarder</button>
-              </form>
+              <ul class="profile_information_list">
+                <div>
+                  <li>
+                    <app-form-input-text [control]="firstNameControl" id="firstName" name="firstName" label="Pénom"
+                      placeholder="Pénom" [required]="true" />
+                  </li>
+                  <li>
+                    <app-form-input-text [control]="lastNameControl" id="lastName" name="lastName" label="Nom"
+                      placeholder="Nom" [required]="true" />
+                  </li>
+                </div>
+                <div>
+                  <li>
+                    <app-form-input-text [control]="emailControl" id="email" name="email" label="Email"
+                      placeholder="Email" [required]="true" />
+                  </li>
+                  <li>
+                    <app-form-input-text [control]="telephoneControl" id="telephone" name="telephone" label="Telephone"
+                      placeholder="Telephone" [required]="true" />
+                  </li>
+                </div>
+              </ul>
+              <app-tag-button text="Sauvegarder" type="button" (click)="onSubmitInformation()" />
             </div>
           </div>
         </div>
@@ -53,22 +51,21 @@
           </h2>
           <div ngbAccordionCollapse>
             <div ngbAccordionBody>
-              <form>
-                <ul class="profile_information_list" style="align-items: end;">
-                  <div>
-                    <app-form-input-password id="current-password" label="Mot de passe actuel" name="current-password"
-                      placeholder="**********" [required]="true" />
+              <ul class="profile_information_list" style="align-items: end;">
+                <div>
+                  <app-form-input-password [control]="currentPasswordControl" id="current-password"
+                    label="Mot de passe actuel" name="current-password" placeholder="**********" [required]="true" />
 
-                    <app-form-input-password id="new-password" label="Nouveau mot de passe" name="new-password"
-                      placeholder="**********" [required]="true" />
-                  </div>
-                  <div>
-                    <app-form-input-password id="confirm-password" label="Confirmer le mot de passe"
-                      name="confirm-password" placeholder="**********" [required]="true" />
-                  </div>
-                </ul>
-                <button type="submit" [disabled]="true">Sauvegarder</button>
-              </form>
+                  <app-form-input-password [control]="newPasswordControl" id="new-password" label="Nouveau mot de passe"
+                    name="new-password" placeholder="**********" [required]="true" />
+                </div>
+                <div>
+                  <app-form-input-password [control]="confirmPasswordControl" id="confirm-password"
+                    label="Confirmer le mot de passe" name="confirm-password" placeholder="**********"
+                    [required]="true" />
+                </div>
+              </ul>
+              <app-tag-button text="Modifier" type="button" (click)="onSubmitPassword()" />
             </div>
           </div>
         </div>

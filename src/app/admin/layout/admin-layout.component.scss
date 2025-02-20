@@ -145,6 +145,12 @@ i {
   }
 }
 
+@media (max-width: 992px) {
+  .ngbCollapse_profil {
+    display: none;
+  }
+}
+
 .navbar-nav {
   .nav-item {
     margin-left: 2px;
@@ -290,5 +296,17 @@ i {
   .logo {
     top: 4px;
     position: relative;
+  }
+}
+
+.mobile-menu {
+  z-index: 60;
+}
+
+.nav-link.check-logout {
+  color: $error-color;
+  i {
+    color: $error-color;
+    margin-right: 10px;
   }
 }

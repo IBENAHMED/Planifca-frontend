@@ -33,16 +33,15 @@
       </div>
 
       <div class="container-profile">
-        <div class="profile" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
-          aria-controls="collapseExample">
+        <div class="profile" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
           <i class="fas fa-bell"></i>
-          <div class="notification">
+          <div class="notification" (click)="collapse.toggle()">
             <div class="icon-profile">RI</div>
             <span>Reda IBENAHMED</span>
           </div>
         </div>
 
-        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+        <div class="ngbCollapse_profil" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
           <div class="card">
             <div class="card-body">
               <button class="check-profile" [routerLink]="'/' + adminProfileurl">
@@ -67,7 +66,7 @@
   <div class="mobile-menu" [class.show]="isOpen">
     <div class="mobile-sidebar">
       <li class="nav-link">
-        <div class="profile">
+        <div class="profile" (click)="collapse.toggle()">
           <div class="icon-profile">RI</div>
           <span>IBENAHMED</span>
         </div>
@@ -80,6 +79,8 @@
         <li><a routerLink="/space-clients/club" class="nav-link"><i class="fas fa-user"></i> About</a></li>
         <li><a routerLink="/space-clients/club" class="nav-link"><i class="fas fa-cogs"></i> Services</a></li>
         <li><a routerLink="/space-clients/club" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li><a [routerLink]="'/' + adminProfileurl" class="nav-link"><i class="fas fa-sign-out-alt"></i>Voir mon profil</a></li>
+        <li><button (click)="logOut()" class="nav-link check-logout"> <i class="fas fa-user"></i>Déconnexion</button></li>
       </ul>
     </div>
   </div>
