@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
-import { AdminLayoutComponent } from '../layout/admin-layout.component';
+import { AdminLayoutComponent } from '../../layout/admin-layout.component';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormInputTextComponent } from '../../components/form/form-input-text/form-input-text.component';
 import { FormInputPasswordComponent } from '../../components/form/form-input-password/form-input-password.component';
@@ -11,10 +11,10 @@ import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.c
   standalone: true,
   imports: [
     NgbAccordionModule,
+    TagButtonComponent,
     AdminLayoutComponent,
     FormInputTextComponent,
     FormInputPasswordComponent,
-    TagButtonComponent
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'

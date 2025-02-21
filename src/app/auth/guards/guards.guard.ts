@@ -17,5 +17,9 @@ export const guardsGuard: CanActivateFn = (route, state) => {
     return false;
   };
 
+  if (route.data['role'] !== 'admin') {
+    router.navigate(['/unauthorized']);
+  };
+
   return true;
 };

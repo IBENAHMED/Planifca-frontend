@@ -1,8 +1,8 @@
 import { NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { URLS } from '../../components/helpers/url-constants';
-import { AuthService } from '../../auth/service/auth.service';
+import { URLS } from '../components/helpers/url-constants';
+import { AuthService } from '../auth/service/auth.service';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
