@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.frontPath = param.get('frontPath');
 
       if (this.frontPath) {
-        this.authService.checkUserRole(this.frontPath).subscribe({
+        this.authService.isFrontPathExist(this.frontPath).subscribe({
           next: (response) => {
             localStorage.setItem('userContext', JSON.stringify(response))
           },

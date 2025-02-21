@@ -15,6 +15,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
+  private userRole: string = 'admin';
   private tokenKey = 'token';
   private userContextKey = 'userContext';
   private userContext: any = localStorage.getItem(this.userContextKey);
@@ -67,7 +68,7 @@ export class AuthService {
     );
   };
 
-  checkUserRole(frontPath: string | null): Observable<any> {
+  isFrontPathExist(frontPath: string | null): Observable<any> {
     return this.http.get(`${this.urlApi}/club/front/${frontPath}`).pipe(
       catchError((error) => {
         throw error;
@@ -78,4 +79,16 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!localStorage.getItem(this.tokenKey);
   };
+
+  setUserRole(role: string) {
+    this.userRole = role;
+  }
+
+  getUserRole(): string {
+    return this.userRole;
+  }
+
+  hasRole(requiredRole: string): boolean {
+    return this.userRole === requiredRole;
+  }
 };

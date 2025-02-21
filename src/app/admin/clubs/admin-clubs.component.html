@@ -31,40 +31,34 @@
     </ng-template>
 
 
-    <div class="table-container mt-3">
-      <table class="custom-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nom</th>
-            <th>Email</th>
-            <th>Rôle</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>John Doe</td>
-            <td>johnexample.com</td>
-            <td><span class="badge badge-admin">Admin</span></td>
-            <td>
-              <button class="btn-action edit"><i class="bi bi-pencil"></i></button>
-              <button class="btn-action delete"><i class="bi bi-trash"></i></button>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jane Smith</td>
-            <td>janeexample.com</td>
-            <td><span class="badge badge-user">User</span></td>
-            <td>
-              <button class="btn-action edit"><i class="bi bi-pencil"></i></button>
-              <button class="btn-action delete"><i class="bi bi-trash"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <p class="mt-5">Une table répertorie tous les clubs pour <code>l'administration</code>, facilitant la gestion et les mises à jour.</p>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Date de création</th>
+        <th scope="col">Dernier action</th>
+        <th scope="col">Statu</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (country of countries; track country.name) {
+      <tr>
+        <th scope="row">{{ country.name }}</th>
+        <td>{{ country.creation_date }}</td>
+        <td>{{ country.last_action }}</td>
+        <td>{{ country.statut }}</td>
+        <td>...</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-center p-2">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+      (pageChange)="refreshCountries()">
+    </ngb-pagination>
+  </div>
   </article>
 </app-admin-layout>

@@ -1,7 +1,7 @@
+import { createClub } from '../model/club-type';
 import { catchError, Observable } from 'rxjs';
-import { club } from '../model/club-type';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -9,12 +9,10 @@ import { environment } from '../../../environments/environment';
 })
 export class AdminService {
 
-  constructor() { }
-
   private readonly urlApi: string = `${environment.baseUrl}`;
   private http = inject(HttpClient)
 
-  createClub(dataClub: club): Observable<any> {
+  createClub(dataClub: createClub): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`

@@ -9,10 +9,12 @@ export const adminRoutes: Routes = [
     path: URLS.ADMIN,
     canActivate: [guardsGuard],
     component: AdminClubsComponent,
+    data: { role: 'admin' },
   },
   {
     path: URLS.PROFILE,
     canActivate: [guardsGuard],
     component: ProfileComponent,
+    data: { role: 'admin' },
   },
 ];
