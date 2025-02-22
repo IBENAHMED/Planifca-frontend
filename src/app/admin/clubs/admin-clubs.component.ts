@@ -85,7 +85,20 @@ export class AdminClubsComponent implements OnInit {
         this.route.navigate([`${path}/club`]);
       }
     });
+
+    this.getAllClubs();
   };
+
+  getAllClubs() {
+    return this.adminService.getAllClubs().subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }
 
   open(content: any) {
     this.modalService.open(content);

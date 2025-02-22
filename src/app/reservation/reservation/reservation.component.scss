@@ -1,0 +1,191 @@
+@import "variables";
+@import "mixins";
+
+.adminComponent-content {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.adminComponent-content h3 {
+  font-weight: bold;
+  color: #00007e;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  padding: 20px;
+  background: #1e1e2f;
+  border-radius: 12px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  padding: 20px;
+  background: $secondary-color;
+  border-radius: $border-radius;
+  box-shadow: inset 1px 4px 11px 0px rgba(0, 0, 0, 0.1);
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: $border-radius;
+  overflow: hidden;
+
+  thead {
+    background: $primary-color;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+
+    th {
+      padding-left: 14px;
+      padding-right: 14px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      text-align: left;
+      font-weight: 600;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      transition: background $transition ease-in-out;
+
+      &:hover {
+        background: rgba($primary-color, 0.1);
+      }
+    }
+
+    td {
+      padding: 12px;
+      color: $text-color;
+      font-size: 15px;
+    }
+
+    .badge {
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .badge-admin {
+      background: $primary-color;
+      color: #fff;
+    }
+
+    .badge-user {
+      background: darken($secondary-color, 10%);
+      color: $text-color;
+    }
+
+    .btn-action {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 6px;
+      transition: $transition ease-in-out;
+      border-radius: 5px;
+
+      &.edit {
+        color: $primary-color;
+      }
+
+      &.delete {
+        color: #ff4d4f;
+      }
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+.modal-title {
+  color: $primary-color;
+}
+
+.container-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body {
+  label {
+    text-align: left;
+    margin-bottom: 3px;
+    font-size: $text-xs;
+    font-weight: $font-normal;
+  }
+
+  span {
+    color: $error-color;
+  }
+
+  input {
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    outline-color: $primary-color;
+    border-radius: calc($border-radius * 2);
+    @include padding-x(14px);
+    @include padding-y(7px);
+  }
+}
+
+.btn-close {
+  outline: none;
+  box-shadow: none;
+}
+
+ngb-alert {
+  margin-left: 15px;
+  margin-right: 15px;
+  @include padding-x(15px);
+  @include padding-y(7px);
+}
+
+.tableReservation {
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+  @include padding-x(20px);
+
+  &_text {
+    @include padding-x(5px);
+  }
+
+  tr th {
+    @include padding-y(10px);
+  }
+
+  tr td {
+    @include padding-y(15px);
+    color: $text-color
+  }
+
+  thead tr th {
+    color: $primary-color;
+  }
+
+  tbody .button {
+    cursor: pointer;
+  }
+
+  .terminer {
+    color: blue !important;
+  }
+
+  .en-cours {
+    color: green !important;
+  }
+}
