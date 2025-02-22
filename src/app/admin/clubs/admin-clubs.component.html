@@ -47,16 +47,16 @@
           </tr>
         </thead>
         <tbody>
-          @for (country of club; track country.name) {
+          @for (club of club; track club.name) {
           <tr>
-            <td scope="row">{{ country.name }}</td>
-            <td>{{ country.creation_date }}</td>
-            <td>{{ country.last_action }}</td>
+            <td scope="row">{{ club.name }}</td>
+            <td>{{ club.creation_date }}</td>
+            <td>{{ club.last_action }}</td>
             <td [ngClass]="{
-              'terminer': country?.statut === 'Terminer',
-              'en-cours': country?.statut === 'En cours'
+              'terminer': club?.statut === 'Terminer',
+              'en-cours': club?.statut === 'En cours'
             }">
-              {{ country?.statut }}
+              {{ club?.statut }}
             </td>
             <td class="button">...</td>
           </tr>

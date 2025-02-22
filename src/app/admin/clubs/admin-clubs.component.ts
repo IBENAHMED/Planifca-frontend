@@ -92,7 +92,7 @@ export class AdminClubsComponent implements OnInit {
   };
 
   refreshClub() {
-    this.club = club.map((country, i) => ({ id: i + 1, ...country })).slice(
+    this.club = club.map((club, i) => ({ id: i + 1, ...club })).slice(
       (this.page - 1) * this.pageSize,
       (this.page - 1) * this.pageSize + this.pageSize,
     );
