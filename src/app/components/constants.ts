@@ -1,6 +1,7 @@
 export default {
   USER: {
-    Admin: "admin",
-    Club: "club",
+    SUPERADMIN: "SUPERADMIN",
+    ADMIN: "ADMIN",
+    STAFF: "STAFF",
   },
 }

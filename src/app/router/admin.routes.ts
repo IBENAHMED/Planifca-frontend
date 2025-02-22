@@ -10,12 +10,12 @@ export const adminRoutes: Routes = [
     path: URLS.ADMIN,
     canActivate: [guardsGuard],
     component: AdminClubsComponent,
-    data: { role: constants.USER.Admin },  // todo: you need to change this when you get data from backend
+    data: { role: [constants.USER.SUPERADMIN] },
   },
   {
     path: URLS.PROFILE,
     canActivate: [guardsGuard],
     component: ProfileComponent,
-    data: { role: constants.USER.Admin },  // todo: you need to change this when you get data from backend
+    data: { role: [constants.USER.SUPERADMIN, constants.USER.ADMIN] },
   },
 ];

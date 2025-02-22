@@ -1,9 +1,8 @@
 import { inject } from '@angular/core';
-import constants from '../../components/constants';
 import { AuthService } from '../service/auth.service';
 import { CanActivateFn, Router } from '@angular/router';
 
-export const guardsGuard: CanActivateFn = (route, state) => {
+export const guardsGuard: CanActivateFn = async (route, state) => {
 
   const router = inject(Router);
   const authService = inject(AuthService);
@@ -18,7 +17,7 @@ export const guardsGuard: CanActivateFn = (route, state) => {
     return false;
   };
 
-  if (route.data['role'] !== constants.USER.Admin) {
+  if (!await authService.hasRole(route.data['role'])) {
     router.navigate(['/unauthorized']);
   };
 

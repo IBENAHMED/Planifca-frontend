@@ -3,7 +3,7 @@
     <div class="adminComponent-content">
       <h3>Mes clubs</h3>
       <app-tag-button text="Nouveaux club" (click)="open(content)">
-        <img src="/icon/icon-plus.svg" alt="icon-plus" />
+        <img style="margin-bottom: 2px;" src="/icon/icon-plus.svg" alt="icon-plus" />
       </app-tag-button>
     </div>
 
@@ -30,35 +30,45 @@
       </form>
     </ng-template>
 
+    <p class="tableClub_text mt-5">Une table répertorie tous les clubs pour <code>l'administration</code>, facilitant la
+      gestion et les
+      mises à jour.
+    </p>
 
-  <p class="mt-5">Une table répertorie tous les clubs pour <code>l'administration</code>, facilitant la gestion et les mises à jour.</p>
+    <div class="tableClub">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Date de création</th>
+            <th scope="col">Dernier action</th>
+            <th scope="col">Statu</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (country of club; track country.name) {
+          <tr>
+            <td scope="row">{{ country.name }}</td>
+            <td>{{ country.creation_date }}</td>
+            <td>{{ country.last_action }}</td>
+            <td [ngClass]="{
+              'terminer': country?.statut === 'Terminer',
+              'en-cours': country?.statut === 'En cours'
+            }">
+              {{ country?.statut }}
+            </td>
+            <td class="button">...</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Nom</th>
-        <th scope="col">Date de création</th>
-        <th scope="col">Dernier action</th>
-        <th scope="col">Statu</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (country of countries; track country.name) {
-      <tr>
-        <th scope="row">{{ country.name }}</th>
-        <td>{{ country.creation_date }}</td>
-        <td>{{ country.last_action }}</td>
-        <td>{{ country.statut }}</td>
-        <td>...</td>
-      </tr>
-      }
-    </tbody>
-  </table>
-
-  <div class="d-flex justify-content-center p-2">
-    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-      (pageChange)="refreshCountries()">
-    </ngb-pagination>
-  </div>
+    <div class="d-flex justify-content-center p-2">
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+        (pageChange)="refreshClub()">
+      </ngb-pagination>
+    </div>
   </article>
 </app-admin-layout>

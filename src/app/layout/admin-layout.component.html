@@ -5,14 +5,13 @@
 
       <div class="collapse navbar-collapse d-none d-lg-block">
         <ul class="navbar-nav ms-auto">
-          <!-- todo: you need to change this when you get data from backend -->
-          <li *ngIf="authService.hasRole('admin')" class="nav-item">
+          <li *ngIf="roleClub" class="nav-item">
             <a class="nav-link" [routerLink]="'/' + frontPath + '/club'">
               <i class="fas fa-home"></i>
-              <span>Clubs</span>
+              <span>Club</span>
             </a>
           </li>
-          <li class="nav-item">
+          <li *ngIf="roleAdministration" class="nav-item">
             <a class="nav-link" [routerLink]="'/' + frontPath + '/administration'">
               <i class="fas fa-user"></i>
               <span>Administration</span>
@@ -76,12 +75,14 @@
     </div>
     <div class="container-list-unstyled">
       <ul class="list-unstyled">
-        <li><a routerLink="/space-clients/club" class="nav-link"><i class="fas fa-home"></i> Clubs</a></li>
-        <li><a routerLink="/space-clients/club" class="nav-link"><i class="fas fa-user"></i> About</a></li>
-        <li><a routerLink="/space-clients/club" class="nav-link"><i class="fas fa-cogs"></i> Services</a></li>
-        <li><a routerLink="/space-clients/club" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
-        <li><a [routerLink]="'/' + frontPath + '/profile'" class="nav-link"><i class="fas fa-sign-out-alt"></i>Voir mon profil</a></li>
-        <li><button (click)="logOut()" class="nav-link check-logout"> <i class="fas fa-user"></i>Déconnexion</button></li>
+        <li><a routerLink="/space-clients/club" class="nav-link"><i class="fas fa-home"></i>Club</a></li>
+        <li><a routerLink="/space-clients/club" class="nav-link"><i class="fas fa-user"></i>About</a></li>
+        <li><a routerLink="/space-clients/club" class="nav-link"><i class="fas fa-cogs"></i>Services</a></li>
+        <li><a routerLink="/space-clients/club" class="nav-link"><i class="fas fa-envelope"></i>Contact</a></li>
+        <li><a [routerLink]="'/' + frontPath + '/profile'" class="nav-link"><i class="fas fa-sign-out-alt"></i>Voir mon
+            profil</a></li>
+        <li><button (click)="logOut()" class="nav-link check-logout"> <i class="fas fa-user"></i>Déconnexion</button>
+        </li>
       </ul>
     </div>
   </div>
