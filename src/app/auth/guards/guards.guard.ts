@@ -1,4 +1,5 @@
 import { inject } from '@angular/core';
+import constants from '../../components/constants';
 import { AuthService } from '../service/auth.service';
 import { CanActivateFn, Router } from '@angular/router';
 
@@ -17,7 +18,7 @@ export const guardsGuard: CanActivateFn = (route, state) => {
     return false;
   };
 
-  if (route.data['role'] !== 'admin') {
+  if (route.data['role'] !== constants.USER.Admin) {
     router.navigate(['/unauthorized']);
   };
 
