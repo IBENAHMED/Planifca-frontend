@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
@@ -8,8 +9,6 @@ import { NgbAlertConfig, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
-import { FormsModule } from '@angular/forms';
 import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 const COUNTRIES: clubInformation[] = [

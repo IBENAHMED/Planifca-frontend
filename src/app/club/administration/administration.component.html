@@ -1,3 +1,62 @@
 <app-admin-layout>
-  <p>administration works!</p>
+  <article class="adminAdministrationComponent">
+    <div class="adminComponent-content">
+      <h3>Mes administration</h3>
+      <app-tag-button text="Nouveaux administration" (click)="open(content)">
+        <img src="/icon/icon-plus.svg" alt="icon-plus" />
+      </app-tag-button>
+    </div>
+
+    <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Nouveau administration</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+      </div>
+      <form [formGroup]="administrationInformation" (ngSubmit)="onsubmit()">
+        <div class="modal-body">
+          <label for="nom">Nom<span>*</span></label>
+          <input formControlName="name" id="name" name="name" placeholder="Nom" required type="text" />
+          <label for="email">Email<span>*</span></label>
+          <input formControlName="email" id="email" name="email" placeholder="Email" required type="email" />
+        </div>
+        <div class="modal-footer">
+          <app-tag-button type="submit" text="Sauvegarder" [disabled]="administrationInformation.invalid"
+            [ngClass]="{'disabled': administrationInformation.invalid}" />
+        </div>
+        <ngb-alert *ngIf="success" type="success" [dismissible]="false">Le administration a été créé avec succès.</ngb-alert>
+      </form>
+    </ng-template>
+
+
+    <p class="mt-5">Une table répertorie tous les <code>l'administration</code>, pour facilitant la gestion et les
+      mises à jour.</p>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Date de création</th>
+          <th scope="col">Dernier action</th>
+          <th scope="col">Statu</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (country of countries; track country.name) {
+        <tr>
+          <th scope="row">{{ country.name }}</th>
+          <td>{{ country.creation_date }}</td>
+          <td>{{ country.last_action }}</td>
+          <td>{{ country.statut }}</td>
+          <td>...</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center p-2">
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+        (pageChange)="refreshCountries()">
+      </ngb-pagination>
+    </div>
+  </article>
 </app-admin-layout>
