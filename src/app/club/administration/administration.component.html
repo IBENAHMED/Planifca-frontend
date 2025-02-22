@@ -2,17 +2,17 @@
   <article class="adminAdministrationComponent">
     <div class="adminComponent-content">
       <h3>Mes administration</h3>
-      <app-tag-button text="Nouveaux administration" (click)="open(content)">
-        <img src="/icon/icon-plus.svg" alt="icon-plus" />
+      <app-tag-button text="Nouveaux utilisateur" (click)="open(content)">
+        <img style="margin-bottom: 2px;" src="/icon/icon-plus.svg" alt="icon-plus" />
       </app-tag-button>
     </div>
 
     <ng-template #content let-c="close" let-d="dismiss">
       <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Nouveau administration</h4>
+        <h4 class="modal-title" id="modal-basic-title">Nouveau utilisateur</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
       </div>
-      <form [formGroup]="administrationInformation" (ngSubmit)="onsubmit()">
+      <form [formGroup]="utilisateurInformation" (ngSubmit)="onsubmit()">
         <div class="modal-body">
           <label for="nom">Nom<span>*</span></label>
           <input formControlName="name" id="name" name="name" placeholder="Nom" required type="text" />
@@ -20,10 +20,11 @@
           <input formControlName="email" id="email" name="email" placeholder="Email" required type="email" />
         </div>
         <div class="modal-footer">
-          <app-tag-button type="submit" text="Sauvegarder" [disabled]="administrationInformation.invalid"
-            [ngClass]="{'disabled': administrationInformation.invalid}" />
+          <app-tag-button type="submit" text="Sauvegarder" [disabled]="utilisateurInformation.invalid"
+            [ngClass]="{'disabled': utilisateurInformation.invalid}" />
         </div>
-        <ngb-alert *ngIf="success" type="success" [dismissible]="false">Le administration a été créé avec succès.</ngb-alert>
+        <ngb-alert *ngIf="success" type="success" [dismissible]="false">Le utilisateur a été créé avec
+          succès.</ngb-alert>
       </form>
     </ng-template>
 
@@ -31,31 +32,40 @@
     <p class="mt-5">Une table répertorie tous les <code>l'administration</code>, pour facilitant la gestion et les
       mises à jour.</p>
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Nom</th>
-          <th scope="col">Date de création</th>
-          <th scope="col">Dernier action</th>
-          <th scope="col">Statu</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (country of countries; track country.name) {
-        <tr>
-          <th scope="row">{{ country.name }}</th>
-          <td>{{ country.creation_date }}</td>
-          <td>{{ country.last_action }}</td>
-          <td>{{ country.statut }}</td>
-          <td>...</td>
-        </tr>
-        }
-      </tbody>
-    </table>
+    <div class="tableClub">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Date de création</th>
+            <th scope="col">Dernier action</th>
+            <th scope="col">Statu</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (club of clubs; track club.name) {
+          <tr>
+            <td scope="row">{{ club.name }}</td>
+            <td>{{ club.creation_date }}</td>
+            <td>{{ club.last_action }}</td>
+            <td [ngClass]="{
+                  'terminer': club?.statut === 'Terminer',
+                  'en-cours': club?.statut === 'En cours'
+                }">
+              {{ club?.statut }}
+            </td>
+            <td class="button">...</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
 
     <div class="d-flex justify-content-center p-2">
       <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-        (pageChange)="refreshCountries()">
+        (pageChange)="refreshClub()">
       </ngb-pagination>
     </div>
   </article>

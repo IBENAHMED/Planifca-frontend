@@ -19,6 +19,8 @@ import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.co
 import { TagButtonComponent } from '../../components/tag/tag-button/tag-button.component';
 import { FormInputEmailComponent } from '../../components/form/form-input-email/form-input-email.component';
 import { FormInputPasswordComponent } from '../../components/form/form-input-password/form-input-password.component';
+import { response } from 'express';
+import constants from '../../components/constants';
 @Component({
   selector: 'login-auth',
   standalone: true,
@@ -102,7 +104,20 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.route.navigate([`${this.frontPath}/club`]);
+          this.authService.getUserRole().subscribe({
+            next: (response) => {
+              if (response.roles.includes(constants.USER.SUPERADMIN)) {
+                this.route.navigate([`${this.frontPath}/club`])
+              }
+
+              if (response.roles.includes(constants.USER.ADMIN)) {
+                this.route.navigate([`${this.frontPath}/administration`])
+              }
+            },
+            error: () => {
+              alert("Internal server error");
+            },
+          });
         },
         error: ({ status }) => {
           this.isError = [404, 401].includes(status);

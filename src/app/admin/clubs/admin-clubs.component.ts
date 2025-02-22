@@ -7,23 +7,23 @@ import { clubInformation, createClub } from '../model/club-type';
 import { AdminLayoutComponent } from '../../layout/admin-layout.component';
 import { NgbAlertConfig, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
-const COUNTRIES: clubInformation[] = [
-  {name: 'reda-foot', last_action: '01/01/2021', creation_date: '01/01/2025', statut: 'Terminer'},
-  {name: 'city-foot', last_action: '22/02/2022', creation_date: '01/01/2025', statut: 'En cours'},
-  {name: 'gold-foot', last_action: '18/03/2023', creation_date: '01/01/2025', statut: 'En cours'},
-  {name: 'city-foot', last_action: '11/04/2024', creation_date: '01/01/2025', statut: 'Terminer'},
-  {name: 'came-foot', last_action: '23/05/2025', creation_date: '01/01/2025', statut: 'En cours'},
-  {name: 'arina-foot', last_action: '21/06/2021', creation_date: '01/01/2025', statut: 'Terminer'},
-  {name: 'mohamed-foot', last_action: '11/07/2022', creation_date: '01/01/2025', statut: 'En cours'},
-  {name: 'oussama-foot', last_action: '22/08/2023', creation_date: '01/01/2025', statut: 'ETerminer'},
-  {name: 'admin-foot', last_action: '15/09/2024', creation_date: '01/01/2025', statut: 'Terminer'},
-  {name: 'google-foot', last_action: '09/10/2019', creation_date: '01/01/2025', statut: 'En cours'},
-  {name: 'facebook-foot', last_action: '07/11/2022', creation_date: '01/01/2025', statut: 'Terminer'},
-  {name: 'space-foot', last_action: '15/12/2024', creation_date: '01/01/2025', statut: 'En cours'},
+const club: clubInformation[] = [
+  { name: 'reda-foot', last_action: '01/01/2021', creation_date: '01/01/2025', statut: 'Terminer' },
+  { name: 'city-foot', last_action: '22/02/2022', creation_date: '01/01/2025', statut: 'En cours' },
+  { name: 'gold-foot', last_action: '18/03/2023', creation_date: '01/01/2025', statut: 'En cours' },
+  { name: 'city-foot', last_action: '11/04/2024', creation_date: '01/01/2025', statut: 'Terminer' },
+  { name: 'came-foot', last_action: '23/05/2025', creation_date: '01/01/2025', statut: 'En cours' },
+  { name: 'arina-foot', last_action: '21/06/2021', creation_date: '01/01/2025', statut: 'Terminer' },
+  { name: 'mohamed-foot', last_action: '11/07/2022', creation_date: '01/01/2025', statut: 'En cours' },
+  { name: 'oussama-foot', last_action: '22/08/2023', creation_date: '01/01/2025', statut: 'ETerminer' },
+  { name: 'admin-foot', last_action: '15/09/2024', creation_date: '01/01/2025', statut: 'Terminer' },
+  { name: 'google-foot', last_action: '09/10/2019', creation_date: '01/01/2025', statut: 'En cours' },
+  { name: 'facebook-foot', last_action: '07/11/2022', creation_date: '01/01/2025', statut: 'Terminer' },
+  { name: 'space-foot', last_action: '15/12/2024', creation_date: '01/01/2025', statut: 'En cours' },
 ];
 
 @Component({
@@ -48,9 +48,9 @@ const COUNTRIES: clubInformation[] = [
 })
 export class AdminClubsComponent implements OnInit {
   page = 1;
-  pageSize = 8;
-  collectionSize = COUNTRIES.length;
-  countries: clubInformation[] = [];
+  pageSize = 6;
+  collectionSize = club.length;
+  club: clubInformation[] = [];
 
   constructor(config: NgbModalConfig, private modalService: NgbModal, alertConfig: NgbAlertConfig) {
     config.backdrop = 'static';
@@ -58,7 +58,7 @@ export class AdminClubsComponent implements OnInit {
 
     alertConfig.type = 'success';
     alertConfig.dismissible = false;
-    this.refreshCountries();
+    this.refreshClub();
   }
 
   private route = inject(Router);
@@ -91,8 +91,8 @@ export class AdminClubsComponent implements OnInit {
     this.modalService.open(content);
   };
 
-  refreshCountries() {
-    this.countries = COUNTRIES.map((country, i) => ({ id: i + 1, ...country })).slice(
+  refreshClub() {
+    this.club = club.map((country, i) => ({ id: i + 1, ...country })).slice(
       (this.page - 1) * this.pageSize,
       (this.page - 1) * this.pageSize + this.pageSize,
     );

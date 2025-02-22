@@ -1,9 +1,8 @@
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { login } from '../model/login-type';
+import { lastValueFrom, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { inject, Injectable } from '@angular/core';
-import constants from '../../components/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
@@ -16,8 +15,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  // todo: you need to change userRole when you get data from backend
-  private userRole: string = constants.USER.Admin;
+  userRoles: string[] = [];
   private tokenKey = 'token';
   private userContextKey = 'userContext';
   private userContext: any = localStorage.getItem(this.userContextKey);
@@ -82,7 +80,42 @@ export class AuthService {
     return !!localStorage.getItem(this.tokenKey);
   };
 
-  hasRole(requiredRole: string): boolean {
-    return this.userRole === requiredRole;
-  };
+  getUserRole(): Observable<any> {
+    const token = localStorage.getItem(this.tokenKey);
+    return this.http.get(`${this.urlApi}/user/current`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+
+  async hasRole(requiredRoles: string[]): Promise<boolean> {
+    if (this.userRoles.length > 0) {
+      return requiredRoles.some(role => this.userRoles.includes(role));
+    }
+
+    const token = localStorage.getItem(this.tokenKey);
+
+    try {
+      const response = await fetch(`${this.urlApi}/user/current`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch user roles');
+      }
+
+      const data = await response.json();
+      this.userRoles = data.roles;
+      return requiredRoles.some(role => this.userRoles.includes(role));
+    } catch (error) {
+      console.error('Error fetching roles:', error);
+      return false;
+    }
+  }
 };

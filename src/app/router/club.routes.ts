@@ -9,6 +9,6 @@ export const clubRoutes: Routes = [
     path: URLS.CLUB,
     canActivate: [guardsGuard],
     component: AdministrationComponent,
-    data: { role: constants.USER.Admin }, // todo: you need to change this when you get data from backend
+    data: { role: [constants.USER.SUPERADMIN, constants.USER.ADMIN] },
   },
 ];

@@ -10,19 +10,19 @@ import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootst
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-const COUNTRIES: administratIonInformation[] = [
-  {name: 'reda-foot', last_action: '01/01/2021', creation_date: '01/01/2025', statut: 'Terminer'},
-  {name: 'city-foot', last_action: '22/02/2022', creation_date: '01/01/2025', statut: 'En cours'},
-  {name: 'gold-foot', last_action: '18/03/2023', creation_date: '01/01/2025', statut: 'En cours'},
-  {name: 'city-foot', last_action: '11/04/2024', creation_date: '01/01/2025', statut: 'Terminer'},
-  {name: 'came-foot', last_action: '23/05/2025', creation_date: '01/01/2025', statut: 'En cours'},
-  {name: 'arina-foot', last_action: '21/06/2021', creation_date: '01/01/2025', statut: 'Terminer'},
-  {name: 'mohamed-foot', last_action: '11/07/2022', creation_date: '01/01/2025', statut: 'En cours'},
-  {name: 'oussama-foot', last_action: '22/08/2023', creation_date: '01/01/2025', statut: 'ETerminer'},
-  {name: 'admin-foot', last_action: '15/09/2024', creation_date: '01/01/2025', statut: 'Terminer'},
-  {name: 'google-foot', last_action: '09/10/2019', creation_date: '01/01/2025', statut: 'En cours'},
-  {name: 'facebook-foot', last_action: '07/11/2022', creation_date: '01/01/2025', statut: 'Terminer'},
-  {name: 'space-foot', last_action: '15/12/2024', creation_date: '01/01/2025', statut: 'En cours'},
+const clubs: administratIonInformation[] = [
+  { name: 'yassir tabit', last_action: '01/01/2021', creation_date: '11/01/2019', statut: 'Terminer' },
+  { name: 'moahmed atyq', last_action: '22/02/2022', creation_date: '21/02/2018', statut: 'En cours' },
+  { name: 'oussama salihi', last_action: '18/03/2023', creation_date: '03/03/2021', statut: 'En cours' },
+  { name: 'aymen miftah', last_action: '11/04/2024', creation_date: '14/03/2022', statut: 'Terminer' },
+  { name: 'khalid dawdi', last_action: '23/05/2025', creation_date: '19/06/2023', statut: 'En cours' },
+  { name: 'tahar mosaaid', last_action: '11/08/2024', creation_date: '21/06/2021', statut: 'Terminer' },
+  { name: 'yahya brahimi', last_action: '16/11/2025', creation_date: '11/07/2022', statut: 'En cours' },
+  { name: 'yassine tami', last_action: '22/08/2023', creation_date: '27/12/2017', statut: 'ETerminer' },
+  { name: 'reda ibenahmed', last_action: '15/09/2024', creation_date: '28/06/2018', statut: 'Terminer' },
+  { name: 'marwan kamali', last_action: '17/08/2021', creation_date: '09/10/2019', statut: 'En cours' },
+  { name: 'kamal salami', last_action: '07/11/2022', creation_date: '01/11/2022', statut: 'Terminer' },
+  { name: 'hicham sakouti', last_action: '15/12/2024', creation_date: '16/01/2023', statut: 'En cours' },
 ];
 
 @Component({
@@ -49,9 +49,9 @@ const COUNTRIES: administratIonInformation[] = [
 })
 export class AdministrationComponent implements OnInit {
   page = 1;
-  pageSize = 8;
-  collectionSize = COUNTRIES.length;
-  countries: administratIonInformation[] = [];
+  pageSize = 6;
+  collectionSize = clubs.length;
+  clubs: administratIonInformation[] = [];
 
   constructor(config: NgbModalConfig, private modalService: NgbModal, alertConfig: NgbAlertConfig) {
     config.backdrop = 'static';
@@ -59,7 +59,7 @@ export class AdministrationComponent implements OnInit {
 
     alertConfig.type = 'success';
     alertConfig.dismissible = false;
-    this.refreshCountries();
+    this.refreshClub();
   }
 
   private route = inject(Router);
@@ -70,7 +70,7 @@ export class AdministrationComponent implements OnInit {
   success: boolean = false;
   frontPath: string | null = null;
 
-  administrationInformation: FormGroup = this.formbuilder.group({
+  utilisateurInformation: FormGroup = this.formbuilder.group({
     name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
   });
@@ -90,8 +90,8 @@ export class AdministrationComponent implements OnInit {
     this.modalService.open(content);
   };
 
-  refreshCountries() {
-    this.countries = COUNTRIES.map((country, i) => ({ id: i + 1, ...country })).slice(
+  refreshClub() {
+    this.clubs = clubs.map((country, i) => ({ id: i + 1, ...country })).slice(
       (this.page - 1) * this.pageSize,
       (this.page - 1) * this.pageSize + this.pageSize,
     );
