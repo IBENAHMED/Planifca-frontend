@@ -5,6 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import constants from '../../components/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  private userRole: string = 'admin';
+  // todo: you need to change userRole when you get data from backend
+  private userRole: string = constants.USER.Admin;
   private tokenKey = 'token';
   private userContextKey = 'userContext';
   private userContext: any = localStorage.getItem(this.userContextKey);
@@ -79,14 +81,6 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!localStorage.getItem(this.tokenKey);
   };
-
-  setUserRole(role: string) {
-    this.userRole = role;
-  }
-
-  getUserRole(): string {
-    return this.userRole;
-  }
 
   hasRole(requiredRole: string): boolean {
     return this.userRole === requiredRole;

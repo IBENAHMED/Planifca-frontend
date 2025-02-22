@@ -1,7 +1,6 @@
 import { NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { URLS } from '../components/helpers/url-constants';
+import { Component, inject } from '@angular/core';
 import { AuthService } from '../auth/service/auth.service';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -14,11 +13,12 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AdminLayoutComponent {
 
-  private authService = inject(AuthService);
+  authService = inject(AuthService);
+  private userContext: any = localStorage.getItem('userContext');
+  frontPath = JSON.parse(this.userContext).frontPath;
 
   isCollapsed = true;
   isOpen: boolean = false;
-  adminProfileurl: string = URLS.PROFILE;
 
   toggleMenu() {
     this.isOpen = !this.isOpen;

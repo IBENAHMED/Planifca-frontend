@@ -1,18 +1,19 @@
 <article class="AdminLayout">
   <nav class="navbar navbar-expand-lg navbar-white bg-white">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/space-clients/club">Planifca en ligne</a>
+      <a class="navbar-brand" [routerLink]="'/' + frontPath + '/club'">Planifca en ligne</a>
 
       <div class="collapse navbar-collapse d-none d-lg-block">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/space-clients/club">
+          <!-- todo: you need to change this when you get data from backend -->
+          <li *ngIf="authService.hasRole('admin')" class="nav-item">
+            <a class="nav-link" [routerLink]="'/' + frontPath + '/club'">
               <i class="fas fa-home"></i>
               <span>Clubs</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/space-clients/club">
+            <a class="nav-link" [routerLink]="'/' + frontPath + '/administration'">
               <i class="fas fa-user"></i>
               <span>Administration</span>
             </a>
@@ -44,7 +45,7 @@
         <div class="ngbCollapse_profil" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
           <div class="card">
             <div class="card-body">
-              <button class="check-profile" [routerLink]="'/' + adminProfileurl">
+              <button class="check-profile" [routerLink]="'/' + frontPath + '/profile'">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Voir mon profil</span>
               </button>
@@ -79,7 +80,7 @@
         <li><a routerLink="/space-clients/club" class="nav-link"><i class="fas fa-user"></i> About</a></li>
         <li><a routerLink="/space-clients/club" class="nav-link"><i class="fas fa-cogs"></i> Services</a></li>
         <li><a routerLink="/space-clients/club" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
-        <li><a [routerLink]="'/' + adminProfileurl" class="nav-link"><i class="fas fa-sign-out-alt"></i>Voir mon profil</a></li>
+        <li><a [routerLink]="'/' + frontPath + '/profile'" class="nav-link"><i class="fas fa-sign-out-alt"></i>Voir mon profil</a></li>
         <li><button (click)="logOut()" class="nav-link check-logout"> <i class="fas fa-user"></i>Déconnexion</button></li>
       </ul>
     </div>
