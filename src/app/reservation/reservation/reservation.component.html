@@ -1,41 +1,37 @@
 <app-admin-layout>
-  <article class="adminClubsComponent">
+  <article class="adminAdministrationComponent">
     <div class="adminComponent-content">
-      <h3>Clubs</h3>
-      <app-tag-button text="Nouveaux club" (click)="open(content)">
+      <h3>Réservations</h3>
+      <app-tag-button text="Nouveaux réservations" (click)="open(content)">
         <img style="margin-bottom: 2px;" src="/icon/icon-plus.svg" alt="icon-plus" />
       </app-tag-button>
     </div>
 
     <ng-template #content let-c="close" let-d="dismiss">
       <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Nouveau club</h4>
+        <h4 class="modal-title" id="modal-basic-title">Nouveau réservations</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
       </div>
-      <form [formGroup]="clubInformation" (ngSubmit)="onsubmit()">
+      <form [formGroup]="utilisateurInformation" (ngSubmit)="onsubmit()">
         <div class="modal-body">
           <label for="nom">Nom<span>*</span></label>
           <input formControlName="name" id="name" name="name" placeholder="Nom" required type="text" />
           <label for="email">Email<span>*</span></label>
           <input formControlName="email" id="email" name="email" placeholder="Email" required type="email" />
-          <label for="frontPath">FrontPath<span>*</span></label>
-          <input formControlName="frontPath" id="FrontPath" name="frontPath" placeholder="frontPath" required
-            type="text" />
         </div>
         <div class="modal-footer">
-          <app-tag-button type="submit" text="Sauvegarder" [disabled]="clubInformation.invalid"
-            [ngClass]="{'disabled': clubInformation.invalid}" />
+          <app-tag-button type="submit" text="Sauvegarder" [disabled]="utilisateurInformation.invalid"
+            [ngClass]="{'disabled': utilisateurInformation.invalid}" />
         </div>
-        <ngb-alert *ngIf="success" type="success" [dismissible]="false">Le club a été créé avec succès.</ngb-alert>
+        <ngb-alert *ngIf="success" type="success" [dismissible]="false">Le utilisateur a été créé avec
+          succès.</ngb-alert>
       </form>
     </ng-template>
 
-    <p class="tableClub_text mt-5">Une table répertorie tous les clubs pour <code>l'administration</code>, facilitant la
-      gestion et les
-      mises à jour.
-    </p>
+    <p class="mt-5">Une table répertorie tous les <code>réservations</code>, pour facilitant la gestion et les
+      mises à jour.</p>
 
-    <div class="tableClub">
+    <div class="tableReservation">
       <table class="table">
         <thead>
           <tr>
@@ -47,16 +43,16 @@
           </tr>
         </thead>
         <tbody>
-          @for (club of club; track club.name) {
+          @for (reservation of reservation; track reservation.name) {
           <tr>
-            <td scope="row">{{ club.name }}</td>
-            <td>{{ club.creation_date }}</td>
-            <td>{{ club.last_action }}</td>
+            <td scope="row">{{ reservation.name }}</td>
+            <td>{{ reservation.creation_date }}</td>
+            <td>{{ reservation.last_action }}</td>
             <td [ngClass]="{
-              'terminer': club?.statut === 'Terminer',
-              'en-cours': club?.statut === 'En cours'
-            }">
-              {{ club?.statut }}
+                  'terminer': reservation?.statut === 'Terminer',
+                  'en-cours': reservation?.statut === 'En cours'
+                }">
+              {{ reservation?.statut }}
             </td>
             <td class="button">...</td>
           </tr>
@@ -67,7 +63,7 @@
 
     <div class="d-flex justify-content-center p-2">
       <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-        (pageChange)="refreshClub()">
+        (pageChange)="refreshReservation()">
       </ngb-pagination>
     </div>
   </article>

@@ -24,4 +24,17 @@ export class AdminService {
       }),
     );
   };
+
+  getAllClubs(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get(`${this.urlApi}/club?page=0&size=10`, { headers }).pipe(
+      catchError((error) => {
+        throw error;
+      }),
+    );
+  };
 };

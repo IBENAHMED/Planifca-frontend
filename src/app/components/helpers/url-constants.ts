@@ -13,4 +13,7 @@ export const URLS = {
 
   // CLUB
   CLUB: ':frontPath/administration',
+
+  // RESERVATION
+  RESERVATION: ':frontPath/reservation',
 };
