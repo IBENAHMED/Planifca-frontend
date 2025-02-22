@@ -91,7 +91,7 @@ export class AdministrationComponent implements OnInit {
   };
 
   refreshClub() {
-    this.clubs = clubs.map((country, i) => ({ id: i + 1, ...country })).slice(
+    this.clubs = clubs.map((club, i) => ({ id: i + 1, ...club })).slice(
       (this.page - 1) * this.pageSize,
       (this.page - 1) * this.pageSize + this.pageSize,
     );
