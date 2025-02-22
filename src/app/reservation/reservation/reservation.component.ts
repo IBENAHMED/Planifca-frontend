@@ -1,8 +1,9 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { reservationIonInformation } from '../model/reservation-type';
+import { TagAComponent } from "../../components/tag/tag-a/tag-a.component";
 import { AdminLayoutComponent } from '../../layout/admin-layout.component';
 import { NgbAlertConfig, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -30,8 +31,10 @@ const reservation: reservationIonInformation[] = [
   standalone: true,
   imports: [
     NgbModule,
+    RouterLink,
     FormsModule,
     CommonModule,
+    TagAComponent,
     NgbAlertModule,
     NgbTypeaheadModule,
     TagButtonComponent,
@@ -84,10 +87,6 @@ export class ReservationComponent implements OnInit {
         this.route.navigate([`${path}/reservation`]);
       }
     });
-  };
-
-  open(content: any) {
-    this.modalService.open(content);
   };
 
   refreshReservation() {

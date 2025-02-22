@@ -16,4 +16,5 @@ export const URLS = {
 
   // RESERVATION
   RESERVATION: ':frontPath/reservation',
+  CREATE_RESERVATION: ':frontPath/reservation/new',
 };
