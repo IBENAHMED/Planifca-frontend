@@ -1,7 +1,7 @@
 import { takeUntil } from 'rxjs/operators';
 import { Subscription, Subject } from 'rxjs';
+import { RouterLink } from '@angular/router';
 import { NgClass, NgIf } from '@angular/common';
-import { Component, inject, OnDestroy } from '@angular/core';
 import {
   Validators,
   FormsModule,
@@ -9,8 +9,8 @@ import {
   FormBuilder,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { URLS } from '../../components/helpers/url-constants';
 import { AuthLayoutComponentComponent } from '../layout/auth-layout-component.component';
 import { TagButtonComponent } from '../../components/tag/tag-button/tag-button.component';

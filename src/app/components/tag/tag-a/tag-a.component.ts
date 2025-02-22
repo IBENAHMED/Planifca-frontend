@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-tag-a',
@@ -13,4 +13,5 @@ export class TagAComponent {
   @Input() name: string = '';
   @Input() text: string = '';
   @Input() url: string = '';
+
 }

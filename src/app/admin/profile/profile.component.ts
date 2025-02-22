@@ -2,9 +2,9 @@ import { Component, inject } from '@angular/core';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminLayoutComponent } from '../../layout/admin-layout.component';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
 import { FormInputTextComponent } from '../../components/form/form-input-text/form-input-text.component';
 import { FormInputPasswordComponent } from '../../components/form/form-input-password/form-input-password.component';
-import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
 
 @Component({
   selector: 'app-profile',
