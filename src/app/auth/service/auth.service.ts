@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { login } from '../model/login-type';
 import { catchError, tap } from 'rxjs/operators';
 import { inject, Injectable } from '@angular/core';
+import constants from '../../components/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import constants from '../../components/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -84,5 +84,5 @@ export class AuthService {
 
   hasRole(requiredRole: string): boolean {
     return this.userRole === requiredRole;
-  }
+  };
 };

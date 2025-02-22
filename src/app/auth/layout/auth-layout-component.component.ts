@@ -8,5 +8,4 @@ import { Component } from '@angular/core';
   styleUrl: './auth-layout-component.component.scss'
 })
 export class AuthLayoutComponentComponent {
-
 }

@@ -14,4 +14,5 @@ export class TagButtonComponent {
   @Input() ngClass!: any;
   @Input() text!: string;
   @Input() type!: string;
+  
 }

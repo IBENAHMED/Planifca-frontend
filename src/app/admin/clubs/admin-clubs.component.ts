@@ -62,13 +62,6 @@ export class AdminClubsComponent implements OnInit {
     this.refreshCountries();
   }
 
-  refreshCountries() {
-    this.countries = COUNTRIES.map((country, i) => ({ id: i + 1, ...country })).slice(
-      (this.page - 1) * this.pageSize,
-      (this.page - 1) * this.pageSize + this.pageSize,
-    );
-  }
-
   private route = inject(Router);
   private formbuilder = inject(FormBuilder);
   private adminService = inject(AdminService);
@@ -97,6 +90,13 @@ export class AdminClubsComponent implements OnInit {
 
   open(content: any) {
     this.modalService.open(content);
+  };
+
+  refreshCountries() {
+    this.countries = COUNTRIES.map((country, i) => ({ id: i + 1, ...country })).slice(
+      (this.page - 1) * this.pageSize,
+      (this.page - 1) * this.pageSize + this.pageSize,
+    );
   };
 
   onsubmit() {
