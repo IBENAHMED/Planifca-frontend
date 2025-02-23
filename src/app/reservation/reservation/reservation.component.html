@@ -7,9 +7,6 @@
       </app-tag-button>
     </div>
 
-    <p class="mt-5">Une table répertorie tous les <code>réservations</code>, pour facilitant la gestion et les
-      mises à jour.</p>
-
     <form class="form-srach-bar">
       <div class="mb-3 row">
         <div class="search-bar col-xs-3 col-sm-auto">
@@ -19,6 +16,7 @@
         </div>
       </div>
     </form>
+
     <div class="tableReservation">
       <table class="table">
         <thead>
@@ -42,15 +40,25 @@
                 }">
               {{ reservation?.statut }}
             </td>
-            <td class="button" (click)="toggelModal(reservation)">...</td>
-            @if (selectedReservation?.name == reservation.name) {
-            <div class="modals" *ngIf="selectedReservation">
-              <div class="modals-content">
-                <button class="modifier" (click)="modifier()">Modifier</button>
-                <button class="supprimer" (click)="supprimer()">Supprimer</button>
+            <td>
+              <div>
+                <div ngbDropdown>
+                  <button class="ngbDropdown-button" type="button" id="dropdownBasic1" ngbDropdownToggle>
+                    ...
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem class="ngbDropdown-button_modifier">
+                      <i class="fas fa-edit"></i>
+                      Modifier
+                    </button>
+                    <button ngbDropdownItem class="ngbDropdown-button_supprimer">
+                      <i class="fas fa-trash"></i>
+                      Supprimer
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-            }
+            </td>
           </tr>
           }
         </tbody>

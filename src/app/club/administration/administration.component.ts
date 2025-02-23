@@ -50,7 +50,6 @@ const clubs: administratIonInformation[] = [
 export class AdministrationComponent implements OnInit {
   page = 1;
   pageSize = 5;
-  selectedAdministration: any = null;
   collectionSize = clubs.length;
   administrations: administratIonInformation[] = [];
 
@@ -85,24 +84,6 @@ export class AdministrationComponent implements OnInit {
         this.route.navigate([`${path}/administration`]);
       }
     });
-  };
-
-  toggelModal(club: any) {
-    if (!this.selectedAdministration || this.selectedAdministration.name !== club.name) {
-      this.selectedAdministration = club;
-    } else {
-      this.selectedAdministration = null;
-    }
-  };
-
-  modifier() {
-    console.log('Modifier:', this.selectedAdministration);
-    this.selectedAdministration = null;
-  };
-
-  supprimer() {
-    console.log('Supprimer:', this.selectedAdministration);
-    this.selectedAdministration = null;
   };
 
   open(content: any) {
