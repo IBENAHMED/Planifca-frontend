@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import constants from '../components/constants';
+import { RouterLink, RouterModule } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../auth/service/auth.service';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
@@ -8,7 +8,7 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-admin-layout',
   standalone: true,
-  imports: [NgIf, RouterLink, NgbCollapseModule],
+  imports: [NgIf, RouterLink, NgbCollapseModule, RouterModule],
   templateUrl: './admin-layout.component.html',
   styleUrl: './admin-layout.component.scss'
 })

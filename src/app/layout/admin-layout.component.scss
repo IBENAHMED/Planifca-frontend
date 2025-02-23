@@ -305,8 +305,18 @@ i {
 
 .nav-link.check-logout {
   color: $error-color;
+
   i {
     color: $error-color;
     margin-right: 10px;
   }
+}
+
+.active-link {
+  font-weight: bold;
+  color: #007bff !important;
+}
+
+.active-link i {
+  color: #007bff !important;
 }
