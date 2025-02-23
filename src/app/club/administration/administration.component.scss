@@ -8,6 +8,10 @@
   justify-content: space-between;
 }
 
+.body-content {
+  @include padding-x(10px);
+}
+
 .adminComponent-content h3 {
   font-weight: bold;
   color: #00007e;
@@ -296,4 +300,14 @@ ngb-alert {
   font-size: 26px;
   color: $primary-color !important;
   border-radius: 50% !important;
+}
+
+.custom-dropdown {
+  position: relative !important;
+}
+
+.custom-dropdown-menu {
+  position: absolute !important;
+  top: -110px !important;
+  left: 22% !important;
 }
