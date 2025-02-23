@@ -1,12 +1,11 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { reservationIonInformation } from '../model/reservation-type';
-import { TagAComponent } from "../../components/tag/tag-a/tag-a.component";
 import { AdminLayoutComponent } from '../../layout/admin-layout.component';
 import { NgbAlertConfig, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -25,7 +24,6 @@ const reservation: reservationIonInformation[] = [
   { name: 'kamal salami', last_action: '07/11/2022', creation_date: '01/11/2022', statut: 'Terminer' },
   { name: 'hicham sakouti', last_action: '15/12/2024', creation_date: '16/01/2023', statut: 'En cours' },
 ];
-
 @Component({
   selector: 'app-administration',
   standalone: true,
@@ -34,7 +32,6 @@ const reservation: reservationIonInformation[] = [
     RouterLink,
     FormsModule,
     CommonModule,
-    TagAComponent,
     NgbAlertModule,
     NgbTypeaheadModule,
     TagButtonComponent,
@@ -42,24 +39,17 @@ const reservation: reservationIonInformation[] = [
     NgbPaginationModule,
     AdminLayoutComponent,
   ],
-  providers: [
-    NgbModal,
-    NgbModalConfig,
-    NgbAlertConfig,
-  ],
+  providers: [NgbAlertConfig],
   templateUrl: './reservation.component.html',
   styleUrl: './reservation.component.scss',
 })
 export class ReservationComponent implements OnInit {
   page = 1;
-  pageSize = 6;
+  pageSize = 5;
   collectionSize = reservation.length;
   reservation: reservationIonInformation[] = [];
 
-  constructor(config: NgbModalConfig, private modalService: NgbModal, alertConfig: NgbAlertConfig) {
-    config.backdrop = 'static';
-    config.keyboard = false;
-
+  constructor(alertConfig: NgbAlertConfig) {
     alertConfig.type = 'success';
     alertConfig.dismissible = false;
     this.refreshReservation();

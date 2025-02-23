@@ -15,7 +15,7 @@ const club: clubInformation[] = [
   { name: 'reda-foot', last_action: '01/01/2021', creation_date: '01/01/2025', statut: 'Terminer' },
   { name: 'city-foot', last_action: '22/02/2022', creation_date: '01/01/2025', statut: 'En cours' },
   { name: 'gold-foot', last_action: '18/03/2023', creation_date: '01/01/2025', statut: 'En cours' },
-  { name: 'city-foot', last_action: '11/04/2024', creation_date: '01/01/2025', statut: 'Terminer' },
+  { name: 'city-foots', last_action: '11/04/2024', creation_date: '01/01/2025', statut: 'Terminer' },
   { name: 'came-foot', last_action: '23/05/2025', creation_date: '01/01/2025', statut: 'En cours' },
   { name: 'arina-foot', last_action: '21/06/2021', creation_date: '01/01/2025', statut: 'Terminer' },
   { name: 'mohamed-foot', last_action: '11/07/2022', creation_date: '01/01/2025', statut: 'En cours' },
@@ -48,7 +48,8 @@ const club: clubInformation[] = [
 })
 export class AdminClubsComponent implements OnInit {
   page = 1;
-  pageSize = 6;
+  pageSize = 5;
+  selectedClub: any = null;
   collectionSize = club.length;
   club: clubInformation[] = [];
 
@@ -102,6 +103,24 @@ export class AdminClubsComponent implements OnInit {
 
   open(content: any) {
     this.modalService.open(content);
+  };
+
+  toggelModal(club: any) {
+    if (!this.selectedClub || this.selectedClub.name !== club.name) {
+      this.selectedClub = club;
+    } else {
+      this.selectedClub = null;
+    }
+  };
+
+  modifier() {
+    console.log('Modifier:', this.selectedClub);
+    this.selectedClub = null;
+  };
+
+  supprimer() {
+    console.log('Supprimer:', this.selectedClub);
+    this.selectedClub = null;
   };
 
   refreshClub() {
