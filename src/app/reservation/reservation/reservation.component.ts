@@ -46,6 +46,7 @@ const reservation: reservationIonInformation[] = [
 export class ReservationComponent implements OnInit {
   page = 1;
   pageSize = 5;
+  selectedReservation: any = null;
   collectionSize = reservation.length;
   reservation: reservationIonInformation[] = [];
 
@@ -84,6 +85,24 @@ export class ReservationComponent implements OnInit {
       (this.page - 1) * this.pageSize,
       (this.page - 1) * this.pageSize + this.pageSize,
     );
+  };
+
+  toggelModal(reservation: any) {
+    if (!this.selectedReservation || this.selectedReservation.name !== reservation.name) {
+      this.selectedReservation = reservation;
+    } else {
+      this.selectedReservation = null;
+    }
+  };
+
+  modifier() {
+    console.log('Modifier:', this.selectedReservation);
+    this.selectedReservation = null;
+  };
+
+  supprimer() {
+    console.log('Supprimer:', this.selectedReservation);
+    this.selectedReservation = null;
   };
 
   onsubmit() {

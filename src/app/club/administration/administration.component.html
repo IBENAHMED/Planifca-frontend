@@ -53,18 +53,26 @@
           </tr>
         </thead>
         <tbody>
-          @for (club of clubs; track club.name) {
+          @for (administration of administrations; track administration.name) {
           <tr>
-            <td scope="row">{{ club.name }}</td>
-            <td>{{ club.creation_date }}</td>
-            <td>{{ club.last_action }}</td>
+            <td scope="row">{{ administration.name }}</td>
+            <td>{{ administration.creation_date }}</td>
+            <td>{{ administration.last_action }}</td>
             <td [ngClass]="{
-                  'terminer': club?.statut === 'Terminer',
-                  'en-cours': club?.statut === 'En cours'
+                  'terminer': administration?.statut === 'Terminer',
+                  'en-cours': administration?.statut === 'En cours'
                 }">
-              {{ club?.statut }}
+              {{ administration?.statut }}
             </td>
-            <td class="button">...</td>
+            <td class="button" (click)="toggelModal(administration)">...</td>
+            @if (selectedAdministration?.name == administration.name) {
+            <div class="modals" *ngIf="selectedAdministration">
+              <div class="modals-content">
+                <button class="modifier" (click)="modifier()">Modifier</button>
+                <button class="supprimer" (click)="supprimer()">Supprimer</button>
+              </div>
+            </div>
+            }
           </tr>
           }
         </tbody>
