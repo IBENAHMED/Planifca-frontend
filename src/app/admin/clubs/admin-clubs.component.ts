@@ -49,7 +49,6 @@ const club: clubInformation[] = [
 export class AdminClubsComponent implements OnInit {
   page = 1;
   pageSize = 5;
-  selectedClub: any = null;
   collectionSize = club.length;
   club: clubInformation[] = [];
 
@@ -103,24 +102,6 @@ export class AdminClubsComponent implements OnInit {
 
   open(content: any) {
     this.modalService.open(content);
-  };
-
-  toggelModal(club: any) {
-    if (!this.selectedClub || this.selectedClub.name !== club.name) {
-      this.selectedClub = club;
-    } else {
-      this.selectedClub = null;
-    }
-  };
-
-  modifier() {
-    console.log('Modifier:', this.selectedClub);
-    this.selectedClub = null;
-  };
-
-  supprimer() {
-    console.log('Supprimer:', this.selectedClub);
-    this.selectedClub = null;
   };
 
   refreshClub() {

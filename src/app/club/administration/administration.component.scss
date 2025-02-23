@@ -170,7 +170,30 @@ ngb-alert {
 
   tr td {
     @include padding-y(15px);
-    color: $text-color
+    color: $text-color;
+
+    .ngbDropdown-button {
+      border: none;
+      font-weight: 900;
+      color: $text-color;
+      background-color: transparent;
+
+      &_modifier {
+        color: $primary-color;
+
+        i {
+          margin-right: 6px;
+        }
+      }
+
+      &_supprimer {
+        color: $error-color;
+      }
+    }
+
+    .ngbDropdown-button::after {
+      display: none !important;
+    }
   }
 
   thead tr th {
@@ -268,38 +291,9 @@ ngb-alert {
   transform: scale(1.05);
 }
 
-.modals {
-  left: 79%;
-  margin-top: 1px;
-  position: absolute;
-  background: white;
-  border-radius: 5px;
-  @include margin-x(5px);
-  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.372);
-}
-
-.modals-content {
-  .modifier {
-    background-color: rgba(18, 129, 18, 0.758);
-  }
-
-  .supprimer {
-    background-color: $error-color;
-  }
-}
-
-.supprimer,
-.modifier {
-  border: none;
-  color: white;
-  cursor: pointer;
-  margin-left: 5px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  background: #007bff;
-}
-
-.supprimer,
-.modifier:hover {
-  background: #0056b3;
+::ng-deep .page-item:first-child .page-link,
+::ng-deep .page-item:last-child .page-link {
+  font-size: 26px;
+  color: $primary-color !important;
+  border-radius: 50% !important;
 }
