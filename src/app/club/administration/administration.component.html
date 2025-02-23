@@ -1,91 +1,92 @@
 <app-admin-layout>
   <article class="adminAdministrationComponent">
-    <div class="adminComponent-content">
-      <h3>Utilisateurs</h3>
-      <app-tag-button text="Nouveaux utilisateur" (click)="open(content)">
-        <img style="margin-bottom: 2px;" src="/icon/icon-plus.svg" alt="icon-plus" />
-      </app-tag-button>
-    </div>
-
-    <ng-template #content let-c="close" let-d="dismiss">
-      <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Nouveau utilisateur</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    <div class="body-content">
+      <div class="adminComponent-content">
+        <h3>Utilisateurs</h3>
+        <app-tag-button text="Nouveaux utilisateur" (click)="open(content)">
+          <img style="margin-bottom: 2px;" src="/icon/icon-plus.svg" alt="icon-plus" />
+        </app-tag-button>
       </div>
-      <form [formGroup]="utilisateurInformation" (ngSubmit)="onsubmit()">
-        <div class="modal-body">
-          <label for="nom">Nom<span>*</span></label>
-          <input formControlName="name" id="name" name="name" placeholder="Nom" required type="text" />
-          <label for="email">Email<span>*</span></label>
-          <input formControlName="email" id="email" name="email" placeholder="Email" required type="email" />
+
+      <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Nouveau utilisateur</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
         </div>
-        <div class="modal-footer">
-          <app-tag-button type="submit" text="Sauvegarder" [disabled]="utilisateurInformation.invalid"
-            [ngClass]="{'disabled': utilisateurInformation.invalid}" />
+        <form [formGroup]="utilisateurInformation" (ngSubmit)="onsubmit()">
+          <div class="modal-body">
+            <label for="nom">Nom<span>*</span></label>
+            <input formControlName="name" id="name" name="name" placeholder="Nom" required type="text" />
+            <label for="email">Email<span>*</span></label>
+            <input formControlName="email" id="email" name="email" placeholder="Email" required type="email" />
+          </div>
+          <div class="modal-footer">
+            <app-tag-button type="submit" text="Sauvegarder" [disabled]="utilisateurInformation.invalid"
+              [ngClass]="{'disabled': utilisateurInformation.invalid}" />
+          </div>
+          <ngb-alert *ngIf="success" type="success" [dismissible]="false">Le utilisateur a été créé avec
+            succès.</ngb-alert>
+        </form>
+      </ng-template>
+
+      <form class="form-srach-bar mt-3">
+        <div class="mb-3 row">
+          <div class="search-bar col-xs-3 col-sm-auto">
+            <i class="fas fa-search"></i>
+            <input id="table-filtering-search" placeholder="Recherchez votre administration" class="form-control"
+              type="text" />
+          </div>
         </div>
-        <ngb-alert *ngIf="success" type="success" [dismissible]="false">Le utilisateur a été créé avec
-          succès.</ngb-alert>
       </form>
-    </ng-template>
 
-    <form class="form-srach-bar mt-3">
-      <div class="mb-3 row">
-        <div class="search-bar col-xs-3 col-sm-auto">
-          <i class="fas fa-search"></i>
-          <input id="table-filtering-search" placeholder="Recherchez votre administration" class="form-control"
-            type="text" />
-        </div>
-      </div>
-    </form>
-
-    <div class="tableClub">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Date de création</th>
-            <th scope="col">Dernier action</th>
-            <th scope="col">Statut</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (administration of administrations; track administration.name) {
-          <tr>
-            <td scope="row">{{ administration.name }}</td>
-            <td>{{ administration.creation_date }}</td>
-            <td>{{ administration.last_action }}</td>
-            <td [ngClass]="{
+      <div class="tableClub">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nom</th>
+              <th scope="col">Date de création</th>
+              <th scope="col">Dernier action</th>
+              <th scope="col">Statut</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (administration of administrations; track administration.name) {
+            <tr>
+              <td scope="row">{{ administration.name }}</td>
+              <td>{{ administration.creation_date }}</td>
+              <td>{{ administration.last_action }}</td>
+              <td [ngClass]="{
                   'terminer': administration?.statut === 'Terminer',
                   'en-cours': administration?.statut === 'En cours'
                 }">
-              {{ administration?.statut }}
-            </td>
-            <td>
-              <div>
-                <div ngbDropdown>
-                  <button class="ngbDropdown-button" type="button" id="dropdownBasic1" ngbDropdownToggle>
-                    ...
-                  </button>
-                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button ngbDropdownItem class="ngbDropdown-button_modifier">
-                      <i class="fas fa-edit"></i>
-                      Modifier
+                {{ administration?.statut }}
+              </td>
+              <td>
+                <div>
+                  <div ngbDropdown class="custom-dropdown">
+                    <button class="ngbDropdown-button" type="button" id="dropdownBasic1" ngbDropdownToggle>
+                      ...
                     </button>
-                    <button ngbDropdownItem class="ngbDropdown-button_supprimer">
-                      <i class="fas fa-trash"></i>
-                      Supprimer
-                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="custom-dropdown-menu">
+                      <button ngbDropdownItem class="ngbDropdown-button_modifier">
+                        <i class="fas fa-edit"></i>
+                        Modifier
+                      </button>
+                      <button ngbDropdownItem class="ngbDropdown-button_supprimer">
+                        <i class="fas fa-trash"></i>
+                        Supprimer
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </td>
-          </tr>
-          }
-        </tbody>
-      </table>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
-
 
     <div class="d-flex justify-content-center p-2">
       <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"

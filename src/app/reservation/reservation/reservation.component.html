@@ -1,68 +1,70 @@
 <app-admin-layout>
   <article class="adminAdministrationComponent">
-    <div class="adminComponent-content">
-      <h3>Réservations</h3>
-      <app-tag-button text="Nouveaux réservations" routerLink="new">
-        <img style="margin-bottom: 2px;" src="/icon/icon-plus.svg" alt="icon-plus" />
-      </app-tag-button>
-    </div>
-
-    <form class="form-srach-bar mt-3">
-      <div class="mb-3 row">
-        <div class="search-bar col-xs-3 col-sm-auto">
-          <i class="fas fa-search"></i>
-          <input id="table-filtering-search" placeholder="Recherchez votre réservation" class="form-control"
-            type="text" />
-        </div>
+    <div class="body-content">
+      <div class="adminComponent-content">
+        <h3>Réservations</h3>
+        <app-tag-button text="Nouveaux réservations" routerLink="new">
+          <img style="margin-bottom: 2px;" src="/icon/icon-plus.svg" alt="icon-plus" />
+        </app-tag-button>
       </div>
-    </form>
 
-    <div class="tableReservation">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Date de création</th>
-            <th scope="col">Dernier action</th>
-            <th scope="col">Statut</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (reservation of reservation; track reservation.name) {
-          <tr>
-            <td scope="row">{{ reservation.name }}</td>
-            <td>{{ reservation.creation_date }}</td>
-            <td>{{ reservation.last_action }}</td>
-            <td [ngClass]="{
+      <form class="form-srach-bar mt-3">
+        <div class="mb-3 row">
+          <div class="search-bar col-xs-3 col-sm-auto">
+            <i class="fas fa-search"></i>
+            <input id="table-filtering-search" placeholder="Recherchez votre réservation" class="form-control"
+              type="text" />
+          </div>
+        </div>
+      </form>
+
+      <div class="tableReservation">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nom</th>
+              <th scope="col">Date de création</th>
+              <th scope="col">Dernier action</th>
+              <th scope="col">Statut</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (reservation of reservation; track reservation.name) {
+            <tr>
+              <td scope="row">{{ reservation.name }}</td>
+              <td>{{ reservation.creation_date }}</td>
+              <td>{{ reservation.last_action }}</td>
+              <td [ngClass]="{
                   'terminer': reservation?.statut === 'Terminer',
                   'en-cours': reservation?.statut === 'En cours'
                 }">
-              {{ reservation?.statut }}
-            </td>
-            <td>
-              <div>
-                <div ngbDropdown>
-                  <button class="ngbDropdown-button" type="button" id="dropdownBasic1" ngbDropdownToggle>
-                    ...
-                  </button>
-                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button ngbDropdownItem class="ngbDropdown-button_modifier">
-                      <i class="fas fa-edit"></i>
-                      Modifier
+                {{ reservation?.statut }}
+              </td>
+              <td>
+                <div>
+                  <div ngbDropdown class="custom-dropdown">
+                    <button class="ngbDropdown-button" type="button" id="dropdownBasic1" ngbDropdownToggle>
+                      ...
                     </button>
-                    <button ngbDropdownItem class="ngbDropdown-button_supprimer">
-                      <i class="fas fa-trash"></i>
-                      Supprimer
-                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="custom-dropdown-menu">
+                      <button ngbDropdownItem class="ngbDropdown-button_modifier">
+                        <i class="fas fa-edit"></i>
+                        Modifier
+                      </button>
+                      <button ngbDropdownItem class="ngbDropdown-button_supprimer">
+                        <i class="fas fa-trash"></i>
+                        Supprimer
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </td>
-          </tr>
-          }
-        </tbody>
-      </table>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="d-flex justify-content-center p-2">
