@@ -49,7 +49,7 @@ const clubs: administratIonInformation[] = [
 })
 export class AdministrationComponent implements OnInit {
   page = 1;
-  pageSize = 6;
+  pageSize = 5;
   collectionSize = clubs.length;
   clubs: administratIonInformation[] = [];
 

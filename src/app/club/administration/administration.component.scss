@@ -189,3 +189,26 @@ ngb-alert {
     color: green !important;
   }
 }
+
+.form-srach-bar {
+  width: 40%;
+
+  .search-bar {
+    position: relative;
+    width: 100%;
+
+    i {
+      top: 53%;
+      left: 4%;
+      cursor: pointer;
+      position: absolute;
+      color: $primary-color;
+      transform: translateY(-50%);
+    }
+
+    input {
+      width: 100%;
+      @include padding-x(40px);
+    }
+  }
+}

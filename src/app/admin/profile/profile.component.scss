@@ -68,4 +68,9 @@ ul {
 .ngbAccordionButton {
   outline: none;
   box-shadow: none;
+
+  i {
+    margin-right: 10px;
+    color: $primary-color;
+  }
 }

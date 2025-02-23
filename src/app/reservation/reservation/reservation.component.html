@@ -2,15 +2,23 @@
   <article class="adminAdministrationComponent">
     <div class="adminComponent-content">
       <h3>Réservations</h3>
-      <a routerLink="new">
-        Nouveaux réservations
-        <!-- <img style="margin-bottom: 2px;" src="/icon/icon-plus.svg" alt="icon-plus" /> -->
-      </a>
+      <app-tag-button text="Nouveaux réservations" routerLink="new">
+        <img style="margin-bottom: 2px;" src="/icon/icon-plus.svg" alt="icon-plus" />
+      </app-tag-button>
     </div>
 
     <p class="mt-5">Une table répertorie tous les <code>réservations</code>, pour facilitant la gestion et les
       mises à jour.</p>
 
+    <form class="form-srach-bar">
+      <div class="mb-3 row">
+        <div class="search-bar col-xs-3 col-sm-auto">
+          <i class="fas fa-search"></i>
+          <input id="table-filtering-search" placeholder="Recherchez votre réservation" class="form-control"
+            type="text" />
+        </div>
+      </div>
+    </form>
     <div class="tableReservation">
       <table class="table">
         <thead>

@@ -35,6 +35,15 @@
       mises à jour.
     </p>
 
+    <form class="form-srach-bar">
+      <div class="mb-3 row">
+        <div class="search-bar col-xs-3 col-sm-auto">
+          <i class="fas fa-search"></i>
+          <input id="table-filtering-search" placeholder="Recherchez votre club" class="form-control" type="text" />
+        </div>
+      </div>
+    </form>
+
     <div class="tableClub">
       <table class="table">
         <thead>
@@ -58,7 +67,15 @@
             }">
               {{ club?.statut }}
             </td>
-            <td class="button">...</td>
+            <td class="button" (click)="toggelModal(club)">...</td>
+            @if (selectedClub?.name == club.name) {
+            <div class="modals" *ngIf="selectedClub">
+              <div class="modals-content">
+                <button class="modifier" (click)="modifier()">Modifier</button>
+                <button class="supprimer" (click)="supprimer()">Supprimer</button>
+              </div>
+            </div>
+            }
           </tr>
           }
         </tbody>
