@@ -50,8 +50,9 @@ const clubs: administratIonInformation[] = [
 export class AdministrationComponent implements OnInit {
   page = 1;
   pageSize = 5;
+  selectedAdministration: any = null;
   collectionSize = clubs.length;
-  clubs: administratIonInformation[] = [];
+  administrations: administratIonInformation[] = [];
 
   constructor(config: NgbModalConfig, private modalService: NgbModal, alertConfig: NgbAlertConfig) {
     config.backdrop = 'static';
@@ -86,12 +87,30 @@ export class AdministrationComponent implements OnInit {
     });
   };
 
+  toggelModal(club: any) {
+    if (!this.selectedAdministration || this.selectedAdministration.name !== club.name) {
+      this.selectedAdministration = club;
+    } else {
+      this.selectedAdministration = null;
+    }
+  };
+
+  modifier() {
+    console.log('Modifier:', this.selectedAdministration);
+    this.selectedAdministration = null;
+  };
+
+  supprimer() {
+    console.log('Supprimer:', this.selectedAdministration);
+    this.selectedAdministration = null;
+  };
+
   open(content: any) {
     this.modalService.open(content);
   };
 
   refreshClub() {
-    this.clubs = clubs.map((club, i) => ({ id: i + 1, ...club })).slice(
+    this.administrations = clubs.map((club, i) => ({ id: i + 1, ...club })).slice(
       (this.page - 1) * this.pageSize,
       (this.page - 1) * this.pageSize + this.pageSize,
     );

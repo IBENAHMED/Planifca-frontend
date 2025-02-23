@@ -42,7 +42,15 @@
                 }">
               {{ reservation?.statut }}
             </td>
-            <td class="button">...</td>
+            <td class="button" (click)="toggelModal(reservation)">...</td>
+            @if (selectedReservation?.name == reservation.name) {
+            <div class="modals" *ngIf="selectedReservation">
+              <div class="modals-content">
+                <button class="modifier" (click)="modifier()">Modifier</button>
+                <button class="supprimer" (click)="supprimer()">Supprimer</button>
+              </div>
+            </div>
+            }
           </tr>
           }
         </tbody>
