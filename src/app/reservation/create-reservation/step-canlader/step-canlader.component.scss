@@ -1,0 +1,65 @@
+.form-control {
+  margin-bottom: 10px;
+}
+
+.shadow-custom {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  max-width: 1000px;
+  text-align: center;
+}
+
+.shadow-custom {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+fieldset {
+  border: 2px solid #007bff;
+  padding: 20px;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+legend {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #007bff;
+  padding: 5px 0;
+  border-radius: 5px;
+  background: #ffffff;
+  text-transform: uppercase;
+}
+
+label {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.788);
+  font-size: 0.95rem;
+}
+
+.form-control,
+.form-select {
+  border: 2px solid #6c757d3e;
+  border-radius: 8px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.app-tag-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+app-tag-button {
+  width: 300px;
+}
+
+span {
+  color: red;
+}

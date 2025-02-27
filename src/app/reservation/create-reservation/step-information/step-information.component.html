@@ -1,0 +1,59 @@
+<div class="container" style="width: 1000px; text-align: center;">
+  <form>
+    <fieldset class="border p-3 rounded shadow-custom">
+      <legend class="w-auto">Informations Utilisateur</legend>
+      <div class="row mb-3">
+        <div class="col-md-6 text-start">
+          <label for="nom" class="form-label">Nom<span>*</span></label>
+          <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom">
+        </div>
+        <div class="col-md-6 text-start">
+          <label for="prenom" class="form-label">Prénom<span>*</span></label>
+          <input type="text" class="form-control" id="prenom" placeholder="Entrez votre prénom">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6 text-start">
+          <label for="email" class="form-label">Email<span>*</span></label>
+          <input type="email" class="form-control" id="email" placeholder="Entrez votre email">
+        </div>
+        <div class="col-md-6 text-start">
+          <label for="telephone" class="form-label">Téléphone<span>*</span></label>
+          <input type="tel" class="form-control" id="telephone" placeholder="Entrez votre téléphone">
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="border p-3 rounded mt-4 shadow-custom">
+      <legend class="w-auto">Informations Sportives</legend>
+      <div class="row mb-3">
+        <div class="col-md-6 text-start">
+          <label for="sport" class="form-label">Sport<span>*</span></label>
+          <select class="form-select" id="sport">
+            <option selected>Choisissez un sport...</option>
+            <option>Football</option>
+            <option>Basketball</option>
+            <option>Tennis</option>
+            <option>Natation</option>
+          </select>
+        </div>
+        <div class="col-md-6 text-start">
+          <label for="terrain" class="form-label">Terrain<span>*</span></label>
+          <select class="form-select" id="terrain">
+            <option selected>Choisissez un terrain...</option>
+            <option>Stade</option>
+            <option>Gymnase</option>
+            <option>Piscine</option>
+            <option>Terrain extérieur</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="app-tag-button mt-4">
+      <app-tag-button text="Sauvegarder">
+        <img style="margin-bottom: 2px; margin-right: 5px;" src="/icon/icon-plus.svg" alt="icon-plus" />
+      </app-tag-button>
+    </div>
+  </form>
+</div>
