@@ -1,1 +1,63 @@
-<p>step-canlader works!</p>
+<!-- <div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="reservationModalLabel">Make a Reservation</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" required>
+        </div>
+        <div class="mb-3">
+          <label for="date" class="form-label">Date</label>
+          <input type="date" class="form-control" id="date" required>
+        </div>
+        <div class="mb-3">
+          <label for="time" class="form-label">Time</label>
+          <input type="time" class="form-control" id="time" required>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary">Save Reservation</button>
+    </div>
+  </div>
+</div> -->
+<div class="container" style="width: 1000px; text-align: center;">
+  <form>
+    <fieldset class="border p-3 rounded shadow-custom">
+      <legend class="w-auto">Réservation</legend>
+      <div>
+      <div class="modal-body">
+        <form class="row">
+          <div class="col-md-6 mb-3 text-start">
+            <label for="name" class="form-label">Identifiant</label>
+            <input type="text" class="form-control" id="name" placeholder="Identifiant" required>
+          </div>
+          <div class="col-md-6 mb-3 text-start">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" class="form-control" id="date" required>
+          </div>
+          <div class="col-md-6 mb-3 text-start">
+            <label for="time" class="form-label">Heure de début</label>
+            <input type="time" class="form-control" id="time" required>
+          </div>
+          <div class="col-md-6 mb-3 text-start">
+            <label for="time" class="form-label">Fin du temps</label>
+            <input type="time" class="form-control" id="time" required>
+          </div>
+        </form>
+      </div>
+    </div>
+    </fieldset>
+
+    <div class="app-tag-button mt-4">
+      <app-tag-button text="Sauvegarder">
+        <img style="margin-bottom: 2px; margin-right: 5px;" src="/icon/icon-plus.svg" alt="icon-plus" />
+      </app-tag-button>
+    </div>
+  </form>
+</div>

@@ -1,29 +1,5 @@
-.modal-header{
-    background-color: #2564ebe5;
-    color: white;
-}
+@import "variables";
 
-.withoutSave{
-    border:solid 0.8px #2563eb;
-    border-radius: 20px;
-    padding: 10px 15px 10px 15px;
-    background-color: #2563eb;
-    color: white;
-    font-weight: 500
-}
-
-.btn-cancel{
-    border: none;
-    padding: 10px 15px 10px 15px;
-    background-color: transparent;
-    color: #2563eb;
-}
-
-.btn-cancel:hover{
-    color: #21262f;
-}
-
-.withoutSave:hover{
-    background-color: #2564ebbe;
-    transition: 0.3s ease-in;
+.modal-title {
+  color: $primary-color;
 }

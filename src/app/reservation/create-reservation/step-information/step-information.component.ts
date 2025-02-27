@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { TagButtonComponent } from "../../../components/tag/tag-button/tag-button.component";
 
 @Component({
   selector: 'app-step-information',
   standalone: true,
-  imports: [],
+  imports: [TagButtonComponent],
   templateUrl: './step-information.component.html',
   styleUrl: './step-information.component.scss'
 })

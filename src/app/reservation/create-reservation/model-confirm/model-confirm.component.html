@@ -1,13 +1,10 @@
-  <!-- Modal pour fermer -->
-
-    <div class="modal-header">
-      <h5 class="modal-title">Confirmer la fermeture</h5>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modelService.dismissAll()"></button>
-    </div>
-    <div class="modal-body">
-      <p>Êtes-vous sûr de vouloir annuler la création de cette réservation ?</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn-cancel" (click)="modelService.dismissAll()">Non, continuer</button>
-      <button type="button" class="withoutSave" (click)="closeWithoutSave()">Quitter sans enregistrer</button>
-    </div>  
+<div class="modal-header">
+  <h5 class="modal-title">Confirmer la fermeture</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="modelService.dismissAll()"></button>
+</div>
+<div class="modal-body">
+  <p>Êtes-vous sûr de vouloir annuler la création de cette réservation maintenant ?</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-danger" (click)="closeWithoutSave()">Quitter sans enregistrer</button>
+</div>
