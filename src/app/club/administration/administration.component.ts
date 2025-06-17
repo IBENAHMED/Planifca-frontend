@@ -10,6 +10,7 @@ import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootst
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClubServiceService } from '../service/club-service.service';
+import constants from '../../components/constants';
 
 const administrations: administratIonInformation[] = [];
 @Component({
@@ -39,6 +40,7 @@ export class AdministrationComponent implements OnInit {
   pageSize = 5;
   collectionSize = 0;
   administrations: administratIonInformation[] = [];
+  allRoles: string[] = [constants.USER.SUPERADMIN, constants.USER.ADMIN, constants.USER.STAFF];
 
   constructor(config: NgbModalConfig, private modalService: NgbModal, alertConfig: NgbAlertConfig) {
     config.backdrop = 'static';
@@ -59,8 +61,11 @@ export class AdministrationComponent implements OnInit {
   frontPath: string | null = null;
 
   utilisateurInformation: FormGroup = this.formbuilder.group({
-    name: new FormControl('', [Validators.required]),
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl('', [Validators.required]),
+    roles: new FormControl([], [Validators.required, Validators.minLength(1)]),
   });
 
   ngOnInit(): void {
@@ -93,6 +98,23 @@ export class AdministrationComponent implements OnInit {
     this.getAllAdministration(pageNum - 1);
   }
 
+
+  onRoleChange(event: any) {
+    const roles: string[] = this.utilisateurInformation.get('roles')?.value || [];
+
+    if (event.target.checked) {
+      roles.push(event.target.value);
+    } else {
+      const index = roles.indexOf(event.target.value);
+      if (index > -1) {
+        roles.splice(index, 1);
+      }
+    }
+
+    this.utilisateurInformation.get('roles')?.setValue(roles);
+    this.utilisateurInformation.get('roles')?.updateValueAndValidity();
+  }
+
   open(content: any) {
     this.modalService.open(content);
   };
@@ -105,6 +127,13 @@ export class AdministrationComponent implements OnInit {
   };
 
   onsubmit() {
-    alert("Fonctionnalité en cours")
-  };
-};
+    this.clubServiceService.createAdministration(this.utilisateurInformation.value).subscribe({
+      next: () => {
+        this.success = true;
+      },
+      error: () => {
+        alert("Failed to create administration. Please try again.");
+      }
+    })
+  }
+}

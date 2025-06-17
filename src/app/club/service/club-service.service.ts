@@ -13,6 +13,20 @@ export class ClubServiceService {
   private userContextKey = 'userContext';
   private userContext: any = localStorage.getItem(this.userContextKey);
 
+  createAdministration(dataAdministration: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'clubRef': JSON.parse(this.userContext).reference,
+    });
+    return this.http.post(`${this.urlApi}/user/register`, dataAdministration, { headers }).pipe(
+      catchError((error) => {
+        throw error;
+      }),
+    );
+  }
+
   getAllAdministration(page: number, pageSize: number): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
