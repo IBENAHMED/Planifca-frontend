@@ -45,7 +45,7 @@
           <thead>
             <tr>
               <th scope="col">Nom</th>
-              <th scope="col">Date de création</th>
+              <th scope="col">Reference</th>
               <th scope="col">Dernier action</th>
               <th scope="col">Statut</th>
               <th scope="col"></th>
@@ -55,13 +55,13 @@
             @for (club of club; track club.name) {
             <tr>
               <td scope="row">{{ club.name }}</td>
-              <td>{{ club.creation_date }}</td>
-              <td>{{ club.last_action }}</td>
+              <td>{{ club.reference }}</td>
+              <td>{{ club.frontPath }}</td>
               <td [ngClass]="{
-                  'terminer': club?.statut === 'Terminer',
-                  'en-cours': club?.statut === 'En cours'
+                  'terminer': !club?.active,
+                  'en-cours': club?.active
                 }">
-                {{ club?.statut }}
+                {{ club?.active ? 'En cours' : 'Terminé' }}
               </td>
               <td>
                 <div>
@@ -90,7 +90,7 @@
     </div>
     <div class="d-flex justify-content-center p-2">
       <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-        (pageChange)="refreshClub()">
+        (pageChange)="onPageChange($event)">
       </ngb-pagination>
     </div>
   </article>

@@ -11,21 +11,8 @@ import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootst
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-const club: clubInformation[] = [
-  { name: 'reda-foot', last_action: '01/01/2021', creation_date: '01/01/2025', statut: 'Terminer' },
-  { name: 'city-foot', last_action: '22/02/2022', creation_date: '01/01/2025', statut: 'En cours' },
-  { name: 'gold-foot', last_action: '18/03/2023', creation_date: '01/01/2025', statut: 'En cours' },
-  { name: 'city-foots', last_action: '11/04/2024', creation_date: '01/01/2025', statut: 'Terminer' },
-  { name: 'came-foot', last_action: '23/05/2025', creation_date: '01/01/2025', statut: 'En cours' },
-  { name: 'arina-foot', last_action: '21/06/2021', creation_date: '01/01/2025', statut: 'Terminer' },
-  { name: 'mohamed-foot', last_action: '11/07/2022', creation_date: '01/01/2025', statut: 'En cours' },
-  { name: 'oussama-foot', last_action: '22/08/2023', creation_date: '01/01/2025', statut: 'ETerminer' },
-  { name: 'admin-foot', last_action: '15/09/2024', creation_date: '01/01/2025', statut: 'Terminer' },
-  { name: 'google-foot', last_action: '09/10/2019', creation_date: '01/01/2025', statut: 'En cours' },
-  { name: 'facebook-foot', last_action: '07/11/2022', creation_date: '01/01/2025', statut: 'Terminer' },
-  { name: 'space-foot', last_action: '15/12/2024', creation_date: '01/01/2025', statut: 'En cours' },
-];
-
+// todo: add eamil on this list from backend
+const club: clubInformation[] = [];
 @Component({
   selector: 'app-admin',
   standalone: true,
@@ -48,8 +35,8 @@ const club: clubInformation[] = [
 })
 export class AdminClubsComponent implements OnInit {
   page = 1;
-  pageSize = 5;
-  collectionSize = club.length;
+  pageSize = 6;
+  collectionSize = 0;
   club: clubInformation[] = [];
 
   constructor(config: NgbModalConfig, private modalService: NgbModal, alertConfig: NgbAlertConfig) {
@@ -86,18 +73,24 @@ export class AdminClubsComponent implements OnInit {
       }
     });
 
-    this.getAllClubs();
+    this.getAllClubs(0);
   };
 
-  getAllClubs() {
-    return this.adminService.getAllClubs().subscribe({
+  getAllClubs(backendPage: number) {
+    return this.adminService.getAllClubs(backendPage, this.pageSize).subscribe({
       next: (response) => {
-        console.log(response);
+        this.club = response.content;
+        this.collectionSize = response.totalElements;
       },
-      error: (error) => {
-        console.log(error);
+      error: () => {
+        alert("Internal server error");
       }
     });
+  };
+
+  onPageChange(pageNum: number) {
+    this.page = pageNum;
+    this.getAllClubs(pageNum - 1);
   }
 
   open(content: any) {
@@ -129,6 +122,7 @@ export class AdminClubsComponent implements OnInit {
       },
       error: () => {
         this.success = false;
+        alert("Internal server error");
       }
     });
   };
