@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { TagButtonComponent } from "../../../components/tag/tag-button/tag-button.component";
 
 @Component({
-  selector: 'app-step-canlader',
+  selector: 'app-calendar-date-picker',
   standalone: true,
-  imports: [TagButtonComponent],
+  imports: [],
   templateUrl: './step-canlader.component.html',
-  styleUrl: './step-canlader.component.scss'
+  styleUrls: ['./step-canlader.component.scss'],
 })
 export class StepCanladerComponent {
-
 }

@@ -4,7 +4,8 @@ export const URLS = {
   NOTFOUND: '**',
 
   // AUTH
-  PASSWORD_RESET: 'account/password-reset',
+  // todo add account/
+  PASSWORD_RESET: 'reset-password',
   PASSWORD_FORGET: 'account/password-forget',
 
   // ADMIN

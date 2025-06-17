@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { takeUntil } from 'rxjs/operators';
 import { Subscription, Subject } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -34,7 +34,8 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   private subscription: Subscription | null = null;
 
-  private route = inject(ActivatedRoute);
+  private routes: any = inject(Router);
+  private route: any = inject(ActivatedRoute);
   private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
 
@@ -73,10 +74,15 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     return password === confirmPassword ? null : { passwordsMismatch: true };
   };
 
-  resetPassword(newPassword: string, token: string) {
-    this.subscription = this.authService.resetPassword(newPassword, token)
+  resetPassword(newPassword: string, confirmPassword: string, token: string) {
+    this.subscription = this.authService.resetPassword(newPassword, confirmPassword, token)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
+        next: (response) => {
+          // this.route.navigate([`/${JSON.parse(localStorage.getItem('userContext') || '{}').frontPath}/login`])
+          console.log("seccess")
+          this.routes.navigate([`/space-clients/login`])
+        },
         error: () => {
           alert("Internal server error");
         },
@@ -85,6 +91,6 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (!this.passwordForm.valid || !this.token) return;
-    this.resetPassword(this.passwordForm.get('newPassword')?.value, this.token);
+    this.resetPassword(this.passwordForm.get('newPassword')?.value, this.passwordForm.get('confirmPassword')?.value, this.token);
   };
 };

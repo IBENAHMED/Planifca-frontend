@@ -44,23 +44,31 @@ export class AuthService {
   };
 
   forgetPassword(email: string): Observable<any> {
-    return this.http.post(`${this.urlApi}/auth/forget-password`, { email: email }).pipe(
+    // todo: chnage forgot to forget
+    return this.http.post(
+      `${this.urlApi}/auth/forgot-password`,
+      { email: email },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'clubRef': JSON.parse(this.userContext).reference,
+        }),
+      }
+    ).pipe(
       catchError((error) => {
         throw error;
       }),
     );
   };
 
-  resetPassword(newPassword: string, token: string): Observable<any> {
+  resetPassword(newPassword: string, confirmPassword: string, token: string): Observable<any> {
     return this.http.post(
       `${this.urlApi}/auth/reset-password`,
-      { newPassword },
       {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'X-Requested-With': token,
-        }),
-      },
+        token,
+        newPassword,
+        confirmPassword,
+       },
     ).pipe(
       catchError((error) => {
         throw error;
