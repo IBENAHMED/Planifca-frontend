@@ -25,13 +25,13 @@ export class AdminService {
     );
   };
 
-  getAllClubs(): Observable<any> {
+  getAllClubs(page: number, pageSize: number): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
 
-    return this.http.get(`${this.urlApi}/club?page=0&size=10`, { headers }).pipe(
+    return this.http.get(`${this.urlApi}/club?page=${page}&size=${pageSize}`, { headers }).pipe(
       catchError((error) => {
         throw error;
       }),
