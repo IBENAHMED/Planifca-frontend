@@ -43,9 +43,9 @@
         <table class="table">
           <thead>
             <tr>
+              <th scope="col">Prenom</th>
               <th scope="col">Nom</th>
-              <th scope="col">Date de création</th>
-              <th scope="col">Dernier action</th>
+              <th scope="col">Email</th>
               <th scope="col">Statut</th>
               <th scope="col"></th>
             </tr>
@@ -53,14 +53,14 @@
           <tbody>
             @for (administration of administrations; track administration.name) {
             <tr>
-              <td scope="row">{{ administration.name }}</td>
-              <td>{{ administration.creation_date }}</td>
-              <td>{{ administration.last_action }}</td>
+              <td scope="row">{{ administration.firstName }}</td>
+              <td>{{ administration.lastName }}</td>
+              <td>{{ administration.email }}</td>
               <td [ngClass]="{
-                  'terminer': administration?.statut === 'Terminer',
-                  'en-cours': administration?.statut === 'En cours'
-                }">
-                {{ administration?.statut }}
+                'terminer': !administration?.active,
+                'en-cours': administration?.active
+              }">
+                {{ administration?.active }}
               </td>
               <td>
                 <div>
@@ -90,7 +90,7 @@
 
     <div class="d-flex justify-content-center p-2">
       <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-        (pageChange)="refreshClub()">
+      (pageChange)="onPageChange($event)">
       </ngb-pagination>
     </div>
   </article>
