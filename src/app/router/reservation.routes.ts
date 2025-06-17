@@ -8,14 +8,14 @@ import { CreateReservationComponent } from '../reservation/create-reservation/cr
 export const reservationRoutes: Routes = [
   {
     path: URLS.RESERVATION,
-    canActivate: [guardsGuard],
+    // canActivate: [guardsGuard],
     component: ReservationComponent,
-    data: { role: [constants.USER.SUPERADMIN, constants.USER.ADMIN] },
+    // data: { role: [constants.USER.SUPERADMIN, constants.USER.ADMIN] },
   },
   {
     path: URLS.CREATE_RESERVATION,
-    canActivate: [guardsGuard],
+    // canActivate: [guardsGuard],
     component: CreateReservationComponent,
-    data: { role: [constants.USER.SUPERADMIN, constants.USER.ADMIN] },
+    // data: { role: [constants.USER.SUPERADMIN, constants.USER.ADMIN] },
   },
 ];

@@ -73,9 +73,9 @@ export class ReservationComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(param => {
       this.frontPath = param.get('frontPath');
 
-      if (this.frontPath !== path) {
-        this.route.navigate([`${path}/reservation`]);
-      }
+      // if (this.frontPath !== path) {
+      //   this.route.navigate([`${path}/reservation`]);
+      // }
     });
   };
 
