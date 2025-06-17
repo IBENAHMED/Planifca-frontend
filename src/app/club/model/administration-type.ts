@@ -5,7 +5,8 @@ export interface createAdministration {
 }
 export interface administratIonInformation {
   name: string,
-  last_action: string,
-  creation_date: string,
-  statut: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  active: string,
 }
