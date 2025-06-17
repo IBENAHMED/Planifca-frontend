@@ -35,7 +35,7 @@ const club: clubInformation[] = [];
 })
 export class AdminClubsComponent implements OnInit {
   page = 1;
-  pageSize = 6;
+  pageSize = 5;
   collectionSize = 0;
   club: clubInformation[] = [];
 
