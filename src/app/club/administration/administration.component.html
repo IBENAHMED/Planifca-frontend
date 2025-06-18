@@ -27,17 +27,18 @@
             <label for="tel">Téléphone<span>*</span></label>
             <input id="tel" formControlName="phone" name="tel" placeholder="Téléphone" type="tel" />
 
-            <div class="mb-3">
+            <div>
               <label class="form-label">Rôles<span>*</span></label>
-              <div *ngFor="let role of allRoles">
-                <label class="" [for]="role">{{ role }}</label>
-                <input
-                  type="checkbox"
-                  [value]="role"
-                  (change)="onRoleChange($event)"
-                  [checked]="utilisateurInformation.controls['roles'].value.includes(role)"
-                  id="{{ role }}"
-                />
+              <div class="checkboxContainer">
+                <div *ngFor="let role of allRoles">
+                  <div class="checkboxContainer_form">
+                    <div>
+                      <input type="checkbox" [value]="role" (change)="onRoleChange($event)"
+                        [checked]="utilisateurInformation.controls['roles'].value.includes(role)" id="{{ role }}" />
+                    </div>
+                    <label [for]="role">{{ role }}</label>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -116,6 +116,26 @@
   }
 }
 
+.checkboxContainer {
+  display: flex;
+  gap: 25px;
+  height: 20px;
+
+  &_form {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  label {
+    font-size: $text-sm;
+    color: $text-color;
+    cursor: pointer;
+    width: fit-content;
+  }
+}
+
 .modal-title {
   color: $primary-color;
 }
