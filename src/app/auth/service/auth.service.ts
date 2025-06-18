@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { login } from '../model/login-type';
-import { lastValueFrom, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -76,6 +76,21 @@ export class AuthService {
     );
   };
 
+  activateUserAccount(userId: string, newPassword: string, confirmPassword: string): Observable<any> {
+    // todo backend get ref club from path
+    return this.http.post(
+      `${this.urlApi}/auth/activate?userId=${userId}`,
+      {
+        newPassword,
+        confirmPassword,
+      }
+    ).pipe(
+      catchError((error) => {
+        throw error;
+      }),
+    );
+  };
+
   isFrontPathExist(frontPath: string | null): Observable<any> {
     return this.http.get(`${this.urlApi}/club/front/${frontPath}`).pipe(
       catchError((error) => {
@@ -119,11 +134,9 @@ export class AuthService {
       }
 
       const data = await response.json();
-      console.log(data)
       this.userRoles = data.roles;
       return requiredRoles.some(role => this.userRoles.includes(role));
     } catch (error) {
-      console.error('Error fetching roles:', error);
       return false;
     }
   }

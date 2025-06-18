@@ -4,9 +4,10 @@ export const URLS = {
   NOTFOUND: '**',
 
   // AUTH
-  // todo add account/
+  // todo add account backend
   PASSWORD_RESET: 'reset-password',
   PASSWORD_FORGET: 'account/password-forget',
+  ACTIVATE_ACCOUNT: 'activate-account',
 
   // ADMIN
   ADMIN: ':frontPath/club',

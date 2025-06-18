@@ -79,8 +79,6 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          // this.route.navigate([`/${JSON.parse(localStorage.getItem('userContext') || '{}').frontPath}/login`])
-          console.log("seccess")
           this.routes.navigate([`/space-clients/login`])
         },
         error: () => {
