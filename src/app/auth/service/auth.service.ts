@@ -68,7 +68,7 @@ export class AuthService {
         token,
         newPassword,
         confirmPassword,
-       },
+      },
     ).pipe(
       catchError((error) => {
         throw error;
@@ -119,6 +119,7 @@ export class AuthService {
       }
 
       const data = await response.json();
+      console.log(data)
       this.userRoles = data.roles;
       return requiredRoles.some(role => this.userRoles.includes(role));
     } catch (error) {
