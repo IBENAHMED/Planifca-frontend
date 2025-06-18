@@ -15,14 +15,18 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 export class AdminLayoutComponent implements OnInit {
 
   roleClub: boolean = false;
-  authService = inject(AuthService);
+  roleReservation: boolean = false;
+  roleStatistics: boolean = false;
   roleAdministration: boolean = false;
+  authService = inject(AuthService);
   userContext: any = localStorage.getItem('userContext');
   frontPath = JSON.parse(this.userContext).frontPath;
 
   async ngOnInit() {
     this.roleClub = await this.authService.hasRole([constants.USER.SUPERADMIN]);
-    this.roleAdministration = await this.authService.hasRole([constants.USER.ADMIN, constants.USER.SUPERADMIN]);
+    this.roleAdministration = await this.authService.hasRole([constants.USER.SUPERADMIN, constants.USER.ADMIN]);
+    this.roleReservation = await this.authService.hasRole([constants.USER.ADMIN, constants.USER.STAFF]);
+    this.roleStatistics = await this.authService.hasRole([constants.USER.ADMIN, constants.USER.STAFF]);
   }
 
   isCollapsed = true;

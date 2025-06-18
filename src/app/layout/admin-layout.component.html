@@ -21,14 +21,14 @@
               <span>Administration</span>
             </a>
           </li>
-          <li class="nav-item">
+          <li *ngIf="roleReservation" class="nav-item">
             <a class="nav-link" [routerLink]="'/' + frontPath + '/reservation'" routerLinkActive="active-link"
               [routerLinkActiveOptions]="{ exact: true }">
               <i class="fas fa-cogs"></i>
               <span>Réservation</span>
             </a>
           </li>
-          <li class="nav-item">
+          <li *ngIf="roleStatistics" class="nav-item">
             <a class="nav-link" [routerLink]="'/' + frontPath + '/statistics'" routerLinkActive="active-link"
               [routerLinkActiveOptions]="{ exact: true }">
               <i class="fas fa-envelope"></i>
