@@ -1,0 +1,12 @@
+<app-auth-layout-component>
+  <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+    <app-form-input-password id="new-password" label="Nouveau mot de passe" name="password" placeholder="**********"
+      [required]="true" [control]="newPasswordControl" />
+
+    <app-form-input-password id="confirm-password" label="Confirmer le mot de passe" name="password"
+      placeholder="**********" [required]="true" [control]="confirmPasswordControl" />
+
+    <app-tag-button type="submit" text="Confirmer" [disabled]="passwordForm.invalid"
+      [ngClass]="{'disabled': passwordForm.invalid}" />
+  </form>
+</app-auth-layout-component>

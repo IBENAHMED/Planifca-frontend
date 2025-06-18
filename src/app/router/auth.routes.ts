@@ -4,6 +4,7 @@ import { URLS } from '../components/helpers/url-constants';
 import { LoginComponent } from '../auth/login/login.component';
 import { ResetPasswordComponent } from '../auth/reset-password/reset-password.component';
 import { ForgetPasswordComponent } from '../auth/forget-password/forget-password.component';
+import { ActivateAccountComponent } from '../auth/activate-account/activate-account.component';
 
 export const authRoutes: Routes = [
   {
@@ -23,5 +24,10 @@ export const authRoutes: Routes = [
     path: ':frontPath/login',
     pathMatch: 'full',
     component: LoginComponent,
+  },
+  // todo add acoount in bacend and frontend
+  {
+    path: URLS.ACTIVATE_ACCOUNT,
+    component: ActivateAccountComponent,
   },
 ];
