@@ -15,17 +15,40 @@
         </div>
         <form [formGroup]="utilisateurInformation" (ngSubmit)="onsubmit()">
           <div class="modal-body">
+            <label for="prenom">Prénom<span>*</span></label>
+            <input id="prenom" formControlName="firstName" name="prenom" placeholder="Prénom" type="text" />
+
             <label for="nom">Nom<span>*</span></label>
-            <input formControlName="name" id="name" name="name" placeholder="Nom" required type="text" />
+            <input id="nom" formControlName="lastName" name="nom" placeholder="Nom" type="text" />
+
             <label for="email">Email<span>*</span></label>
-            <input formControlName="email" id="email" name="email" placeholder="Email" required type="email" />
+            <input id="email" formControlName="email" name="email" placeholder="Email" type="email" />
+
+            <label for="tel">Téléphone<span>*</span></label>
+            <input id="tel" formControlName="phone" name="tel" placeholder="Téléphone" type="tel" />
+
+            <div>
+              <label class="form-label">Rôles<span>*</span></label>
+              <div class="checkboxContainer">
+                <div *ngFor="let role of allRoles">
+                  <div class="checkboxContainer_form">
+                    <div>
+                      <input type="checkbox" [value]="role" (change)="onRoleChange($event)"
+                        [checked]="utilisateurInformation.controls['roles'].value.includes(role)" id="{{ role }}" />
+                    </div>
+                    <label [for]="role">{{ role }}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <app-tag-button type="submit" text="Sauvegarder" [disabled]="utilisateurInformation.invalid"
               [ngClass]="{'disabled': utilisateurInformation.invalid}" />
           </div>
-          <ngb-alert *ngIf="success" type="success" [dismissible]="false">Le utilisateur a été créé avec
-            succès.</ngb-alert>
+          <ngb-alert *ngIf="success" type="success" [dismissible]="false">
+            Le utilisateur a été créé avec succès.
+          </ngb-alert>
         </form>
       </ng-template>
 
@@ -90,7 +113,7 @@
 
     <div class="d-flex justify-content-center p-2">
       <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-      (pageChange)="onPageChange($event)">
+        (pageChange)="onPageChange($event)">
       </ngb-pagination>
     </div>
   </article>
