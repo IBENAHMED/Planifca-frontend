@@ -7,8 +7,6 @@ import { StatisticsComponent } from '../statistics/statistics/statistics.compone
 export const statisticsRoutes: Routes = [
   {
     path: URLS.STATISTICS,
-    canActivate: [guardsGuard],
     component: StatisticsComponent,
-    data: { role: [constants.USER.SUPERADMIN, constants.USER.ADMIN] },
   },
 ];

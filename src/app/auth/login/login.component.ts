@@ -113,6 +113,10 @@ export class LoginComponent implements OnInit, OnDestroy {
               if (response.roles.includes(constants.USER.ADMIN)) {
                 this.route.navigate([`${this.frontPath}/administration`])
               }
+
+              if (response.roles.includes(constants.USER.STAFF)) {
+                this.route.navigate([`${this.frontPath}/reservation`])
+              }
             },
             error: () => {
               alert("Internal server error");

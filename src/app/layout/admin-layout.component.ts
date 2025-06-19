@@ -24,7 +24,7 @@ export class AdminLayoutComponent implements OnInit {
 
   async ngOnInit() {
     this.roleClub = await this.authService.hasRole([constants.USER.SUPERADMIN]);
-    this.roleAdministration = await this.authService.hasRole([constants.USER.SUPERADMIN, constants.USER.ADMIN]);
+    this.roleAdministration = await this.authService.hasRole([constants.USER.ADMIN]);
     this.roleReservation = await this.authService.hasRole([constants.USER.ADMIN, constants.USER.STAFF]);
     this.roleStatistics = await this.authService.hasRole([constants.USER.ADMIN, constants.USER.STAFF]);
   }
