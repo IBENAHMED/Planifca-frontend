@@ -22,24 +22,23 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Nom</th>
-              <th scope="col">Date de création</th>
-              <th scope="col">Dernier action</th>
+              <th scope="col">Date</th>
+              <th scope="col">Start</th>
+              <th scope="col">End</th>
+              <th scope="col">Phone</th>
               <th scope="col">Statut</th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            @for (reservation of reservation; track reservation.name) {
+            @for (reservation of reservation; track reservation.reservationId) {
             <tr>
-              <td scope="row">{{ reservation.name }}</td>
-              <td>{{ reservation.creation_date }}</td>
-              <td>{{ reservation.last_action }}</td>
-              <td [ngClass]="{
-                  'terminer': reservation?.statut === 'Terminer',
-                  'en-cours': reservation?.statut === 'En cours'
-                }">
-                {{ reservation?.statut }}
+              <td scope="row">{{ reservation.reservationDate }}</td>
+              <td>{{ reservation.startTime }}</td>
+              <td>{{ reservation.endTime }}</td>
+              <td>{{ reservation.clientPhoneNumber }}</td>
+              <td>
+                {{ reservation?.clientFirstName }} {{ reservation?.clientLastName }}
               </td>
               <td>
                 <div>
@@ -69,7 +68,7 @@
 
     <div class="d-flex justify-content-center p-2">
       <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-        (pageChange)="refreshReservation()">
+        (pageChange)="onPageChange($event)">
       </ngb-pagination>
     </div>
   </article>

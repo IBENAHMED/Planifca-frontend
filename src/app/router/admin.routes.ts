@@ -14,8 +14,6 @@ export const adminRoutes: Routes = [
   },
   {
     path: URLS.PROFILE,
-    canActivate: [guardsGuard],
     component: ProfileComponent,
-    data: { role: [constants.USER.SUPERADMIN, constants.USER.ADMIN] },
   },
 ];

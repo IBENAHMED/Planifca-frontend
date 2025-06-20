@@ -4,8 +4,11 @@ export interface createReservation {
   frontPath: string,
 }
 export interface reservationIonInformation {
-  name: string,
-  last_action: string,
-  creation_date: string,
-  statut: string,
+  reservationId: string,
+  reservationDate: string,
+  startTime: string,
+  endTime: string,
+  clientPhoneNumber: string,
+  clientFirstName: string,
+  clientLastName: string,
 }
