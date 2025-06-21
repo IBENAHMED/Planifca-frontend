@@ -9,6 +9,7 @@ import { environment } from '../../../environments/environment';
 })
 export class AdminService {
 
+  private tokenKey = 'token';
   private http = inject(HttpClient);
   private readonly urlApi: string = `${environment.baseUrl}`;
 
@@ -37,4 +38,14 @@ export class AdminService {
       }),
     );
   };
+
+  getUserContext(): Observable<any> {
+    const token = localStorage.getItem(this.tokenKey);
+    return this.http.get(`${this.urlApi}/user/current`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+  }
 };

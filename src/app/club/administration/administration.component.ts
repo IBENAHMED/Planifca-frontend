@@ -1,7 +1,9 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import constants from '../../components/constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
+import { ClubServiceService } from '../service/club-service.service';
 import { administratIonInformation } from '../model/administration-type';
 import { AdminLayoutComponent } from '../../layout/admin-layout.component';
 import { NgbAlertConfig, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
@@ -9,8 +11,6 @@ import { NgbModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ClubServiceService } from '../service/club-service.service';
-import constants from '../../components/constants';
 
 const administrations: administratIonInformation[] = [];
 @Component({
@@ -97,7 +97,6 @@ export class AdministrationComponent implements OnInit {
     this.page = pageNum;
     this.getAllAdministration(pageNum - 1);
   }
-
 
   onRoleChange(event: any) {
     const roles: string[] = this.utilisateurInformation.get('roles')?.value || [];

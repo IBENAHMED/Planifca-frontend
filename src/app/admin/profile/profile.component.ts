@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { AdminService } from '../service/admin-service.service';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminLayoutComponent } from '../../layout/admin-layout.component';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -19,8 +20,11 @@ import { FormInputPasswordComponent } from '../../components/form/form-input-pas
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
+
+  private user: any = null;
   private formbuilder = inject(FormBuilder);
+  private adminService = inject(AdminService);
 
   myProfileInformation: FormGroup = this.formbuilder.group({
     firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -67,6 +71,24 @@ export class ProfileComponent {
     return this.myPasswordInformation.get('confirmPassword') as FormControl;
   };
 
+  ngOnInit(): void {
+    this.adminService.getUserContext().subscribe({
+      next: (response) => {
+        this.user = response;
+
+        this.myProfileInformation.patchValue({
+          firstName: this.user.firstName,
+          lastName: this.user.lastName,
+          email: this.user.email,
+          telephone: this.user.phone
+        });
+      },
+      error: () => {
+        alert("Internal server error");
+      }
+    });
+  }
+
   passwordsMatchValidators(formGroup: FormGroup) {
     const password = formGroup.get("newPassword")?.value;
     const confirmPassword = formGroup.get("confirmPassword")?.value;
@@ -74,10 +96,10 @@ export class ProfileComponent {
   };
 
   onSubmitInformation() {
-    console.log(this.myProfileInformation)
+    console.log(this.user.firstName)
   };
 
   onSubmitPassword() {
-    console.log(this.myPasswordInformation)
+    console.log(this.user.phone)
   };
 };

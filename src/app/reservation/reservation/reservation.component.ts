@@ -9,21 +9,9 @@ import { NgbAlertConfig, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ResirvationServiceService } from '../service/resirvation-service.service';
 
-const reservation: reservationIonInformation[] = [
-  { name: 'yassir tabit', last_action: '01/01/2021', creation_date: '11/01/2019', statut: 'Terminer' },
-  { name: 'moahmed atyq', last_action: '22/02/2022', creation_date: '21/02/2018', statut: 'En cours' },
-  { name: 'oussama salihi', last_action: '18/03/2023', creation_date: '03/03/2021', statut: 'En cours' },
-  { name: 'aymen miftah', last_action: '11/04/2024', creation_date: '14/03/2022', statut: 'Terminer' },
-  { name: 'khalid dawdi', last_action: '23/05/2025', creation_date: '19/06/2023', statut: 'En cours' },
-  { name: 'tahar mosaaid', last_action: '11/08/2024', creation_date: '21/06/2021', statut: 'Terminer' },
-  { name: 'yahya brahimi', last_action: '16/11/2025', creation_date: '11/07/2022', statut: 'En cours' },
-  { name: 'yassine tami', last_action: '22/08/2023', creation_date: '27/12/2017', statut: 'ETerminer' },
-  { name: 'reda ibenahmed', last_action: '15/09/2024', creation_date: '28/06/2018', statut: 'Terminer' },
-  { name: 'marwan kamali', last_action: '17/08/2021', creation_date: '09/10/2019', statut: 'En cours' },
-  { name: 'kamal salami', last_action: '07/11/2022', creation_date: '01/11/2022', statut: 'Terminer' },
-  { name: 'hicham sakouti', last_action: '15/12/2024', creation_date: '16/01/2023', statut: 'En cours' },
-];
+const reservation: reservationIonInformation[] = [];
 @Component({
   selector: 'app-administration',
   standalone: true,
@@ -58,6 +46,7 @@ export class ReservationComponent implements OnInit {
   private route = inject(Router);
   private formbuilder = inject(FormBuilder);
   private activatedRoute = inject(ActivatedRoute);
+  private resirvationServiceService = inject(ResirvationServiceService)
   private userContext: any = localStorage.getItem('userContext');
 
   success: boolean = false;
@@ -73,11 +62,30 @@ export class ReservationComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(param => {
       this.frontPath = param.get('frontPath');
 
-      // if (this.frontPath !== path) {
-      //   this.route.navigate([`${path}/reservation`]);
-      // }
+      if (this.frontPath !== path) {
+        this.route.navigate([`${path}/reservation`]);
+      }
+    });
+
+    this.getAllResirvation(0);
+  };
+
+  getAllResirvation(backendPage: number) {
+    return this.resirvationServiceService.getAllResirvation(backendPage, this.pageSize).subscribe({
+      next: (response) => {
+        this.reservation = response.content;
+        this.collectionSize = response.totalElements;
+      },
+      error: () => {
+        alert("Internal server error");
+      }
     });
   };
+
+  onPageChange(pageNum: number) {
+    this.page = pageNum;
+    this.getAllResirvation(pageNum - 1);
+  }
 
   refreshReservation() {
     this.reservation = reservation.map((club, i) => ({ id: i + 1, ...club })).slice(

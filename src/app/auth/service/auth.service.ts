@@ -46,7 +46,7 @@ export class AuthService {
   forgetPassword(email: string): Observable<any> {
     // todo: chnage forgot to forget
     return this.http.post(
-      `${this.urlApi}/auth/forgot-password`,
+      `${this.urlApi}/auth/forget-password`,
       { email: email },
       {
         headers: new HttpHeaders({
@@ -76,13 +76,16 @@ export class AuthService {
     );
   };
 
-  activateUserAccount(userId: string, newPassword: string, confirmPassword: string): Observable<any> {
-    // todo backend get ref club from path
+  activateUserAccount(userId: string, club: string, newPassword: string, confirmPassword: string): Observable<any> {
+    // todo: refactor from backend responseType should be JSON
     return this.http.post(
-      `${this.urlApi}/auth/activate?userId=${userId}`,
+      `${this.urlApi}/auth/activate?frontpath=${club}&userId=${userId}`,
       {
         newPassword,
         confirmPassword,
+      },
+      {
+        responseType: 'text'
       }
     ).pipe(
       catchError((error) => {
