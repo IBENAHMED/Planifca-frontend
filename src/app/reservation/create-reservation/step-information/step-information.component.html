@@ -29,22 +29,21 @@
       <div class="row mb-3">
         <div class="col-md-6 text-start">
           <label for="sport" class="form-label">Sport<span>*</span></label>
-          <select class="form-select" id="sport">
+          <select class="form-select" id="sport" (change)="onSportChange($event)">
             <option selected>Choisissez un sport...</option>
             <option>Football</option>
-            <option>Basketball</option>
+            <option>Basket-ball</option>
             <option>Tennis</option>
             <option>Natation</option>
           </select>
         </div>
         <div class="col-md-6 text-start">
           <label for="terrain" class="form-label">Terrain<span>*</span></label>
-          <select class="form-select" id="terrain">
-            <option selected>Choisissez un terrain...</option>
-            <option>Stade</option>
-            <option>Gymnase</option>
-            <option>Piscine</option>
-            <option>Terrain extérieur</option>
+          <select class="form-select" id="terrain" [disabled]="!terrains || terrains.length === 0">
+            <option selected disabled>Choisissez un terrain...</option>
+            <option *ngFor="let terrain of terrains" [value]="terrain.terrainId">
+              {{ terrain.name }}
+            </option>
           </select>
         </div>
       </div>
