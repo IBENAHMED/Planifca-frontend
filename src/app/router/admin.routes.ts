@@ -8,9 +8,7 @@ import { AdminClubsComponent } from '../admin/clubs/admin-clubs.component';
 export const adminRoutes: Routes = [
   {
     path: URLS.ADMIN,
-    canActivate: [guardsGuard],
     component: AdminClubsComponent,
-    data: { role: [constants.USER.SUPERADMIN] },
   },
   {
     path: URLS.PROFILE,

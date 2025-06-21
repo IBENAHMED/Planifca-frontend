@@ -29,6 +29,7 @@ export class ActivateAccountComponent {
   private authService = inject(AuthService);
 
   userId: string | null = null;
+  club: string | null = null;
 
   passwordForm: FormGroup = this.formBuilder.group({
     newPassword: new FormControl('', [
@@ -40,7 +41,15 @@ export class ActivateAccountComponent {
   }, { validators: this.passwordsMatchValidators });
 
   ngOnInit(): void {
-    this.userId = this.route.snapshot.queryParamMap.get('userId');
+    const rawClub = this.route.snapshot.queryParamMap.get('club');
+
+    if (rawClub) {
+      const decoded = decodeURIComponent(rawClub);
+
+      const [clubPart, userIdPart] = decoded.split('?userId=');
+      this.club = clubPart;
+      this.userId = userIdPart;
+    }
   };
 
   get newPasswordControl(): FormControl {
@@ -58,12 +67,12 @@ export class ActivateAccountComponent {
   };
 
   onSubmit(): void {
-    if (!this.passwordForm.valid || !this.userId) return;
-    this.authService.activateUserAccount(this.userId, this.passwordForm.get('newPassword')?.value, this.passwordForm.get('confirmPassword')?.value)
+    if (!this.passwordForm.valid || !this.userId || !this.club) return;
+    this.authService.activateUserAccount(this.userId, this.club, this.passwordForm.get('newPassword')?.value, this.passwordForm.get('confirmPassword')?.value)
       .subscribe({
         next: () => {
-          // todo backend get ref club from path
-          // this.routes.navigate([`/frontpath/login`])
+          console.log("Account activated successfully");
+          this.routes.navigate([`/${this.club}/login`])
         },
         error: () => {
           alert("Internal server error");
