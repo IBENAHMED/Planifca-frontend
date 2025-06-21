@@ -100,6 +100,18 @@ export class ProfileComponent implements OnInit {
   };
 
   onSubmitPassword() {
-    console.log(this.user.phone)
+    this.adminService.chnagePassword(
+      this.currentPasswordControl.value,
+      this.newPasswordControl.value,
+      this.confirmPasswordControl.value,
+      this.emailControl.value
+    ).subscribe({
+      next: () => {
+        alert("Password changed successfully");
+      },
+      error: () => {
+        alert("Internal server error");
+      }
+    });
   };
-};
+}
