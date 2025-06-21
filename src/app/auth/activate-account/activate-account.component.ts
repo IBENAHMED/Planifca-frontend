@@ -75,7 +75,7 @@ export class ActivateAccountComponent {
           this.routes.navigate([`/${this.club}/login`])
         },
         error: () => {
-          alert("Internal server error");
+         console.log("")
         },
       });
   };

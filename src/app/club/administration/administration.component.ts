@@ -1,9 +1,7 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import constants from '../../components/constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
-import { ClubServiceService } from '../service/club-service.service';
 import { administratIonInformation } from '../model/administration-type';
 import { AdminLayoutComponent } from '../../layout/admin-layout.component';
 import { NgbAlertConfig, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +9,9 @@ import { NgbModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ClubServiceService } from '../service/club-service.service';
+import constants from '../../components/constants';
+import { UserContextService } from '../../components/services/user-context.service';
 
 const administrations: administratIonInformation[] = [];
 @Component({
@@ -55,7 +56,7 @@ export class AdministrationComponent implements OnInit {
   private formbuilder = inject(FormBuilder);
   private clubServiceService = inject(ClubServiceService);
   private activatedRoute = inject(ActivatedRoute);
-  private userContext: any = localStorage.getItem('userContext');
+  private userContextService = inject(UserContextService);
 
   success: boolean = false;
   frontPath: string | null = null;
@@ -69,7 +70,7 @@ export class AdministrationComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    const path = JSON.parse(this.userContext).frontPath;
+    const path =this.userContextService.getUserContext().frontPath;
     this.activatedRoute.paramMap.subscribe(param => {
       this.frontPath = param.get('frontPath');
 
@@ -88,7 +89,7 @@ export class AdministrationComponent implements OnInit {
         this.collectionSize = response.totalElements;
       },
       error: () => {
-        alert("Internal server error");
+       console.log("")
       }
     });
   };

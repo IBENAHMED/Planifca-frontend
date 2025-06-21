@@ -1,80 +1,57 @@
 import { Router } from '@angular/router';
 import { login } from '../model/login-type';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { UserContextService } from '../../components/services/user-context.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   private readonly urlApi: string = `${environment.baseUrl}`;
   private http = inject(HttpClient);
   private router = inject(Router);
+  private userContextService = inject(UserContextService);
 
   userRoles: string[] = [];
-  private tokenKey = 'token';
-  private userContextKey = 'userContext';
-  private userContext: any = localStorage.getItem(this.userContextKey);
 
-  login(credentials: login): Observable<any> {
-    return this.http.post(
+  login(credentials: login): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(
       `${this.urlApi}/auth/login`,
-      credentials,
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'clubRef': JSON.parse(this.userContext).reference,
-        }),
-      }
+      credentials
     ).pipe(
-      tap((response: any) => localStorage.setItem(this.tokenKey, response.token)),
-      catchError((error) => {
-        throw error;
-      }),
+      tap(response => this.userContextService.setToken(response.token)),
+      catchError(error => throwError(() => error))
     );
-  };
+  }
+
 
   logout(): void {
-    localStorage.removeItem(this.tokenKey);
-    this.router.navigate([`/${JSON.parse(this.userContext).frontPath}/login`]);
-  };
+    this.userContextService.clearToken()
+    const frontPath = this.userContextService.getUserContext()?.frontPath || '';
+    this.router.navigate([`/${frontPath}/login`]);
+  }
 
   forgetPassword(email: string): Observable<any> {
-    // todo: chnage forgot to forget
     return this.http.post(
       `${this.urlApi}/auth/forget-password`,
-      { email: email },
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'clubRef': JSON.parse(this.userContext).reference,
-        }),
-      }
+      { email: email }
     ).pipe(
-      catchError((error) => {
-        throw error;
-      }),
+      catchError((error) => throwError(() => error)),
     );
-  };
+  }
 
   resetPassword(newPassword: string, confirmPassword: string, token: string): Observable<any> {
     return this.http.post(
       `${this.urlApi}/auth/reset-password`,
-      {
-        token,
-        newPassword,
-        confirmPassword,
-      },
+      { token, newPassword, confirmPassword }
     ).pipe(
-      catchError((error) => {
-        throw error;
-      })
+      catchError((error) => throwError(() => error)),
     );
-  };
+  }
 
   activateUserAccount(userId: string, club: string, newPassword: string, confirmPassword: string): Observable<any> {
     // todo: refactor from backend responseType should be JSON
@@ -88,32 +65,25 @@ export class AuthService {
         responseType: 'text'
       }
     ).pipe(
-      catchError((error) => {
-        throw error;
-      }),
+      catchError((error) => throwError(() => error)),
     );
-  };
+  }
 
   isFrontPathExist(frontPath: string | null): Observable<any> {
     return this.http.get(`${this.urlApi}/club/front/${frontPath}`).pipe(
-      catchError((error) => {
-        throw error;
-      }),
+      catchError((error) => throwError(() => error)),
     );
-  };
+  }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem(this.tokenKey);
-  };
+    if (typeof window !== 'undefined') {
+      return !!localStorage.getItem('token');
+    }
+    return false;
+  }
 
   getUserRole(): Observable<any> {
-    const token = localStorage.getItem(this.tokenKey);
-    return this.http.get(`${this.urlApi}/user/current`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    });
+    return this.http.get(`${this.urlApi}/user/current`);
   }
 
   async hasRole(requiredRoles: string[]): Promise<boolean> {
@@ -121,26 +91,20 @@ export class AuthService {
       return requiredRoles.some(role => this.userRoles.includes(role));
     }
 
-    const token = localStorage.getItem(this.tokenKey);
+    const token = this.userContextService.getToken();
+    if (!token) {
+      return false;
+    }
 
     try {
-      const response = await fetch(`${this.urlApi}/user/current`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
+      const response: any = await firstValueFrom(
+        this.http.get(`${this.urlApi}/user/current`)
+      );
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch user roles');
-      }
-
-      const data = await response.json();
-      this.userRoles = data.roles;
+      this.userRoles = response.roles;
       return requiredRoles.some(role => this.userRoles.includes(role));
-    } catch (error) {
+    } catch {
       return false;
     }
   }
-};
+}

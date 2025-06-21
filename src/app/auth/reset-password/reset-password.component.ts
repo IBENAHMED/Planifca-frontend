@@ -82,7 +82,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
           this.routes.navigate([`/space-clients/login`])
         },
         error: () => {
-          alert("Internal server error");
+         console.log("")
         },
       });
   };

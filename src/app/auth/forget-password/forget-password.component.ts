@@ -61,7 +61,7 @@ export class ForgetPasswordComponent implements OnDestroy {
           this.isEmailSent = true;
         },
         error: () => {
-          alert("Internal server error");
+         console.log("")
         },
       });
   };

@@ -17,12 +17,7 @@ export class AdminService {
   private userContext: any = localStorage.getItem(this.userContextKey);
 
   createClub(dataClub: createClub): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
-
-    return this.http.post(`${this.urlApi}/club/newClub`, dataClub, { headers }).pipe(
+    return this.http.post(`${this.urlApi}/club/newClub`, dataClub).pipe(
       catchError((error) => {
         throw error;
       }),
@@ -30,12 +25,7 @@ export class AdminService {
   };
 
   getAllClubs(page: number, pageSize: number): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
-
-    return this.http.get(`${this.urlApi}/club?page=${page}&size=${pageSize}`, { headers }).pipe(
+    return this.http.get(`${this.urlApi}/club?page=${page}&size=${pageSize}`).pipe(
       catchError((error) => {
         throw error;
       }),

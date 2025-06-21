@@ -39,7 +39,7 @@ export class EmailSentConfirmationComponent implements OnDestroy {
           }, 3000);
         },
         error: () => {
-          alert("Internal server error");
+         console.log("")
         },
       });
   };

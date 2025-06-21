@@ -21,6 +21,7 @@ import { FormInputEmailComponent } from '../../components/form/form-input-email/
 import { FormInputPasswordComponent } from '../../components/form/form-input-password/form-input-password.component';
 import { response } from 'express';
 import constants from '../../components/constants';
+import { UserContextService } from '../../components/services/user-context.service';
 @Component({
   selector: 'login-auth',
   standalone: true,
@@ -46,7 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
   private activatedRoute = inject(ActivatedRoute);
-  private userContext: any = localStorage.getItem('userContext');
+  private userContextService = inject(UserContextService);
 
   isError: boolean = false;
   frontPath: string | null = null;
@@ -60,15 +61,16 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const routeSubscription = this.activatedRoute.paramMap.subscribe(param => {
       this.frontPath = param.get('frontPath');
+      const userContext = this.userContextService.getUserContext();
 
       if (this.frontPath) {
         this.authService.isFrontPathExist(this.frontPath).subscribe({
           next: (response) => {
-            localStorage.setItem('userContext', JSON.stringify(response))
+            this.userContextService.setUserContext(response)
           },
           error: () => {
-            this.userContext ? (
-              this.route.navigate([`${JSON.parse(this.userContext).frontPath}/login`])
+            userContext ? (
+              this.route.navigate([`${JSON.parse(userContext).frontPath}/login`])
             ) : (
               this.route.navigate(['/unauthorized'])
             );
@@ -119,13 +121,13 @@ export class LoginComponent implements OnInit, OnDestroy {
               }
             },
             error: () => {
-              alert("Internal server error");
+             console.log("")
             },
           });
         },
         error: ({ status }) => {
           this.isError = [404, 401].includes(status);
-          if (!this.isError) alert("Internal server error");
+          if (!this.isError)console.log("")
         },
       });
 

@@ -4,6 +4,7 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../auth/service/auth.service';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserContextService } from '../components/services/user-context.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -19,8 +20,8 @@ export class AdminLayoutComponent implements OnInit {
   roleStatistics: boolean = false;
   roleAdministration: boolean = false;
   authService = inject(AuthService);
-  userContext: any = localStorage.getItem('userContext');
-  frontPath = JSON.parse(this.userContext).frontPath;
+  private userContextService = inject(UserContextService);
+  frontPath = this.userContextService.getUserContext()?.frontPath;
 
   async ngOnInit() {
     this.roleClub = await this.authService.hasRole([constants.USER.SUPERADMIN]);

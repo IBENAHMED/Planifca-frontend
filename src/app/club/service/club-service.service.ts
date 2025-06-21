@@ -10,17 +10,9 @@ export class ClubServiceService {
   private http = inject(HttpClient);
   private readonly urlApi: string = `${environment.baseUrl}`;
 
-  private userContextKey = 'userContext';
-  private userContext: any = localStorage.getItem(this.userContextKey);
-
   createAdministration(dataAdministration: any): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      'clubRef': JSON.parse(this.userContext).reference,
-    });
-    return this.http.post(`${this.urlApi}/user/register`, dataAdministration, { headers }).pipe(
+
+    return this.http.post(`${this.urlApi}/user/register`, dataAdministration).pipe(
       catchError((error) => {
         throw error;
       }),
@@ -28,14 +20,7 @@ export class ClubServiceService {
   }
 
   getAllAdministration(page: number, pageSize: number): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      'clubRef': JSON.parse(this.userContext).reference,
-
-    });
-    return this.http.get(`${this.urlApi}/user/getUserList?page=${page}&size=${pageSize}`, { headers }).pipe(
+    return this.http.get(`${this.urlApi}/user/getUserList?page=${page}&size=${pageSize}`).pipe(
       catchError((error) => {
         throw error;
       }),

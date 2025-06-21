@@ -10,6 +10,7 @@ import { NgbModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UserContextService } from '../../components/services/user-context.service';
 
 // todo: add eamil on this list from backend
 const club: clubInformation[] = [];
@@ -52,7 +53,7 @@ export class AdminClubsComponent implements OnInit {
   private formbuilder = inject(FormBuilder);
   private adminService = inject(AdminService);
   private activatedRoute = inject(ActivatedRoute);
-  private userContext: any = localStorage.getItem('userContext');
+  private userContextService = inject(UserContextService);
 
   success: boolean = false;
   frontPath: string | null = null;
@@ -64,7 +65,7 @@ export class AdminClubsComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    const path = JSON.parse(this.userContext).frontPath;
+    const path = this.userContextService.getUserContext().frontPath;
     this.activatedRoute.paramMap.subscribe(param => {
       this.frontPath = param.get('frontPath');
 
@@ -83,7 +84,7 @@ export class AdminClubsComponent implements OnInit {
         this.collectionSize = response.totalElements;
       },
       error: () => {
-        alert("Internal server error");
+       console.log("")
       }
     });
   };
@@ -122,7 +123,7 @@ export class AdminClubsComponent implements OnInit {
       },
       error: () => {
         this.success = false;
-        alert("Internal server error");
+       console.log("")
       }
     });
   };

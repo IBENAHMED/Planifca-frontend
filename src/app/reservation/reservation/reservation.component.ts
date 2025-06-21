@@ -10,6 +10,7 @@ import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootst
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ResirvationServiceService } from '../service/resirvation-service.service';
+import { UserContextService } from '../../components/services/user-context.service';
 
 const reservation: reservationIonInformation[] = [];
 @Component({
@@ -47,7 +48,7 @@ export class ReservationComponent implements OnInit {
   private formbuilder = inject(FormBuilder);
   private activatedRoute = inject(ActivatedRoute);
   private resirvationServiceService = inject(ResirvationServiceService)
-  private userContext: any = localStorage.getItem('userContext');
+  private userContextService = inject(UserContextService);
 
   success: boolean = false;
   frontPath: string | null = null;
@@ -58,7 +59,7 @@ export class ReservationComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    const path = JSON.parse(this.userContext).frontPath;
+    const path = this.userContextService.getUserContext()?.frontPath;
     this.activatedRoute.paramMap.subscribe(param => {
       this.frontPath = param.get('frontPath');
 
@@ -77,7 +78,7 @@ export class ReservationComponent implements OnInit {
         this.collectionSize = response.totalElements;
       },
       error: () => {
-        alert("Internal server error");
+       console.log("")
       }
     });
   };

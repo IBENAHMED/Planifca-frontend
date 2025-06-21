@@ -11,18 +11,8 @@ export class ResirvationServiceService {
   private http = inject(HttpClient);
   private readonly urlApi: string = `${environment.baseUrl}`;
 
-  private userContextKey = 'userContext';
-  private userContext: any = localStorage.getItem(this.userContextKey);
-
   getAllResirvation(page: number, pageSize: number): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      'clubRef': JSON.parse(this.userContext).reference,
-
-    });
-    return this.http.get(`${this.urlApi}/reservation?page=${page}&size=${pageSize}`, { headers }).pipe(
+    return this.http.get(`${this.urlApi}/reservation?page=${page}&size=${pageSize}`).pipe(
       catchError((error) => {
         throw error;
       }),

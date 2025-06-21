@@ -84,7 +84,7 @@ export class ProfileComponent implements OnInit {
         });
       },
       error: () => {
-        alert("Internal server error");
+       console.log("")
       }
     });
   }
@@ -110,7 +110,7 @@ export class ProfileComponent implements OnInit {
         alert("Password changed successfully");
       },
       error: () => {
-        alert("Internal server error");
+       console.log("")
       }
     });
   };
