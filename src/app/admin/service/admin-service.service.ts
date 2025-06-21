@@ -13,6 +13,9 @@ export class AdminService {
   private http = inject(HttpClient);
   private readonly urlApi: string = `${environment.baseUrl}`;
 
+  private userContextKey = 'userContext';
+  private userContext: any = localStorage.getItem(this.userContextKey);
+
   createClub(dataClub: createClub): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
@@ -47,5 +50,24 @@ export class AdminService {
         'Content-Type': 'application/json'
       }
     });
+  }
+
+  chnagePassword(oldPassword: string, newPassword: string, confirmPassword: string, email: string): Observable<any> {
+    const token = localStorage.getItem(this.tokenKey);
+    return this.http.post(`${this.urlApi}/user/change-password/${email}`, {
+      oldPassword,
+      newPassword,
+      confirmPassword,
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'clubRef': JSON.parse(this.userContext).reference,
+      }
+    }).pipe(
+      catchError((error) => {
+        throw error;
+      }),
+    );
   }
 };
