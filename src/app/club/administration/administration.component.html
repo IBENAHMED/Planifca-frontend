@@ -62,59 +62,68 @@
         </div>
       </form>
 
-      <div class="tableClub">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Prenom</th>
-              <th scope="col">Nom</th>
-              <th scope="col">Email</th>
-              <th scope="col">Statut</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (administration of administrations; track administration.name) {
-            <tr>
-              <td scope="row">{{ administration.firstName }}</td>
-              <td>{{ administration.lastName }}</td>
-              <td>{{ administration.email }}</td>
-              <td [ngClass]="{
+      <ng-container *ngIf="administrations && administrations.length > 0; else noaAministrations">
+        <div class="tableClub">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Prenom</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Statut</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (administration of administrations; track administration.name) {
+              <tr>
+                <td scope="row">{{ administration.firstName }}</td>
+                <td>{{ administration.lastName }}</td>
+                <td>{{ administration.email }}</td>
+                <td [ngClass]="{
                 'terminer': !administration?.active,
                 'en-cours': administration?.active
               }">
-                {{ administration?.active }}
-              </td>
-              <td>
-                <div>
-                  <div ngbDropdown class="custom-dropdown">
-                    <button class="ngbDropdown-button" type="button" id="dropdownBasic1" ngbDropdownToggle>
-                      ...
-                    </button>
-                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="custom-dropdown-menu">
-                      <button ngbDropdownItem class="ngbDropdown-button_modifier">
-                        <i class="fas fa-edit"></i>
-                        Modifier
+                  {{ administration?.active }}
+                </td>
+                <td>
+                  <div>
+                    <div ngbDropdown class="custom-dropdown">
+                      <button class="ngbDropdown-button" type="button" id="dropdownBasic1" ngbDropdownToggle>
+                        ...
                       </button>
-                      <button ngbDropdownItem class="ngbDropdown-button_supprimer">
-                        <i class="fas fa-trash"></i>
-                        Supprimer
-                      </button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="custom-dropdown-menu">
+                        <button ngbDropdownItem class="ngbDropdown-button_modifier">
+                          <i class="fas fa-edit"></i>
+                          Modifier
+                        </button>
+                        <button ngbDropdownItem class="ngbDropdown-button_supprimer">
+                          <i class="fas fa-trash"></i>
+                          Supprimer
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </td>
-            </tr>
-            }
-          </tbody>
-        </table>
-      </div>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </ng-container>
     </div>
 
-    <div class="d-flex justify-content-center p-2">
-      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-        (pageChange)="onPageChange($event)">
-      </ngb-pagination>
-    </div>
+    <ng-container *ngIf="administrations && administrations.length > 0">
+      <div class="d-flex justify-content-center p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+          (pageChange)="onPageChange($event)">
+        </ngb-pagination>
+      </div>
+    </ng-container>
+    <ng-template #noaAministrations>
+      <div class="no-administrations-box text-center mt-5">
+        Aucune administrations
+      </div>
+    </ng-template>
   </article>
 </app-admin-layout>

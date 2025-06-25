@@ -311,3 +311,13 @@ ngb-alert {
   top: -110px !important;
   left: 22% !important;
 }
+
+.no-reservation-box {
+  font-weight: bold;
+  padding: 40px 0px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background-color: $secondary-color;
+  color: $primary-color;
+  border: 1px solid rgba($primary-color, 0.2);
+}

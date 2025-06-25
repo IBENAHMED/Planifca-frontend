@@ -1,35 +1,34 @@
 <div class="content">
   <div class="header-stepper">
-   <div class="header-content d-flex justify-content-between">
-    <div class="chevron" (click)="previousStep()">
-      <i class="fa-solid fa-chevron-left"></i>
-    </div>
-    <div class="stepper">
-      <div class="stepper-container">
-        <div *ngFor="let step of steps; let i = index" class="step">
-          <div class="progress-bar" [ngClass]="{ 'completed-bar': i < currentStep + 1 }"></div>
-          <div class="circle" (click)="goToStep(i)" [ngClass]="{
+    <div class="header-content d-flex justify-content-between">
+      <div class="chevron" (click)="previousStep()">
+        <i class="fa-solid fa-chevron-left"></i>
+      </div>
+      <div class="stepper">
+        <div class="stepper-container">
+          <div *ngFor="let step of steps; let i = index" class="step">
+            <div class="progress-bar" [ngClass]="{ 'completed-bar': i < currentStep + 1 }"></div>
+            <div class="circle" (click)="goToStep(i)" [ngClass]="{
             'completed': step.completed,
             'active': i === currentStep && i!==2,
             'pending': i > currentStep
           }">
-            <i [ngClass]="step.icon"></i>
+              <i [ngClass]="step.icon"></i>
+            </div>
           </div>
         </div>
       </div>
+      <div class="close" (click)="closeReser()">
+        <i class="fa fa-close"></i>
+      </div>
     </div>
-    <div class="close" (click)="closeReser()">
-      <i class="fa fa-close"></i>
-    </div>
-   </div>
   </div>
   <div class="content-info">
     <div class="col-8 step-info">
       <ng-container [ngSwitch]="currentStep">
         <app-step-information *ngSwitchCase="0"></app-step-information>
-        <!-- <app-step-canlader *ngSwitchCase="1"></app-step-canlader> -->
+        <app-calendar *ngSwitchCase="1"></app-calendar>
         <app-step-recap *ngSwitchCase="2"></app-step-recap>
-        <p *ngSwitchDefault>Étape inconnue</p>
       </ng-container>
     </div>
   </div>

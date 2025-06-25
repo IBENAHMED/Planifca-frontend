@@ -18,58 +18,67 @@
         </div>
       </form>
 
-      <div class="tableReservation">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Date</th>
-              <th scope="col">Start</th>
-              <th scope="col">End</th>
-              <th scope="col">Phone</th>
-              <th scope="col">Statut</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (reservation of reservation; track reservation.reservationId) {
-            <tr>
-              <td scope="row">{{ reservation.reservationDate }}</td>
-              <td>{{ reservation.startTime }}</td>
-              <td>{{ reservation.endTime }}</td>
-              <td>{{ reservation.clientPhoneNumber }}</td>
-              <td>
-                {{ reservation?.clientFirstName }} {{ reservation?.clientLastName }}
-              </td>
-              <td>
-                <div>
-                  <div ngbDropdown class="custom-dropdown">
-                    <button class="ngbDropdown-button" type="button" id="dropdownBasic1" ngbDropdownToggle>
-                      ...
-                    </button>
-                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="custom-dropdown-menu">
-                      <button ngbDropdownItem class="ngbDropdown-button_modifier">
-                        <i class="fas fa-edit"></i>
-                        Modifier
+      <ng-container *ngIf="reservation && reservation.length > 0; else noReservation">
+        <div class="tableReservation">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Start</th>
+                <th scope="col">End</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Statut</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (reservation of reservation; track reservation.reservationId) {
+              <tr>
+                <td scope="row">{{ reservation.reservationDate }}</td>
+                <td>{{ reservation.startTime }}</td>
+                <td>{{ reservation.endTime }}</td>
+                <td>{{ reservation.clientPhoneNumber }}</td>
+                <td>
+                  {{ reservation?.clientFirstName }} {{ reservation?.clientLastName }}
+                </td>
+                <td>
+                  <div>
+                    <div ngbDropdown class="custom-dropdown">
+                      <button class="ngbDropdown-button" type="button" id="dropdownBasic1" ngbDropdownToggle>
+                        ...
                       </button>
-                      <button ngbDropdownItem class="ngbDropdown-button_supprimer">
-                        <i class="fas fa-trash"></i>
-                        Supprimer
-                      </button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="custom-dropdown-menu">
+                        <button ngbDropdownItem class="ngbDropdown-button_modifier">
+                          <i class="fas fa-edit"></i>
+                          Modifier
+                        </button>
+                        <button ngbDropdownItem class="ngbDropdown-button_supprimer">
+                          <i class="fas fa-trash"></i>
+                          Supprimer
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </td>
-            </tr>
-            }
-          </tbody>
-        </table>
-      </div>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </ng-container>
     </div>
 
-    <div class="d-flex justify-content-center p-2">
-      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-        (pageChange)="onPageChange($event)">
-      </ngb-pagination>
-    </div>
+    <ng-container *ngIf="reservation && reservation.length > 0">
+      <div class="d-flex justify-content-center p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+          (pageChange)="onPageChange($event)">
+        </ngb-pagination>
+      </div>
+    </ng-container>
+    <ng-template #noReservation>
+      <div class="no-reservation-box text-center mt-5">
+        Aucune réservation
+      </div>
+    </ng-template>
   </article>
 </app-admin-layout>
