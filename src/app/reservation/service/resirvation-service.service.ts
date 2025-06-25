@@ -10,8 +10,35 @@ import { UserContextService } from '../../components/services/user-context.servi
 export class ResirvationServiceService {
 
   private http = inject(HttpClient);
-  private readonly urlApi: string = `${environment.baseUrl}`;
   private UserContextService = inject(UserContextService);
+  private readonly urlApi: string = `${environment.baseUrl}`;
+
+  createResirvation({
+    reservationDate,
+    startTime,
+    endTime,
+    clientFirstName,
+    clientLastName,
+    clientPhoneNumber,
+    terrainId,
+  }: any): Observable<any> {
+
+    const body = {
+      reservationDate,
+      startTime,
+      endTime,
+      clientFirstName,
+      clientLastName,
+      clientPhoneNumber,
+    };
+
+    return this.http.post(
+      `${this.urlApi}/reservation/new/${terrainId}`, body).pipe(
+        catchError((error) => {
+          throw error;
+        }),
+      );
+  };
 
   getAllResirvation(page: number, pageSize: number): Observable<any> {
     return this.http.get(`${this.urlApi}/reservation?page=${page}&size=${pageSize}`).pipe(

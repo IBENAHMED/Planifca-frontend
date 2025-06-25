@@ -26,7 +26,7 @@
   <div class="content-info">
     <div class="col-8 step-info">
       <ng-container [ngSwitch]="currentStep">
-        <app-step-information *ngSwitchCase="0"></app-step-information>
+        <app-step-information *ngSwitchCase="0" (informationSaved)="nextStep()"></app-step-information>
         <app-calendar *ngSwitchCase="1"></app-calendar>
         <app-step-recap *ngSwitchCase="2"></app-step-recap>
       </ng-container>

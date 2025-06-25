@@ -20,6 +20,7 @@ import { StepRecapComponent } from "./step-recap/step-recap.component";
   styleUrl: './create-reservation.component.scss'
 })
 export class CreateReservationComponent {
+  currentStep = 0;
 
   steps = [
     { icon: 'fas fa-user', completed: true },
@@ -27,9 +28,7 @@ export class CreateReservationComponent {
     { icon: 'fas fa-list', completed: true }
   ];
 
-  constructor(private modalService: NgbModal) {}
-
-  currentStep = 0;
+  constructor(private modalService: NgbModal) { }
 
   nextStep() {
     if (this.currentStep < this.steps.length - 1) {
@@ -44,7 +43,7 @@ export class CreateReservationComponent {
   }
 
   closeReser() {
-    this.modalService.open(ModelConfirmComponent, {centered:true} )
+    this.modalService.open(ModelConfirmComponent, { centered: true })
   }
 
   goToStep(i: number): void {
