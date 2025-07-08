@@ -8,13 +8,13 @@
         <div class="stepper-container">
           <div *ngFor="let step of steps; let i = index" class="step">
             <div class="progress-bar" [ngClass]="{ 'completed-bar': i < currentStep + 1 }"></div>
-            <div class="circle" (click)="goToStep(i)" [ngClass]="{
+            <button class="circle" (click)="goToStep(i)" [ngClass]="{
             'completed': step.completed,
             'active': i === currentStep && i!==2,
             'pending': i > currentStep
           }">
               <i [ngClass]="step.icon"></i>
-            </div>
+            </button>
           </div>
         </div>
       </div>
@@ -26,8 +26,11 @@
   <div class="content-info">
     <div class="col-8 step-info">
       <ng-container [ngSwitch]="currentStep">
-        <app-step-information *ngSwitchCase="0" (informationSaved)="nextStep()"></app-step-information>
-        <app-calendar *ngSwitchCase="1"></app-calendar>
+        <app-step-information [formClient]="clientForm" *ngSwitchCase="0"
+          (informationSaved)="nextStep()"></app-step-information>
+        <div class="container-calendar">
+          <app-calendar *ngSwitchCase="1"></app-calendar>
+        </div>
         <app-step-recap *ngSwitchCase="2"></app-step-recap>
       </ng-container>
     </div>

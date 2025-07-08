@@ -16,6 +16,7 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
 }
 
 .content-info {
@@ -97,6 +98,7 @@
   margin: 0 auto;
   position: relative;
   z-index: 1;
+  border: none;
 }
 
 .completed {
@@ -167,4 +169,9 @@
   display: flex;
   justify-content: space-between;
   margin: 30px 20px 0px 20px;
+}
+
+.container-calendar{
+  width: 100%;
+  padding: 20px;
 }

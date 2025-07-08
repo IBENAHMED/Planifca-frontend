@@ -54,6 +54,10 @@ label {
 .app-tag-button {
   display: flex;
   justify-content: flex-end;
+
+  i{
+    margin-left: 20px;
+  }
 }
 
 app-tag-button {

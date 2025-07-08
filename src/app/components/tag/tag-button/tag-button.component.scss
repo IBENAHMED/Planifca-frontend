@@ -11,12 +11,17 @@ button {
   padding-left: 25px;
   padding-right: 25px;
   font-size: $text-sm;
-  font-weight: $font-normal;
+  font-weight:600;
   background: $primary-color;
   border-radius: $border-radius;
 }
 
-.disabled {
-  opacity: 0.7;
+button:hover{
+  opacity: 0.9
+}
+
+button:disabled {
+  opacity: 0.6;
   cursor: no-drop;
+  background-color: #e0e0e0;
 }

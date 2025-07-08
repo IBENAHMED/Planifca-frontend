@@ -1,15 +1,16 @@
 <div class="container" style="width: 1000px; text-align: center;">
-  <form>
+  <form [formGroup]="formClient">
     <fieldset class="border p-3 rounded shadow-custom">
       <legend class="w-auto">Informations Utilisateur</legend>
       <div class="row mb-3">
         <div class="col-md-6 text-start">
           <label for="nom" class="form-label">Nom<span>*</span></label>
-          <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom">
+          <input formControlName="firstName" type="text" class="form-control" id="nom" placeholder="Entrez votre nom">
         </div>
         <div class="col-md-6 text-start">
           <label for="prenom" class="form-label">Prénom<span>*</span></label>
-          <input type="text" class="form-control" id="prenom" placeholder="Entrez votre prénom">
+          <input formControlName="lastName" type="text" class="form-control" id="prenom"
+            placeholder="Entrez votre prénom">
         </div>
       </div>
       <div class="row mb-3">
@@ -19,7 +20,8 @@
         </div>
         <div class="col-md-6 text-start">
           <label for="telephone" class="form-label">Téléphone<span>*</span></label>
-          <input type="tel" class="form-control" id="telephone" placeholder="Entrez votre téléphone">
+          <input formControlName="phone" type="tel" class="form-control" id="telephone"
+            placeholder="Entrez votre téléphone">
         </div>
       </div>
     </fieldset>
@@ -30,7 +32,7 @@
         <div class="col-md-6 text-start">
           <label for="sport" class="form-label">Sport<span>*</span></label>
           <select class="form-select" id="sport" (change)="onSportChange($event)">
-            <option selected>Choisissez un sport...</option>
+            <option selected disabled>Choisissez un sport...</option>
             <option>Football</option>
             <option>Basket-ball</option>
             <option>Tennis</option>
@@ -39,8 +41,7 @@
         </div>
         <div class="col-md-6 text-start">
           <label for="terrain" class="form-label">Terrain<span>*</span></label>
-          <select class="form-select" id="terrain" [disabled]="!terrains || terrains.length === 0">
-            <option selected disabled>Choisissez un terrain...</option>
+          <select formControlName="terrainId" class="form-select" id="terrain">
             <option *ngFor="let terrain of terrains" [value]="terrain.terrainId">
               {{ terrain.name }}
             </option>
@@ -50,8 +51,10 @@
     </fieldset>
 
     <div class="app-tag-button mt-4">
-      <app-tag-button text="Sauvegarder" type="button" (click)="saveInformation()">
-        <img style="margin-bottom: 2px; margin-right: 5px;" src="/icon/icon-plus.svg" alt="icon-plus" />
+      <app-tag-button text="Passer au calendrier" type="button" (click)="saveInformation()"
+        [disabled]="formClient.invalid">
+        <i class="fas fa-arrow-right"></i>
+        <!-- <img style="margin-bottom: 2px; margin-right: 5px;" src="/icon/icon-plus.svg" alt="icon-plus" /> -->
       </app-tag-button>
     </div>
   </form>

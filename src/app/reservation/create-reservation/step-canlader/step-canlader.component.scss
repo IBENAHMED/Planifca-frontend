@@ -1,0 +1,113 @@
+.container-calendar {
+  width: 100%;
+}
+
+::ng-deep .fc-toolbar {
+  border-radius: 0px;
+  background: #ffffff;
+  box-shadow: 8px 8px 16px #eaeaea, -8px -8px 16px #e7e7e7;
+  padding: 20px;
+}
+
+::ng-deep .fc-toolbar button:hover {
+  background-color: #004d40;
+}
+
+::ng-deep .fc-header-toolbar {
+  margin-bottom: 0 !important;
+  height: 50px !important;
+}
+
+::ng-deep .fc-button-group button {
+  background-color: #ffffff !important;
+  border-color: #2563eb !important;
+  height: 25px !important;
+  color: #2563eb !important;
+  font-weight: 500 !important;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 4px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center !important;
+  transition: background-color 0.3s ease !important;
+}
+
+::ng-deep .fc-toolbar button:hover {
+  background-color: #2563eb !important;
+  color: #fff !important;
+}
+
+::ng-deep .fc-toolbar button:active,
+::ng-deep .fc-toolbar button:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+::ng-deep .fc-today-button {
+  border-color: #2563eb !important;
+  height: 25px !important;
+  color: #2563eb !important;
+  font-weight: 500 !important;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 4px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: #ffffff !important;
+  line-height: 0.5 !important;
+}
+
+::ng-deep .fc-timegrid .fc-col-header-cell {
+  background-color: #2563eb !important;
+  height: 30px !important;
+  text-decoration: none !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  padding: 0 !important;
+  border: 1px solid #e0e0e0;
+}
+
+::ng-deep .fc-col-header-cell-cushion {
+  text-decoration: none !important;
+  color: #fff;
+}
+
+::ng-deep .fc-timegrid-col.fc-day-today {
+  background-color: #95b5ff5f !important;
+}
+
+::ng-deep .fc-timegrid-axis {
+  background-color: #ffffff !important;
+  width: 30px !important;
+  font-weight: 700 !important;
+  font-size: 14px;
+  text-align: center !important;
+}
+
+::ng-deep .timegrid-slot-label-cushion  {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: #444 !important;
+}
+
+/* Supprimer padding / margin inutiles dans la colonne des heures */
+::ng-deep .fc-timegrid-axis-frame,
+::ng-deep .fc-timegrid-slot-label {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  text-align: center; /* pour centrer les heures */
+}
+
+::ng-deep .fc-timegrid-axis {
+  background-color: #f5f5f5 !important;
+}
+
+/* Personnaliser chaque cellule horaire */
+::ng-deep .fc-timegrid-axis-frame {
+  padding: 5px 0;
+  color: red !important;
+}
