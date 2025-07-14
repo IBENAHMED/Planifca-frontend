@@ -1,6 +1,6 @@
 import { NgFor } from '@angular/common';
 import { Component, inject, Output, EventEmitter, Input } from '@angular/core'; // Import Output and EventEmitter
-import { ResirvationServiceService } from '../../service/resirvation-service.service';
+import { ReservationServiceService } from '../../service/reservation-service.service';
 import { TagButtonComponent } from "../../../components/tag/tag-button/tag-button.component";
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -20,7 +20,7 @@ export class StepInformationComponent {
 
   @Output() informationSaved = new EventEmitter<void>();
 
-  private ResirvationServiceService = inject(ResirvationServiceService);
+  private ReservationServiceService = inject(ReservationServiceService);
 
   onSportChange(event: Event) {
     const target = event.target as HTMLSelectElement;
@@ -28,7 +28,7 @@ export class StepInformationComponent {
     this.terrains = null;
 
     if (this.selectedSport && this.selectedSport !== 'Choisissez un sport...') {
-      this.ResirvationServiceService.getStadiumsByType(this.selectedSport).subscribe({
+      this.ReservationServiceService.getStadiumsByType(this.selectedSport).subscribe({
         next: (data) => {
           this.terrains = data;
           if (this.terrains && this.terrains.length > 0) {

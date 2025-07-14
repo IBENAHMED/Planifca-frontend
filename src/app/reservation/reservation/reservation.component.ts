@@ -9,7 +9,7 @@ import { NgbAlertConfig, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.component";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ResirvationServiceService } from '../service/resirvation-service.service';
+import { ReservationServiceService } from '../service/reservation-service.service';
 import { UserContextService } from '../../components/services/user-context.service';
 
 const reservation: reservationIonInformation[] = [];
@@ -47,7 +47,7 @@ export class ReservationComponent implements OnInit {
   private route = inject(Router);
   private formbuilder = inject(FormBuilder);
   private activatedRoute = inject(ActivatedRoute);
-  private resirvationServiceService = inject(ResirvationServiceService)
+  private ReservationServiceService = inject(ReservationServiceService)
   private userContextService = inject(UserContextService);
 
   success: boolean = false;
@@ -72,7 +72,7 @@ export class ReservationComponent implements OnInit {
   };
 
   getAllResirvation(backendPage: number) {
-    return this.resirvationServiceService.getAllResirvation(backendPage, this.pageSize).subscribe({
+    return this.ReservationServiceService.getAllResirvation(backendPage, this.pageSize).subscribe({
       next: (response) => {
         this.reservation = response.content;
         this.collectionSize = response.totalElements;

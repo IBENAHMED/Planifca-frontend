@@ -6,7 +6,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions, EventInput } from '@fullcalendar/core';
-import { ResirvationServiceService } from '../../service/resirvation-service.service';
+import { ReservationServiceService } from '../../service/reservation-service.service';
 import frLocale from '@fullcalendar/core/locales/fr';
 @Component({
   selector: 'app-calendar',
@@ -21,7 +21,7 @@ import frLocale from '@fullcalendar/core/locales/fr';
 })
 export class StepCanladerComponent implements OnInit {
 
-  private resirvationServiceService = inject(ResirvationServiceService);
+  private ReservationServiceService = inject(ReservationServiceService);
 
   private reservationInfo: any = null;
 
@@ -156,7 +156,7 @@ export class StepCanladerComponent implements OnInit {
 //     endTime: endTime,
 //   };
 
-//   this.resirvationServiceService.createResirvation({
+//   this.ReservationServiceService.createResirvation({
 //     reservationDate: reservationDetails.reservationDate,
 //     startTime: reservationDetails.startTime,
 //     endTime: reservationDetails.endTime,

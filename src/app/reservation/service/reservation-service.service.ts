@@ -7,7 +7,7 @@ import { UserContextService } from '../../components/services/user-context.servi
 @Injectable({
   providedIn: 'root'
 })
-export class ResirvationServiceService {
+export class ReservationServiceService {
 
   private http = inject(HttpClient);
   private UserContextService = inject(UserContextService);
