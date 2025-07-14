@@ -17,5 +17,5 @@ export const reservationRoutes: Routes = [
     // canActivate: [guardsGuard],
     component: CreateReservationComponent,
     // data: { role: [constants.USER.SUPERADMIN, constants.USER.ADMIN] },
-  },
+  }
 ];

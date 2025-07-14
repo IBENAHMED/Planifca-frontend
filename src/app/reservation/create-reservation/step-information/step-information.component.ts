@@ -20,7 +20,7 @@ export class StepInformationComponent {
 
   @Output() informationSaved = new EventEmitter<void>();
 
-  private ReservationServiceService = inject(ReservationServiceService);
+  private reservationService = inject(ReservationServiceService);
 
   onSportChange(event: Event) {
     const target = event.target as HTMLSelectElement;
@@ -28,11 +28,12 @@ export class StepInformationComponent {
     this.terrains = null;
 
     if (this.selectedSport && this.selectedSport !== 'Choisissez un sport...') {
-      this.ReservationServiceService.getStadiumsByType(this.selectedSport).subscribe({
+      this.reservationService.getStadiumsByType(this.selectedSport).subscribe({
         next: (data) => {
           this.terrains = data;
           if (this.terrains && this.terrains.length > 0) {
             this.formClient.get('terrainId')?.enable();
+            this.formClient.get('terrainName')?.patchValue(this.selectedTerrainName)
           } else {
             this.formClient.get('terrainId')?.disable();
           }
@@ -46,8 +47,14 @@ export class StepInformationComponent {
   }
 
   saveInformation() {
-    console.log(this.formClient)
     this.informationSaved.emit()
   }
+
+  get selectedTerrainName(): string | null {
+  const selectedId = this.formClient.get('terrainId')?.value;
+  const selectedTerrain = this.terrains.find((t:any) => t.terrainId === selectedId);
+  return selectedTerrain ? selectedTerrain.name : null;
+}
+
 
 }

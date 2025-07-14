@@ -2,20 +2,19 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { Component, inject, OnInit } from '@angular/core';
-import interactionPlugin from '@fullcalendar/interaction';
-import { FullCalendarModule } from '@fullcalendar/angular';
-import { CalendarOptions, EventInput } from '@fullcalendar/core';
-import { ReservationServiceService } from '../../service/reservation-service.service';
+import { Component, inject, Input, OnInit, AfterViewInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
+import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarOptions, DatesSetArg, EventInput } from '@fullcalendar/core';
 import frLocale from '@fullcalendar/core/locales/fr';
+import { TagButtonComponent } from "../../../components/tag/tag-button/tag-button.component";
+import { FormGroup } from '@angular/forms';
+import { ReservationServiceService } from '../../service/reservation-service.service';
+import { NotificationService } from '../../../components/services/notification.service';
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    FullCalendarModule
-  ],
+  imports: [CommonModule, RouterOutlet, FullCalendarModule, TagButtonComponent],
   templateUrl: './step-canlader.component.html',
   styleUrls: ['./step-canlader.component.scss'],
 })
@@ -23,160 +22,126 @@ export class StepCanladerComponent implements OnInit {
 
   private ReservationServiceService = inject(ReservationServiceService);
 
-  private reservationInfo: any = null;
+  @ViewChild('fullcalendar') calendarComponent!: FullCalendarComponent;
 
-  reservations = [
-    {
-      startDate: '2025-07-10T10:00:00',
-      endDate: '2025-07-10T11:00:00',
-      status: 'reserved',
-      userName: 'Alice'
-    },
-    {
-      startDate: '2025-07-10T12:00:00',
-      endDate: '2025-07-10T13:0:00',
-      status: 'available'
-    },
-    {
-      startDate: '2025-07-11T09:00:00',
-      endDate: '2025-07-11T10:00:00',
-      status: 'reserved',
-      userName: 'Bob'
-    },
-    {
-      startDate: '2025-07-06T09:00:00',
-      endDate: '2025-07-06T10:0:00',
-      status: 'available'
-    },
-    {
-      startDate: '2025-07-06T10:00:00',
-      endDate: '2025-07-06T11:0:00',
-      status: 'available'
-    },
-    {
-      startDate: '2025-07-06T11:00:00',
-      endDate: '2025-07-06T12:0:00',
-      status: 'available'
-    },
-    {
-      startDate: '2025-07-06T12:00:00',
-      endDate: '2025-07-06T13:0:00',
-      status: 'reserved',
-      userName: 'atyq'
-    }
-  ];
+  @Input() terrainId!: string;
+
+  @Input() calendarForm!: FormGroup
+
+  @Output() toRecap = new EventEmitter<void>();
+
+  events: EventInput[] = [];
+
+  selectedEvent: any = null;
+
+  private reservationService = inject(ReservationServiceService);
+
+  private notificationService = inject(NotificationService)
 
   calendarOptions: CalendarOptions = {
     initialView: 'timeGridWeek',
     locale: frLocale,
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
     selectable: true,
-    selectMirror: true,
     nowIndicator: true,
     height: 'auto',
     allDaySlot: false,
+    slotMinTime: '06:00:00',
+    slotMaxTime: '23:00:00',
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
       right: 'timeGridWeek,timeGridDay'
     },
+    eventDidMount: (info) => {
 
+      if (info.event.title === 'Disponible') {
+        info.el.style.cursor = 'pointer';
+      } else {
+        info.el.style.cursor = 'not-allowed';
+      }
+    },
+
+    events: [],
+    eventClick: this.handleEventClick.bind(this),
     dayHeaderFormat: { weekday: 'long' },
-    slotMinTime: '06:00:00',
-    slotMaxTime: '24:00:00',
-    slotDuration: '01:00:00',
-    snapDuration: '01:00:00',
-    // select: this.handleDateSelect.bind(this),
-    // eventClick: this.handleEventClick.bind(this)
+    dateClick: this.handleDateClick.bind(this),
+    datesSet: this.handleDatesSet.bind(this)
   };
 
-  ngOnInit() {
-    // this.loadReservationInfo();
-    this.loadReservationsInCalendar()
+  ngOnInit() { }
+
+  handleDateClick(arg: DateClickArg) {
+    this.loadTimeSlots(arg.date, arg.date);
   }
 
-  loadReservationsInCalendar() {
-    const events = this.reservations.map(res => ({
-      title: res.status === 'reserved' ? `Réservé : ${res.userName || ''}` : 'Disponible',
-      start: res.startDate,
-      end: res.endDate,
-      color: res.status === 'reserved' ? '#d32f2f' : '#28a745'
-    }));
+  handleDatesSet(arg: DatesSetArg) {
+    this.loadTimeSlots(new Date(arg.start), new Date(arg.end));
+  }
 
-    this.calendarOptions = {
-      ...this.calendarOptions,
-      events
+  loadTimeSlots(startDate: Date, endDate: Date) {
+    const startStr = startDate.toISOString().split('T')[0];
+    const endStr = new Date(endDate.getTime() - 1).toISOString().split('T')[0];
+
+    this.reservationService.getListTimeSlots(this.terrainId, startStr, endStr).subscribe({
+      next: (slots: any[]) => {
+        this.events = slots.map((slot, index) => ({
+          id: `date${index}`,
+          title: slot.status === 'RESERVED' ? 'Réservé' : 'Disponible',
+          start: `${slot.reservationDate}T${slot.startTime}`,
+          end: `${slot.reservationDate}T${slot.endTime}`,
+          color: slot.status === 'RESERVED' ? 'red' : '#58d68d'
+        }));
+        const calendarApi = this.calendarComponent.getApi();
+        calendarApi.removeAllEvents();
+        this.events.forEach(event => calendarApi.addEvent(event));
+      },
+      error: (err) => {
+        console.error('Erreur récupération créneaux:', err);
+      }
+    });
+  }
+
+
+  handleEventClick(clickInfo: any) {
+    const event = clickInfo.event;
+    const calendarApi = this.calendarComponent.getApi();
+
+    if (event.title === 'Réservé') {
+      this.notificationService.warning("Ce créneau est déjà réservé.")
+      return;
+    }
+
+    if (this.selectedEvent) {
+      const oldEvent = calendarApi.getEventById(this.selectedEvent.id);
+      if (oldEvent) {
+        oldEvent.setProp('color', this.selectedEvent.originalColor);
+      }
+    }
+
+    this.selectedEvent = {
+      id: event.id,
+      originalColor: event.backgroundColor
     };
+
+    event.setProp('color', '#f39c12');
+    const selectedSlot = {
+      start: this.formatTime(event.start),
+      end: this.formatTime(event.end),
+      date: event.start.toISOString().split('T')[0],
+    };
+
+    this.calendarForm.patchValue(selectedSlot)
   }
+
+  formatTime(date: Date): string {
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  }
+  
+  passeToRecap() {
+    this.toRecap.emit()
+  }
+
 }
-
-// loadReservationInfo(): void {
-//   try {
-//     const storedInfo = localStorage.getItem('reservationInfo');
-//     if (storedInfo) {
-//       this.reservationInfo = JSON.parse(storedInfo);
-//       console.log('Reservation Info loaded from localStorage:', this.reservationInfo);
-//     } else {
-//       console.warn('No reservation information found in localStorage.');
-//       alert('Please complete the user information step first.');
-//     }
-//   } catch (e) {
-//     console.error('Error parsing reservation info from localStorage:', e);
-//     this.reservationInfo = null;
-//     alert('Error loading user information. Please return to the previous step.');
-//   }
-// }
-
-
-// handleDateSelect(selectInfo: any) {
-//   const startDate = new Date(selectInfo.startStr);
-//   const endDate = new Date(selectInfo.endStr);
-//   const reservationDate = startDate.toISOString().split('T')[0];
-
-//   const startTime = startDate.toTimeString().split(' ')[0].substring(0, 5);
-//   const endTime = endDate.toTimeString().split(' ')[0].substring(0, 5);
-
-//   const durationMs = endDate.getTime() - startDate.getTime();
-//   const oneHourMs = 60 * 60 * 1000;
-
-//   if (durationMs !== oneHourMs) {
-//     alert('Please select exactly a 1-hour slot.');
-//     return;
-//   }
-
-//   if (!this.reservationInfo || !this.reservationInfo.prenom || !this.reservationInfo.nom || !this.reservationInfo.telephone || !this.reservationInfo.terrainId) {
-//     alert('User information (Nom, Prenom, Telephone, Terrain) is missing. Please go back to the previous step and fill in all details.');
-//     console.error('Missing required reservation info:', this.reservationInfo);
-//     return;
-//   }
-
-//   const reservationDetails = {
-//     reservationDate: reservationDate,
-//     startTime: startTime,
-//     endTime: endTime,
-//   };
-
-//   this.ReservationServiceService.createResirvation({
-//     reservationDate: reservationDetails.reservationDate,
-//     startTime: reservationDetails.startTime,
-//     endTime: reservationDetails.endTime,
-//     clientFirstName: this.reservationInfo.prenom,
-//     clientLastName: this.reservationInfo.nom,
-//     clientPhoneNumber: this.reservationInfo.telephone,
-//     terrainId: this.reservationInfo.terrainId
-//   }).subscribe({
-//     next: (response) => {
-//       console.log('Reservation created successfully:', response);
-//     },
-//     error: (error) => {
-//       console.error('Error creating reservation:', error);
-//     }
-//   });
-// }
-
-// handleEventClick(clickInfo: any) {
-//   if (confirm(`Are you sure you want to delete the reservation '${clickInfo.event.title}'?`)) {
-//     clickInfo.event.remove();
-//     alert(`Reservation '${clickInfo.event.title}' has been cancelled.`);
-//   }
-// }

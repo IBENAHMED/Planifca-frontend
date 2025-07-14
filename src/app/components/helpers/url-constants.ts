@@ -19,6 +19,7 @@ export const URLS = {
   // RESERVATION
   RESERVATION: ':frontPath/reservation',
   CREATE_RESERVATION: ':frontPath/reservation/new',
+  RESERVATION_PROCESSING:':frontPath/reservation/processing',
 
   // STATISTICS
   STATISTICS: ':frontPath/statistics',

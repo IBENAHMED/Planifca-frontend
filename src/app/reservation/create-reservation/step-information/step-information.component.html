@@ -16,7 +16,7 @@
       <div class="row mb-3">
         <div class="col-md-6 text-start">
           <label for="email" class="form-label">Email<span>*</span></label>
-          <input type="email" class="form-control" id="email" placeholder="Entrez votre email">
+          <input formControlName="email" type="email" class="form-control" id="email" placeholder="Entrez votre email">
         </div>
         <div class="col-md-6 text-start">
           <label for="telephone" class="form-label">Téléphone<span>*</span></label>
@@ -31,7 +31,7 @@
       <div class="row mb-3">
         <div class="col-md-6 text-start">
           <label for="sport" class="form-label">Sport<span>*</span></label>
-          <select class="form-select" id="sport" (change)="onSportChange($event)">
+          <select formControlName="sport" class="form-select" id="sport" (change)="onSportChange($event)">
             <option selected disabled>Choisissez un sport...</option>
             <option>Football</option>
             <option>Basket-ball</option>

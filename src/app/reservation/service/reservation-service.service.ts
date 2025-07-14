@@ -13,32 +13,10 @@ export class ReservationServiceService {
   private UserContextService = inject(UserContextService);
   private readonly urlApi: string = `${environment.baseUrl}`;
 
-  createResirvation({
-    reservationDate,
-    startTime,
-    endTime,
-    clientFirstName,
-    clientLastName,
-    clientPhoneNumber,
-    terrainId,
-  }: any): Observable<any> {
-
-    const body = {
-      reservationDate,
-      startTime,
-      endTime,
-      clientFirstName,
-      clientLastName,
-      clientPhoneNumber,
-    };
-
+  createResirvation(reservationData: any, terrainId: String) {
     return this.http.post(
-      `${this.urlApi}/reservation/new/${terrainId}`, body).pipe(
-        catchError((error) => {
-          throw error;
-        }),
-      );
-  };
+      `${this.urlApi}/reservation/new/${terrainId}`, reservationData)
+  }
 
   getAllResirvation(page: number, pageSize: number): Observable<any> {
     return this.http.get(`${this.urlApi}/reservation?page=${page}&size=${pageSize}`).pipe(
@@ -57,5 +35,9 @@ export class ReservationServiceService {
         throw error;
       }),
     );
+  }
+
+  getListTimeSlots(terrainId: String, startDate: any, endDate: any): Observable<any> {
+    return this.http.get(`${this.urlApi}/reservation/timeslots/${terrainId}?startDate=${startDate}&endDate=${endDate}`)
   }
 }

@@ -47,7 +47,9 @@ export class ReservationComponent implements OnInit {
   private route = inject(Router);
   private formbuilder = inject(FormBuilder);
   private activatedRoute = inject(ActivatedRoute);
-  private ReservationServiceService = inject(ReservationServiceService)
+
+  private reservationService = inject(ReservationServiceService)
+
   private userContextService = inject(UserContextService);
 
   success: boolean = false;
@@ -72,7 +74,7 @@ export class ReservationComponent implements OnInit {
   };
 
   getAllResirvation(backendPage: number) {
-    return this.ReservationServiceService.getAllResirvation(backendPage, this.pageSize).subscribe({
+    return this.reservationService.getAllResirvation(backendPage, this.pageSize).subscribe({
       next: (response) => {
         this.reservation = response.content;
         this.collectionSize = response.totalElements;
