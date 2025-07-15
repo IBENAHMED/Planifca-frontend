@@ -1,1 +1,70 @@
-<p>step-recap works!</p>
+<div class="test d-flex align-items-center justify-content-center" style=" width: 100%;">
+    <div class="bg-white bg-opacity-95 rounded-4 mx-auto" style=" width: 100%;">
+        <h4 class="display-4 fw-bold text-center text-dark mb-5">
+            <span class="d-block text-primary">Votre Réservation</span>
+            <span class="d-block text-secondary mt-2">Détails du Récapitulatif</span>
+        </h4>
+
+        <div class="d-flex  justify-content-between w-100">
+            <div class="content-info">
+                <div class="card mb-4 gradient-blue   rounded-4 p-1 card-custom-shadow">
+                    <div class="card-body">
+                        <h4 class="card-title h4 fw-bold d-flex align-items-center mb-4">
+                            <i class="fa-regular fa-circle-user"></i>
+                            Informations Personnelles
+                        </h4>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <p class="label-info fw-semibold mb-0">Nom:</p>
+                                <p class="label-value fs-5 fw-bold">{{clientForm.value.firstName}}</p>
+                            </div>
+                            <div class="col">
+                                <p class="label-info fw-semibold mb-0">Prenom:</p>
+                                <p class="label-value fs-5 fw-bold">{{clientForm.value.lastName}}</p>
+                            </div>
+                            <div class="col">
+                                <p class="label-info fw-semibold mb-0">Email:</p>
+                                <p class="label-value fs-5 fw-bold">{{clientForm.value.email}}</p>
+                            </div>
+                            <div class="col">
+                                <p class="label-info fw-semibold mb-0">Téléphone:</p>
+                                <p class="label-value fs-5 fw-bold">{{clientForm.value.phone}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card gradient-green mb-2   rounded-4 p-1 card-custom-shadow">
+                    <div class="card-body">
+                        <h4 class="card-title h4 fw-bold d-flex align-items-center mb-4">
+                            <i class="fa-regular fa-calendar"></i> Détails de la Réservation Sportive
+                        </h4>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <p class="label-info fw-semibold mb-0">Sport:</p>
+                                <p class="label-value  fs-5 fw-bold">{{clientForm.value.sport}}</p>
+                            </div>
+                            <div class="col">
+                                <p class="label-info fw-semibold mb-0">Date:</p>
+                                <p class="label-value  fs-5 fw-bold">{{sportForm.value.date}}</p>
+                            </div>
+                            <div class="col">
+                                <p class="label-info fw-semibold mb-0">Heure:</p>
+                                <p class="label-value  fs-5 fw-bold">{{sportForm.value.start}} - {{sportForm.value.end}}
+                                </p>
+                            </div>
+                            <div class="col">
+                                <p class="label-info fw-semibold mb-0">Lieu:</p>
+                                <p class="label-value  fs-5 fw-bold">{{clientForm.value.terrainId}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bloc-button d-flex  justify-content-end align-items-end mb-2">
+                <app-tag-button text="Lancer Reservation" (click)="lauchReservation()"></app-tag-button>
+
+            </div>
+        </div>
+    </div>

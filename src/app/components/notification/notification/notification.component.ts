@@ -1,30 +1,21 @@
 import { Component, inject, OnDestroy } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
 import { NotificationService, Notification } from '../../services/notification.service';
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-notification',
   standalone: true,
-  imports: [],
+  imports: [NgbToastModule, CommonModule],
   templateUrl: './notification.component.html',
   styleUrl: './notification.component.scss'
 })
-export class NotificationComponent implements OnDestroy {
+export class NotificationComponent {
 
-  notifications: Notification[] = [];
-  private subscription: Subscription;
-  private notificationService = inject(NotificationService)
+  show = true;
 
-  constructor() {
-    this.subscription = this.notificationService.notifications$.subscribe(notif => {
-      this.notifications.push(notif);
-      timer(notif.duration ?? 3000).subscribe(() => {
-        this.notifications = this.notifications.filter(n => n !== notif);
-      });
-    });
-  }
+  notificationService = inject(NotificationService)
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+  constructor() { }
 }

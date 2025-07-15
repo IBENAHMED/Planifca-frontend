@@ -1,3 +1,9 @@
-<div>
-  <full-calendar [options]="calendarOptions"></full-calendar>
+<div class="d-flex justify-content-between">
+  <full-calendar #fullcalendar [options]="calendarOptions"></full-calendar>
+  <div class="app-tag-button mt-4 d-flex justify-content-end">
+    <app-tag-button text="Passer au récapitulatif" type="button" (click)="passeToRecap()"
+      [disabled]="calendarForm.invalid">
+      <i class="fas fa-arrow-right"></i>
+    </app-tag-button>
+  </div>
 </div>

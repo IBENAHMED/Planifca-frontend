@@ -1,3 +1,19 @@
-<div class="notification" *ngFor="let notif of notifications" [ngClass]="notif.type">
-    {{ notif.message }}
+<div class="toast-container position-fixed top-0 end-0 p-3">
+  <ngb-toast 
+    *ngFor="let toast of notificationService.toasts" 
+    [autohide]="true" 
+    [class]="toast.classname"
+    (hidden)="notificationService.remove(toast)">
+    
+    <div class="d-flex align-items-center">
+      <div class="toast-icon me-2">
+        <i class="fa-solid fa-circle-info"></i>
+      </div>
+      <div class="toast-message flex-grow-1">
+        {{ toast.message }}
+      </div>
+      <button type="button" class="btn-close ms-2" aria-label="Close" (click)="notificationService.remove(toast)"></button>
+    </div>
+
+  </ngb-toast>
 </div>

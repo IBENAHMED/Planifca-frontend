@@ -1,4 +1,12 @@
-<div class="content">
+
+<div *ngIf="isProcessing" class="processing-overlay">
+  <div class="progress-bar-container">
+    <div class="progress" [style.width.%]="progressValue"></div>
+    <div class="progress-text">{{ progressValue }}%</div>
+  </div>
+</div>
+
+<div class="content" *ngIf="!isProcessing">
   <div class="header-stepper">
     <div class="header-content d-flex justify-content-between">
       <div class="chevron" (click)="previousStep()">
@@ -8,7 +16,7 @@
         <div class="stepper-container">
           <div *ngFor="let step of steps; let i = index" class="step">
             <div class="progress-bar" [ngClass]="{ 'completed-bar': i < currentStep + 1 }"></div>
-            <button class="circle" (click)="goToStep(i)" [ngClass]="{
+            <button class="circle" (click)="goToStep(i)" [disabled]="reservationForm.invalid" [ngClass]="{
             'completed': step.completed,
             'active': i === currentStep && i!==2,
             'pending': i > currentStep
@@ -28,10 +36,12 @@
       <ng-container [ngSwitch]="currentStep">
         <app-step-information [formClient]="clientForm" *ngSwitchCase="0"
           (informationSaved)="nextStep()"></app-step-information>
-        <div class="container-calendar">
-          <app-calendar *ngSwitchCase="1"></app-calendar>
-        </div>
-        <app-step-recap *ngSwitchCase="2"></app-step-recap>
+
+        <app-calendar *ngSwitchCase="1" (toRecap)="nextStep()" [calendarForm]="reservationInfo"
+          [terrainId]="clientForm.get('terrainId')?.value"></app-calendar>
+
+        <app-step-recap [clientForm]="clientForm" [sportForm]="reservationInfo" *ngSwitchCase="2"
+          (lauche)="createReservation()"></app-step-recap>
       </ng-container>
     </div>
   </div>

@@ -1,0 +1,66 @@
+/* Custom Card Shadows */
+.card-custom-shadow {
+  box-shadow: 0px -1px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+.display-4{
+  font-size: 25px !important;
+}
+.text-secondary{
+  font-size: 14px;
+}
+.card {
+  border: none !important;
+  width: 850px;
+
+  h4 {
+    color: #007bff;
+    font-size: 18px;
+
+    i {
+      margin-right: 10px;
+    }
+  }
+}
+
+.label-info {
+  color: #2e304c;
+}
+
+.label-value {
+  color: #9c9c9c;
+  font-size: 15px !important;
+}
+
+.bloc-button {
+  width: 400px;
+}
+
+/* Gradient Backgrounds for Cards */
+.gradient-blue {
+  background: #ffff; /* Matches Tailwind's from-blue-500 to-blue-600 */
+  color: black;
+}
+
+.gradient-green {
+  background: #ffff;
+}
+
+/* Custom Button Hover Effects (for the 'Retour à l'accueil' button) */
+/* These are custom additions to replicate Tailwind's hover:scale-105 and hover:shadow-xl */
+.hover-scale-105 {
+  transition: transform 0.3s ease-in-out; /* Smooth transition for scaling */
+}
+
+.hover-scale-105:hover {
+  transform: scale(1.05); /* Scales the button up by 5% */
+}
+
+.hover-shadow-xl {
+  transition: box-shadow 0.3s ease-in-out; /* Smooth transition for shadow */
+}
+
+.hover-shadow-xl:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04) !important; /* Deeper shadow */
+}

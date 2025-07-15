@@ -16,28 +16,34 @@ export interface Notification {
 
 export class NotificationService {
 
-  private notificationSubject = new Subject<Notification>();
-  public notifications$ = this.notificationSubject.asObservable();
-
   constructor() { }
 
-  success(message: string, duration: number = 3000) {
-    this.notify('success', message, duration);
+  toasts: { message: string, classname: string, delay?: number }[] = [];
+
+  show(message: string, options: { classname?: string, delay?: number } = {}) {
+    this.toasts.push({
+      message,
+      classname: options.classname || 'bg-info text-white',
+      delay: 300000
+    });
+  }
+  success(message: string) {
+    this.show(message, { classname: 'bg-success text-white', delay: 3000 });
   }
 
-  error(message: string, duration: number = 5000) {
-    this.notify('error', message, duration);
+  error(message: string) {
+    this.show(message, { classname: 'bg-danger', delay: 300000 });
   }
 
-  warning(message: string, duration: number = 4000) {
-    this.notify('warning', message, duration);
+  info(message: string) {
+    this.show(message, { classname: 'bg-info text-white', delay: 3000 });
   }
 
-  info(message: string, duration: number = 3000) {
-    this.notify('info', message, duration);
+  warning(message: string) {
+    this.show(message, { classname: 'bg-warning text-dark', delay: 3000 });
   }
 
-  private notify(type: NotificationType, message: string, duration: number = 3000) {
-    this.notificationSubject.next({ type, message, duration });
+  remove(toast: any) {
+    this.toasts = this.toasts.filter(t => t !== toast);
   }
 }
