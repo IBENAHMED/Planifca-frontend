@@ -42,8 +42,9 @@
         <div class="profile" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
           <i class="fas fa-bell"></i>
           <div class="notification" (click)="collapse.toggle()">
-            <div class="icon-profile">RI</div>
-            <span>Reda IBENAHMED</span>
+            <div class="icon-profile">{{ user?.firstName?.slice(0, 1) | uppercase }}{{ user?.lastName?.slice(0, 1) |
+              uppercase }}</div>
+            <span>{{user?.firstName |uppercase }} {{user?.lastName|titlecase}}</span>
           </div>
         </div>
 

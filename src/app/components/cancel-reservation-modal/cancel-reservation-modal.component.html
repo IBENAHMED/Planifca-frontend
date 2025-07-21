@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h5 class="modal-title">Annulation de la réservation</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="dismiss()"></button>
+</div>
+
+<div class="modal-body">
+    <p>Veuillez préciser la raison de l’annulation de cette réservation.</p>
+
+    <textarea class="form-control mt-3" [(ngModel)]="reason" placeholder="Motif d'annulation" name="" id=""></textarea>
+</div>
+
+<div class="modal-footer justify-content-end">
+    <button class="btn btn-secondary" (click)="dismiss()">Fermer</button>
+    <button class="btn btn-confirm" [disabled]="reason===''" (click)="confirmCancel()">Confirmer l’annulation</button>
+</div>

@@ -308,8 +308,8 @@ ngb-alert {
 
 .custom-dropdown-menu {
   position: absolute !important;
-  top: -110px !important;
-  left: 22% !important;
+  box-shadow: 0px 0px 6px 0px rgba(59, 57, 57, 0.6);
+  border: none;
 }
 
 .no-reservation-box {
@@ -320,4 +320,46 @@ ngb-alert {
   background-color: $secondary-color;
   color: $primary-color;
   border: 1px solid rgba($primary-color, 0.2);
+}
+
+.cancelButton {
+  color: #ff474a !important;
+  background-color: #f9e9e9;
+  font-weight: bold;
+}
+
+.dropdown-item {
+  color: #2563eb;
+  font-family: "fangsong";
+  font-size: 15px;
+}
+
+.dropdown-item:active{
+  background-color: #ededed;
+}
+
+.status-finished {
+  color: #58bd58 !important;
+  font-weight: 500;
+  font-family: system-ui;
+}
+.status-programmee {
+  color: #007bff !important;
+  font-weight: 500;
+  font-family: system-ui;
+}
+.status-cancelled {
+  color: red !important;
+  font-weight: 500;
+  font-family: system-ui;
+}
+.status-inprogress {
+  color: orange !important;
+  font-weight: 500;
+  font-family: system-ui;
+}
+.status-expired {
+  color: gray !important;
+  font-weight: 500;
+  font-family: system-ui;
 }

@@ -1,6 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { reservationIonInformation } from '../model/reservation-type';
@@ -11,6 +11,9 @@ import { TagButtonComponent } from "../../components/tag/tag-button/tag-button.c
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReservationServiceService } from '../service/reservation-service.service';
 import { UserContextService } from '../../components/services/user-context.service';
+import { CancelReservationModalComponent } from '../../components/cancel-reservation-modal/cancel-reservation-modal.component';
+import { NotificationService } from '../../components/services/notification.service';
+import { ReservationActionHandlerService } from '../service/reservation-action-handler.service';
 
 const reservation: reservationIonInformation[] = [];
 @Component({
@@ -34,14 +37,17 @@ const reservation: reservationIonInformation[] = [];
 })
 export class ReservationComponent implements OnInit {
   page = 1;
-  pageSize = 5;
+  pageSize = 25;
   collectionSize = reservation.length;
-  reservation: reservationIonInformation[] = [];
+
+  actions = []
+
+  reservations: reservationIonInformation[] = [];
 
   constructor(alertConfig: NgbAlertConfig) {
     alertConfig.type = 'success';
     alertConfig.dismissible = false;
-    this.refreshReservation();
+    //this.refreshReservation();
   }
 
   private route = inject(Router);
@@ -51,6 +57,8 @@ export class ReservationComponent implements OnInit {
   private reservationService = inject(ReservationServiceService)
 
   private userContextService = inject(UserContextService);
+
+  public actionHandler = inject(ReservationActionHandlerService)
 
   success: boolean = false;
   frontPath: string | null = null;
@@ -76,11 +84,11 @@ export class ReservationComponent implements OnInit {
   getAllResirvation(backendPage: number) {
     return this.reservationService.getAllResirvation(backendPage, this.pageSize).subscribe({
       next: (response) => {
-        this.reservation = response.content;
+        this.reservations = response.content;
         this.collectionSize = response.totalElements;
       },
       error: () => {
-       console.log("")
+        console.log("")
       }
     });
   };
@@ -90,14 +98,21 @@ export class ReservationComponent implements OnInit {
     this.getAllResirvation(pageNum - 1);
   }
 
-  refreshReservation() {
-    this.reservation = reservation.map((club, i) => ({ id: i + 1, ...club })).slice(
-      (this.page - 1) * this.pageSize,
-      (this.page - 1) * this.pageSize + this.pageSize,
-    );
-  };
 
-  onsubmit() {
-    alert("Fonctionnalité en cours")
-  };
+
+  formatTo12HourNoSuffix(time: string): string {
+    const [hoursStr, minutes] = time.split(':');
+    const hours = parseInt(hoursStr, 10);
+
+    return `${hours.toString().padStart(2, '0')}:${minutes}`;
+  }
+
+  getReservationActions(reservation: any) {
+    return this.actionHandler.getReservationActions(
+      reservation,
+      () => this.getAllResirvation(0)
+    );
+  }
 };
+
+

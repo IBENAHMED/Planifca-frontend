@@ -40,4 +40,22 @@ export class ReservationServiceService {
   getListTimeSlots(terrainId: String, startDate: any, endDate: any): Observable<any> {
     return this.http.get(`${this.urlApi}/reservation/timeslots/${terrainId}?startDate=${startDate}&endDate=${endDate}`)
   }
+
+  downloadReceipt(reservationId: string) {
+    return this.http.get(`${this.urlApi}/reservation/download-receipt/${reservationId}`, {
+      responseType: 'blob' as 'json'
+    });
+  }
+
+  cancelReservation(reservationId: string, cancelReason: string) {
+    return this.http.put(`${this.urlApi}/reservation/cancel/${reservationId}`, { cancelReason })
+  }
+
+  startReservation(reservationId: string){
+    return this.http.put(`${this.urlApi}/reservation/start/${reservationId}`,{})
+  }
+  
+  getReservationById(rereservationId: string){
+     return this.http.get(`${this.urlApi}/reservation/${rereservationId}`)
+  }
 }

@@ -18,28 +18,31 @@
         </div>
       </form>
 
-      <ng-container *ngIf="reservation && reservation.length > 0; else noReservation">
+      <ng-container *ngIf="reservations && reservations.length > 0; else noReservation">
         <div class="tableReservation">
           <table class="table">
             <thead>
               <tr>
                 <th scope="col">Date</th>
-                <th scope="col">Start</th>
-                <th scope="col">End</th>
+                <th scope="col">Heure</th>
+                <th scope="col">Client</th>
                 <th scope="col">Phone</th>
+                <th scope="col">Terrain</th>
                 <th scope="col">Statut</th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-              @for (reservation of reservation; track reservation.reservationId) {
+              @for (reservation of reservations; track reservation.reservationId) {
               <tr>
                 <td scope="row">{{ reservation.reservationDate }}</td>
-                <td>{{ reservation.startTime }}</td>
-                <td>{{ reservation.endTime }}</td>
+                <td>{{ formatTo12HourNoSuffix(reservation.startTime)}} <i class="fa-solid fa-arrow-right"></i>
+                  {{formatTo12HourNoSuffix(reservation.endTime)}}</td>
+                <td>{{ reservation?.clientFirstName }} {{ reservation?.clientLastName }}</td>
                 <td>{{ reservation.clientPhoneNumber }}</td>
-                <td>
-                  {{ reservation?.clientFirstName }} {{ reservation?.clientLastName }}
+                <td>{{reservation?.stadium.name}}</td>
+                <td [ngClass]="actionHandler.getReservationDisplayStatus(reservation.reservationStatus).class">
+                  {{actionHandler.getReservationDisplayStatus(reservation.reservationStatus).label}}
                 </td>
                 <td>
                   <div>
@@ -48,14 +51,14 @@
                         ...
                       </button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="custom-dropdown-menu">
-                        <button ngbDropdownItem class="ngbDropdown-button_modifier">
-                          <i class="fas fa-edit"></i>
-                          Modifier
+                        @for (action of getReservationActions(reservation); track $index) {
+                        <button ngbDropdownItem [class]="'ngbDropdown-button_'+action.label"
+                          [ngClass]="{'cancelButton':action.label==='Annuler'}" (click)="action.click()">
+                          <i [class]="action.icon" style="margin-right: 5px;"></i>
+                          {{action.label}}
                         </button>
-                        <button ngbDropdownItem class="ngbDropdown-button_supprimer">
-                          <i class="fas fa-trash"></i>
-                          Supprimer
-                        </button>
+                        }
+
                       </div>
                     </div>
                   </div>
@@ -68,7 +71,7 @@
       </ng-container>
     </div>
 
-    <ng-container *ngIf="reservation && reservation.length > 0">
+    <ng-container *ngIf="reservations && reservations.length > 0">
       <div class="d-flex justify-content-center p-2">
         <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
           (pageChange)="onPageChange($event)">

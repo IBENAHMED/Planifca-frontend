@@ -1,0 +1,98 @@
+<div class="d-flex justify-content-between">
+    <div class="content-reser min-vh-100 p-3">
+        <div class="chevron-back w-100">
+            <i class="fa-solid fa-chevron-left" (click)="back()"></i>
+        </div>
+        <div class="card shadow-lg p-4 p-md-5 w-100">
+            <div class="row g-3 mb-4">
+                <div class="col-12 col-md-6">
+                    <div class="info-box id-reser d-flex justify-content-between">
+                        <p class="text-muted mb-1">ID de Réservation :</p>
+                        <p class="fs-5 fw-bold" id="reservation-id">{{ buildReservationView().id}}</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="info-box status-reser d-flex justify-content-between">
+                        <p class="text-muted mb-1">Statut :</p>
+                        <p class="fs-5 fw-bold"
+                            [ngClass]="actionHandler.getReservationDisplayStatus(buildReservationView().status).class"
+                            id="reservation-status">
+                            {{actionHandler.getReservationDisplayStatus(buildReservationView().status).label}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section Détails de la Réservation -->
+            <div class="mb-4">
+                <h2 class="fs-4 text-secondary mb-3 pb-2 border-bottom">Informations de Réservation</h2>
+                <div class="row g-3">
+                    <div class="col-12 col-sm-6">
+                        <div class="d-flex flex-column">
+                            <span class="text-muted fw-bold">Date:</span>
+                            <span class="text-dark" id="reservation-date">20 juillet 2025</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="d-flex flex-column">
+                            <span class="text-muted fw-bold">Heure:</span>
+                            <span class="text-dark" id="reservation-time">14:30</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="d-flex flex-column">
+                            <span class="text-muted fw-bold">Nombre de Personnes:</span>
+                            <span class="text-dark" id="num-guests">4</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="d-flex flex-column">
+                            <span class="text-muted fw-bold">Service:</span>
+                            <span class="text-dark" id="service-type">Dîner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section Détails du Client -->
+            <div class="mb-4">
+                <h2 class="fs-4 text-secondary mb-3 pb-2 border-bottom">Informations du Client</h2>
+                <div class="row g-3">
+                    <div class="col-12 col-sm-6">
+                        <div class="d-flex flex-column">
+                            <span class="text-muted fw-bold">Nom Complet:</span>
+                            <span class="text-dark" id="guest-name">Jean Dupont</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="d-flex flex-column">
+                            <span class="text-muted fw-bold">Email:</span>
+                            <span class="text-dark" id="guest-email">jean.dupontexample.com</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="d-flex flex-column">
+                            <span class="text-muted fw-bold">Téléphone:</span>
+                            <span class="text-dark" id="guest-phone">+33 6 12 34 56 78</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="actions-reservation">
+        <div class="mt-5">
+            <div class="list-group action-list-group">
+                @for (action of getReservationActions(); track $index) {
+                @if (action && action.icon!=='fa-solid fa-eye') {
+                <button class="list-group-item list-group-item-action action-list-group-item-edit"
+                    (click)="action.click()" [ngClass]="{'cancelButton':action.label==='Annuler'}">
+                    <i [class]="action.icon"></i> {{action.label}}
+                </button>
+                }
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

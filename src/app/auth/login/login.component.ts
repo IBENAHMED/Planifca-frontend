@@ -59,28 +59,34 @@ export class LoginComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
-    const routeSubscription = this.activatedRoute.paramMap.subscribe(param => {
-      this.frontPath = param.get('frontPath');
-      const userContext = this.userContextService.getUserContext();
+    const currentUrl = this.route.url;
+    const frontPath = currentUrl.split('/')[1];
 
-      if (this.frontPath) {
-        this.authService.isFrontPathExist(this.frontPath).subscribe({
-          next: (response) => {
-            this.userContextService.setUserContext(response)
-          },
-          error: () => {
-            userContext ? (
-              this.route.navigate([`${JSON.parse(userContext).frontPath}/login`])
-            ) : (
-              this.route.navigate(['/unauthorized'])
-            );
-          },
-        });
-      }
-    });
+    const userContext = this.userContextService.getUserContext()
+    const savedfrontPath = userContext ? userContext.frontPath : null;
 
-    this.subscriptions.push(routeSubscription);
-  };
+    if (frontPath && frontPath !== savedfrontPath) {
+      this.userContextService.clearUserContext();
+
+      this.authService.isFrontPathExist(frontPath).subscribe({
+        next: (club) => {
+          const newContext = {
+            reference: club.reference,
+            name: club.name,
+            frontPath: club.frontPath,
+            active: club.active
+          };
+          this.userContextService.setUserContext(newContext)
+
+          // naviguer vers la même route avec nouveau contexte
+          this.route.navigate([`/${frontPath}/login`], { replaceUrl: true });
+        },
+        error: () => {
+          this.route.navigate(['/']);
+        }
+      });
+    }
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
@@ -106,7 +112,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.authService.getUserRole().subscribe({
+          this.authService.getCurrentUser().subscribe({
             next: (response) => {
               if (response.roles.includes(constants.USER.SUPERADMIN)) {
                 this.route.navigate([`${this.frontPath}/club`])
@@ -121,13 +127,13 @@ export class LoginComponent implements OnInit, OnDestroy {
               }
             },
             error: () => {
-             console.log("")
+              console.log("")
             },
           });
         },
         error: ({ status }) => {
           this.isError = [404, 401].includes(status);
-          if (!this.isError)console.log("")
+          if (!this.isError) console.log("")
         },
       });
 

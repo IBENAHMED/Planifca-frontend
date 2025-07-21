@@ -110,15 +110,24 @@ export class CreateReservationComponent implements OnInit {
 
   createReservation() {
     this.isProcessing = true;
+    const progressInterval = setInterval(() => {
+      if (this.progressValue < 90) {
+        this.progressValue += 10;
+      }
+    }, 5000);
     this.reservationService.createResirvation(this.buildReservationRequest(), this.clientForm.value.terrainId).subscribe({
       next: () => {
+        clearInterval(progressInterval);
+        this.progressValue = 100;
         setTimeout(() => {
           this.isProcessing = false
           this.route.navigate([`${this.frontPath}/reservation`]);
           this.notificationService.success('La réservation a été créée avec succès.')
-        }, 2000);
+        }, 1000);
       },
       error: (err) => {
+        clearInterval(progressInterval);
+        this.progressValue = 95;
         setTimeout(() => {
           this.isProcessing = false
           this.goToStep(2);
