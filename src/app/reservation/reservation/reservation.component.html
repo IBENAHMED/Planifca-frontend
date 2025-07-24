@@ -18,7 +18,7 @@
         </div>
       </form>
 
-      <ng-container *ngIf="reservations && reservations.length > 0; else noReservation">
+      <ng-container *ngIf="reservations && reservations.length > 0;">
         <div class="tableReservation">
           <table class="table">
             <thead>
@@ -69,19 +69,15 @@
           </table>
         </div>
       </ng-container>
+      <app-pagination [page]="page" [pageSize]="pageSize" [totalItems]="collectionSize"
+        (pageChange)="onPageChange($event)" (pageSizeChange)="onPageSizeChange($event)">
+      </app-pagination>
     </div>
-
-    <ng-container *ngIf="reservations && reservations.length > 0">
-      <div class="d-flex justify-content-center p-2">
-        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-          (pageChange)="onPageChange($event)">
-        </ngb-pagination>
-      </div>
-    </ng-container>
-    <ng-template #noReservation>
+    
+    <!-- <ng-template #noReservation>
       <div class="no-reservation-box text-center mt-5">
         Aucune réservation
       </div>
-    </ng-template>
+    </ng-template> -->
   </article>
 </app-admin-layout>

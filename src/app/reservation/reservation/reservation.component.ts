@@ -1,6 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule, NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { reservationIonInformation } from '../model/reservation-type';
@@ -14,6 +14,7 @@ import { UserContextService } from '../../components/services/user-context.servi
 import { CancelReservationModalComponent } from '../../components/cancel-reservation-modal/cancel-reservation-modal.component';
 import { NotificationService } from '../../components/services/notification.service';
 import { ReservationActionHandlerService } from '../service/reservation-action-handler.service';
+import { PaginationComponent } from '../../components/pagination/pagination.component';
 
 const reservation: reservationIonInformation[] = [];
 @Component({
@@ -30,21 +31,23 @@ const reservation: reservationIonInformation[] = [];
     ReactiveFormsModule,
     NgbPaginationModule,
     AdminLayoutComponent,
+    PaginationComponent
   ],
-  providers: [NgbAlertConfig],
+  providers: [NgbAlertConfig, NgbPaginationConfig],
   templateUrl: './reservation.component.html',
   styleUrl: './reservation.component.scss',
 })
 export class ReservationComponent implements OnInit {
   page = 1;
-  pageSize = 25;
+  pageSize = 10;
   collectionSize = reservation.length;
 
   actions = []
 
   reservations: reservationIonInformation[] = [];
 
-  constructor(alertConfig: NgbAlertConfig) {
+  constructor(alertConfig: NgbAlertConfig, config: NgbPaginationConfig) {
+    config.boundaryLinks = true;
     alertConfig.type = 'success';
     alertConfig.dismissible = false;
     //this.refreshReservation();
@@ -96,6 +99,12 @@ export class ReservationComponent implements OnInit {
   onPageChange(pageNum: number) {
     this.page = pageNum;
     this.getAllResirvation(pageNum - 1);
+  }
+
+  onPageSizeChange(newSize: number) {
+    this.pageSize = newSize;
+    this.page = 1;
+    this.getAllResirvation(0);
   }
 
 

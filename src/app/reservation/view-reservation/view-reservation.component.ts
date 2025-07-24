@@ -20,6 +20,8 @@ export class ViewReservationComponent implements OnInit {
 
   frontPath!: string
 
+  emailtest = 'atyq.mohamed@gmail.com'
+
   public actionHandler = inject(ReservationActionHandlerService)
 
   private reservationService = inject(ReservationServiceService)
@@ -37,6 +39,8 @@ export class ViewReservationComponent implements OnInit {
     if (this.reservationId) {
       this.getReservation()
     }
+
+
   }
 
   getReservationActions() {
@@ -63,7 +67,8 @@ export class ViewReservationComponent implements OnInit {
       client: `${this.reservationData?.clientFirstName} ${this.reservationData?.clientLastName}`,
       phone: this.reservationData?.clientPhoneNumber,
       date: this.reservationData?.reservationDate,
-      // time: `${this.formatTime(reservation.startTime)} → ${this.formatTime(reservation.endTime)}`,
+      endTime: this.reservationData?.endTime,
+      startTime: this.reservationData?.startTime,
       status: this.reservationData?.reservationStatus,
       stadiumName: this.reservationData?.stadium?.name,
       sport: this.reservationData?.stadium?.typeSport,
@@ -71,7 +76,7 @@ export class ViewReservationComponent implements OnInit {
     };
   }
 
-  back(){
+  back() {
     this.router.navigate([`${this.frontPath}/reservation`])
   }
 }

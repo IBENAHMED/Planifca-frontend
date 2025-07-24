@@ -13,6 +13,8 @@ export class ReservationServiceService {
   private UserContextService = inject(UserContextService);
   private readonly urlApi: string = `${environment.baseUrl}`;
 
+  selectedTerrainName = ''
+
   createResirvation(reservationData: any, terrainId: String) {
     return this.http.post(
       `${this.urlApi}/reservation/new/${terrainId}`, reservationData)
@@ -51,11 +53,11 @@ export class ReservationServiceService {
     return this.http.put(`${this.urlApi}/reservation/cancel/${reservationId}`, { cancelReason })
   }
 
-  startReservation(reservationId: string){
-    return this.http.put(`${this.urlApi}/reservation/start/${reservationId}`,{})
+  startReservation(reservationId: string) {
+    return this.http.put(`${this.urlApi}/reservation/start/${reservationId}`, {})
   }
-  
-  getReservationById(rereservationId: string){
-     return this.http.get(`${this.urlApi}/reservation/${rereservationId}`)
+
+  getReservationById(rereservationId: string) {
+    return this.http.get(`${this.urlApi}/reservation/${rereservationId}`)
   }
 }

@@ -3,51 +3,52 @@
         <div class="chevron-back w-100">
             <i class="fa-solid fa-chevron-left" (click)="back()"></i>
         </div>
-        <div class="card shadow-lg p-4 p-md-5 w-100">
-            <div class="row g-3 mb-4">
-                <div class="col-12 col-md-6">
-                    <div class="info-box id-reser d-flex justify-content-between">
-                        <p class="text-muted mb-1">ID de Réservation :</p>
-                        <p class="fs-5 fw-bold" id="reservation-id">{{ buildReservationView().id}}</p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="info-box status-reser d-flex justify-content-between">
-                        <p class="text-muted mb-1">Statut :</p>
-                        <p class="fs-5 fw-bold"
-                            [ngClass]="actionHandler.getReservationDisplayStatus(buildReservationView().status).class"
-                            id="reservation-status">
-                            {{actionHandler.getReservationDisplayStatus(buildReservationView().status).label}}</p>
-                    </div>
+        <div class="card shadow-lg p-2 p-md-4" style="width: 900px;">
+            <div class="badge-section">
+                <div class="badge">ID de Réservation : <strong>{{ buildReservationView().id}}</strong></div>
+                <div class="badge">Statut : <strong
+                        [ngClass]="actionHandler.getReservationDisplayStatus(buildReservationView().status).class">{{actionHandler.getReservationDisplayStatus(buildReservationView().status).label}}</strong>
                 </div>
             </div>
 
-            <!-- Section Détails de la Réservation -->
             <div class="mb-4">
                 <h2 class="fs-4 text-secondary mb-3 pb-2 border-bottom">Informations de Réservation</h2>
                 <div class="row g-3">
                     <div class="col-12 col-sm-6">
                         <div class="d-flex flex-column">
-                            <span class="text-muted fw-bold">Date:</span>
-                            <span class="text-dark" id="reservation-date">20 juillet 2025</span>
+                            <span class=" fw-bold">Date:</span>
+                            <span class="text-dark" id="reservation-date">{{buildReservationView().date}}</span>
                         </div>
                     </div>
                     <div class="col-12 col-sm-6">
                         <div class="d-flex flex-column">
-                            <span class="text-muted fw-bold">Heure:</span>
-                            <span class="text-dark" id="reservation-time">14:30</span>
+                            <span class=" fw-bold">Heure de debut:</span>
+                            <span class="text-dark" id="reservation-time">{{buildReservationView().startTime}}</span>
                         </div>
                     </div>
                     <div class="col-12 col-sm-6">
                         <div class="d-flex flex-column">
-                            <span class="text-muted fw-bold">Nombre de Personnes:</span>
-                            <span class="text-dark" id="num-guests">4</span>
+                            <span class=" fw-bold">Heure de fin:</span>
+                            <span class="text-dark" id="reservation-time">{{buildReservationView().endTime}}</span>
                         </div>
                     </div>
                     <div class="col-12 col-sm-6">
                         <div class="d-flex flex-column">
-                            <span class="text-muted fw-bold">Service:</span>
-                            <span class="text-dark" id="service-type">Dîner</span>
+                            <span class=" fw-bold">Terrain:</span>
+                            <span class="text-dark" id="num-guests">{{buildReservationView().stadiumName}}</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="d-flex flex-column">
+                            <span class=" fw-bold">Sport:</span>
+                            <span class="text-dark" id="service-type">{{buildReservationView().sport}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="d-flex flex-column">
+                            <span class=" fw-bold">Prix:</span>
+                            <span class="text-dark" id="service-type">{{buildReservationView().price+' DH'}}</span>
                         </div>
                     </div>
                 </div>
@@ -59,19 +60,25 @@
                 <div class="row g-3">
                     <div class="col-12 col-sm-6">
                         <div class="d-flex flex-column">
-                            <span class="text-muted fw-bold">Nom Complet:</span>
+                            <span class=" fw-bold">Nom:</span>
                             <span class="text-dark" id="guest-name">Jean Dupont</span>
                         </div>
                     </div>
                     <div class="col-12 col-sm-6">
                         <div class="d-flex flex-column">
-                            <span class="text-muted fw-bold">Email:</span>
-                            <span class="text-dark" id="guest-email">jean.dupontexample.com</span>
+                            <span class=" fw-bold">Nom:</span>
+                            <span class="text-dark" id="guest-name">Jean Dupont</span>
                         </div>
                     </div>
                     <div class="col-12 col-sm-6">
                         <div class="d-flex flex-column">
-                            <span class="text-muted fw-bold">Téléphone:</span>
+                            <span class=" fw-bold">Email:</span>
+                            <span class="text-dark" id="guest-email">{{emailtest}}</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="d-flex flex-column">
+                            <span class=" fw-bold">Téléphone:</span>
                             <span class="text-dark" id="guest-phone">+33 6 12 34 56 78</span>
                         </div>
                     </div>

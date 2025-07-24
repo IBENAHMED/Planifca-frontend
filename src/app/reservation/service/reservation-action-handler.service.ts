@@ -77,7 +77,7 @@ export class ReservationActionHandlerService {
     const actions = [];
 
     const today = new Date();
-    const reservationDate = new Date(reservation.reservationDate);
+    const reservationDate = new Date(reservation?.reservationDate);
 
     const isSameDay =
       today.getFullYear() === reservationDate.getFullYear() &&
@@ -87,23 +87,23 @@ export class ReservationActionHandlerService {
     actions.push({
       label: 'Voir Reservation',
       icon: 'fa-solid fa-eye',
-      click: () => this.onView(reservation.reservationId, this.userContextService.getUserContext()?.frontPath)
+      click: () => this.onView(reservation?.reservationId, this.userContextService.getUserContext()?.frontPath)
     });
 
-    if (reservation.reservationStatus !== 'CANCELLED') {
+    if (reservation?.reservationStatus !== 'CANCELLED') {
       actions.push({
         label: 'Télécharger',
         icon: 'fa-solid fa-download',
-        click: () => this.onDownload(reservation.reservationId)
+        click: () => this.onDownload(reservation?.reservationId)
       });
     }
 
-    if (reservation.reservationStatus === 'PROGRAMMEE') {
+    if (reservation?.reservationStatus === 'PROGRAMMEE') {
       if (isSameDay) {
         actions.push({
           label: 'Démarrer',
           icon: 'fa-solid fa-play',
-          click: () => this.onStart(reservation.reservationId, callback)
+          click: () => this.onStart(reservation?.reservationId, callback)
         });
       }
 
@@ -116,7 +116,7 @@ export class ReservationActionHandlerService {
         {
           label: 'Annuler',
           icon: 'fa-solid fa-xmark',
-          click: () => this.onCancel(reservation.reservationId, callback)
+          click: () => this.onCancel(reservation?.reservationId, callback)
         }
       );
     }

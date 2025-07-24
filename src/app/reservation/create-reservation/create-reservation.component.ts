@@ -75,7 +75,7 @@ export class CreateReservationComponent implements OnInit {
         phone: ['', Validators.required],
         email: ['', Validators.required],
         sport: ['', Validators.required],
-        terrainName: [''],
+        terrainName: [this.reservationService.selectedTerrainName],
         terrainId: ['', Validators.required],
       }),
       reservation: this.fb.group({
