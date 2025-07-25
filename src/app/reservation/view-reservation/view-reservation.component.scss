@@ -1,0 +1,179 @@
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f8f9fa;
+}
+.card {
+  border: none;
+}
+.info-box {
+  background-color: #e0f2f7; /* Couleur de fond pour les boîtes d'info */
+  border-radius: 0.5rem; /* Bords arrondis pour les boîtes d'info */
+}
+.btn-primary {
+  border-radius: 2rem; /* Bords très arrondis pour le bouton */
+  padding: 0.75rem 2rem; /* Plus de padding pour le bouton */
+  font-weight: bold;
+}
+
+.content-reser {
+  width: 78%;
+}
+
+.actions-reservation {
+  margin: 0 20px;
+}
+
+.list-group-item {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.list-group {
+  width: 230px;
+}
+
+.chevron-back {
+  padding-left: 6px;
+  padding-bottom: 22px;
+
+  i {
+    cursor: pointer;
+  }
+}
+
+.info-box {
+  background-color: #2563eb1a !important;
+  height: 60px;
+  align-items: center;
+  padding: 20px;
+
+  p {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+.status-reser {
+  .text-muted {
+    font-weight: 500;
+  }
+  p {
+    color: #2563eb;
+  }
+}
+
+.id-reser {
+  .text-muted {
+    font-weight: 500;
+  }
+  p {
+    color: #2563eb;
+  }
+}
+
+.status-finished {
+  color: #58bd58 !important;
+  font-weight: 500;
+  font-family: system-ui;
+}
+.status-programmee {
+  color: #007bff !important;
+  font-weight: 500;
+  font-family: system-ui;
+}
+.status-cancelled {
+  color: red !important;
+  font-weight: 500;
+  font-family: system-ui;
+}
+.status-inprogress {
+  color: orange !important;
+  font-weight: 500;
+  font-family: system-ui;
+}
+.status-expired {
+  color: gray !important;
+  font-weight: 500;
+  font-family: system-ui;
+}
+
+.cancelButton {
+  color: #ff474a !important;
+  background-color: #f9e9e9;
+  font-weight: bold;
+}
+
+.badge-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  .badge {
+    background-color: #edf2ff;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #2d6de6;
+  }
+}
+
+// .card-reservation-details {
+//   background-color: #ffffff;
+//   padding: 2rem;
+//   border-radius: 12px;
+//   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+//   font-family: 'Segoe UI', sans-serif;
+//   color: #222222;
+
+//   .badge-section {
+//     display: flex;
+//     gap: 1rem;
+//     margin-bottom: 1.5rem;
+
+//     .badge {
+//       background-color: #EDF2FF;
+//       padding: 0.5rem 1rem;
+//       border-radius: 8px;
+//       font-weight: 600;
+//       font-size: 15px;
+//       color: #2D6DE6;
+//     }
+//   }
+
+//   .section-title {
+//     font-size: 1.25rem;
+//     font-weight: 600;
+//     margin: 1.5rem 0 0.5rem;
+//     color: #374151;
+//   }
+
+//   .divider {
+//     border-bottom: 1px solid #E5E7EB;
+//     margin: 1rem 0;
+//   }
+
+//   .info-group {
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: space-between;
+
+//     .info-item {
+//       width: 48%;
+//       margin-bottom: 1rem;
+
+//       label {
+//         font-weight: 600;
+//         color: #374151;
+//       }
+
+//       .value {
+//         display: block;
+//         margin-top: 0.25rem;
+//         font-size: 14px;
+//         color: #222222;
+//       }
+//     }
+//   }
+// }

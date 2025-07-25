@@ -41,7 +41,7 @@
         </div>
         <div class="col-md-6 text-start">
           <label for="terrain" class="form-label">Terrain<span>*</span></label>
-          <select formControlName="terrainId" class="form-select" id="terrain">
+          <select formControlName="terrainId"  class="form-select" id="terrain">
             <option *ngFor="let terrain of terrains" [value]="terrain.terrainId">
               {{ terrain.name }}
             </option>

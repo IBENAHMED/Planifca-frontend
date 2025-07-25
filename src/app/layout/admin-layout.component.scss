@@ -30,7 +30,7 @@
     padding-right: 15px;
 
     &::before {
-      content: '';
+      content: "";
       top: 50%;
       right: 2px;
       width: 1px;
@@ -114,7 +114,7 @@
   align-items: center;
 
   span {
-    @include font-style($text-sm, $font-bold)
+    @include font-style($text-sm, $font-bold);
   }
 
   .icon-profile {
@@ -124,7 +124,7 @@
     @include size(30px);
     background-color: $primary-color;
     @include flex(center, center, 0, row);
-    @include font-style($text-sm, $font-bold)
+    @include font-style($text-sm, $font-bold);
   }
 }
 
@@ -287,16 +287,31 @@ i {
 .footer {
   @include padding-x(12px);
   color: #fff;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
 
   span {
     font-style: italic;
+  }
+
+  small {
+    color: #0037af !important;
+    font-size: 15px !important;
   }
 
   .logo {
     top: 4px;
     position: relative;
   }
+
+  .img-logo {
+    width: 160px;
+  }
+
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+  width: 100%;
+  height: 45px;
 }
 
 .mobile-menu {

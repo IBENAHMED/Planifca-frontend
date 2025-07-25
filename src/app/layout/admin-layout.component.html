@@ -25,7 +25,7 @@
             <a class="nav-link" [routerLink]="'/' + frontPath + '/reservation'" routerLinkActive="active-link"
               [routerLinkActiveOptions]="{ exact: true }">
               <i class="fas fa-cogs"></i>
-              <span>Réservation</span>
+              <span>Réservations</span>
             </a>
           </li>
           <li *ngIf="roleStatistics" class="nav-item">
@@ -42,8 +42,9 @@
         <div class="profile" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
           <i class="fas fa-bell"></i>
           <div class="notification" (click)="collapse.toggle()">
-            <div class="icon-profile">RI</div>
-            <span>Reda IBENAHMED</span>
+            <div class="icon-profile">{{ user?.firstName?.slice(0, 1) | uppercase }}{{ user?.lastName?.slice(0, 1) |
+              uppercase }}</div>
+            <span>{{user?.firstName |uppercase }} {{user?.lastName|titlecase}}</span>
           </div>
         </div>
 
@@ -97,11 +98,9 @@
     <ng-content></ng-content>
   </div>
 
-  <footer class="footer bg-white text-dark">
-    <div class="d-flex justify-content-between align-items-center">
-      <span class="small fst-italic">Version 1.0.1</span>
-      <span class="logo h5 fw-bold fst-italic">Planifica</span>
-    </div>
+  <footer class="footer bg-white text-dark d-flex justify-content-between align-items-center">
+    <small>Tous droits réservés | Version 1.0.0</small>
+    <img class="img-logo" src="images/planifca.png" alt="images login" />
   </footer>
 
 </article>

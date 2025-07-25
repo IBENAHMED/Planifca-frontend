@@ -9,7 +9,7 @@
 }
 
 .body-content {
-  @include padding-x(10px);
+  @include padding-x(30px);
 }
 
 .adminComponent-content h3 {
@@ -61,7 +61,7 @@
   tbody {
     tr {
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      transition: background $transition ease-in-out;
+      transition: $transition ease-in-out;
 
       &:hover {
         background: rgba($primary-color, 0.1);
@@ -161,7 +161,8 @@ ngb-alert {
 }
 
 .tableReservation {
-  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px -4px 6px -4px rgba(0, 0, 0, 0.2),
+    -4px 0px 6px -4px rgba(0, 0, 0, 0.2), 4px 0px 6px -4px rgba(0, 0, 0, 0.2);
   @include padding-x(20px);
 
   &_text {
@@ -240,6 +241,29 @@ ngb-alert {
   }
 }
 
+table tbody tr td:last-child {
+  border: none !important;
+  border-style: none !important;
+}
+
+table tbody tr:last-child {
+  border-style: none !important;
+}
+
+table {
+  border-bottom-width: 0 !important;
+  margin-bottom: 0;
+}
+
+.cercle-icon {
+  width: 5px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5px;
+}
+
 ::ng-deep ngb-pagination {
   --bs-pagination-bg: #f8f9fa;
   --bs-pagination-border-color: #ddd;
@@ -308,8 +332,8 @@ ngb-alert {
 
 .custom-dropdown-menu {
   position: absolute !important;
-  top: -110px !important;
-  left: 22% !important;
+  box-shadow: 0px 0px 6px 0px rgba(59, 57, 57, 0.6);
+  border: none;
 }
 
 .no-reservation-box {
@@ -320,4 +344,51 @@ ngb-alert {
   background-color: $secondary-color;
   color: $primary-color;
   border: 1px solid rgba($primary-color, 0.2);
+}
+
+.cancelButton {
+  color: #ff474a !important;
+  background-color: #f9e9e9;
+  font-weight: bold;
+}
+
+.dropdown-item {
+  color: #2563eb;
+  font-family: "fangsong";
+  font-size: 15px;
+}
+
+.dropdown-item:active {
+  background-color: #ededed;
+}
+
+.status-finished {
+  color: #58bd58 !important;
+  font-weight: 500;
+  font-family: system-ui;
+  font-size: 14px;
+}
+.status-programmee {
+  color: #007bff !important;
+  font-weight: 500;
+  font-family: system-ui;
+  font-size: 14px;
+}
+.status-cancelled {
+  color: red !important;
+  font-weight: 500;
+  font-family: system-ui;
+  font-size: 14px;
+}
+.status-inprogress {
+  color: orange !important;
+  font-weight: 500;
+  font-family: system-ui;
+  font-size: 14px;
+}
+.status-expired {
+  color: gray !important;
+  font-weight: 500;
+  font-family: system-ui;
+  font-size: 14px;
 }

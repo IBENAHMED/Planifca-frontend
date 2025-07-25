@@ -20,6 +20,9 @@ export class StepInformationComponent {
 
   @Output() informationSaved = new EventEmitter<void>();
 
+  selectedTerrainId: string | null = null;
+
+
   private reservationService = inject(ReservationServiceService);
 
   onSportChange(event: Event) {
@@ -47,14 +50,14 @@ export class StepInformationComponent {
   }
 
   saveInformation() {
+    this.reservationService.selectedTerrainName = this.formClient.get('terrainName')?.value
     this.informationSaved.emit()
   }
 
   get selectedTerrainName(): string | null {
-  const selectedId = this.formClient.get('terrainId')?.value;
-  const selectedTerrain = this.terrains.find((t:any) => t.terrainId === selectedId);
-  return selectedTerrain ? selectedTerrain.name : null;
-}
-
+    const selectedId = this.formClient.get('terrainId')?.value;
+    const selectedTerrain = this.terrains.find((t: any) => t.terrainId === selectedId);
+    return selectedTerrain ? selectedTerrain.name : null;
+  }
 
 }

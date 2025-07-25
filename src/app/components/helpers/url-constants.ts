@@ -20,6 +20,7 @@ export const URLS = {
   RESERVATION: ':frontPath/reservation',
   CREATE_RESERVATION: ':frontPath/reservation/new',
   RESERVATION_PROCESSING:':frontPath/reservation/processing',
+  VIEW_RESERVATION:':frontPath/reservation/:reservationId',
 
   // STATISTICS
   STATISTICS: ':frontPath/statistics',

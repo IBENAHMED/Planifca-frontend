@@ -7,7 +7,11 @@ export const TokenInterceptor: HttpInterceptorFn = (req, next) => {
 
     let headers: { [key: string]: string } = {};
 
-    if (token && !req.url.includes('/auth/login')) {
+    const excludedTokenUrls = [
+      '/api/internal/club/front/'
+    ];
+
+    if (token && !excludedTokenUrls.some(url => req.url.includes(url)) && !req.url.includes('/auth/login')) {
       headers['Authorization'] = `Bearer ${token}`;
     }
 
