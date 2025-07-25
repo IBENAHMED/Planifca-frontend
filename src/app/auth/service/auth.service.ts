@@ -70,9 +70,7 @@ export class AuthService {
   }
 
   isFrontPathExist(frontPath: string | null): Observable<any> {
-    return this.http.get(`${this.urlApi}/club/front/${frontPath}`).pipe(
-      catchError((error) => throwError(() => error)),
-    );
+    return this.http.get(`${this.urlApi}/club/front/${frontPath}`)
   }
 
   isAuthenticated(): boolean {
@@ -82,7 +80,7 @@ export class AuthService {
     return false;
   }
 
-  getUserRole(): Observable<any> {
+  getCurrentUser(): Observable<any> {
     return this.http.get(`${this.urlApi}/user/current`);
   }
 

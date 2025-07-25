@@ -11,4 +11,6 @@ export interface reservationIonInformation {
   clientPhoneNumber: string,
   clientFirstName: string,
   clientLastName: string,
+  reservationStatus: string,
+  stadium: any
 }

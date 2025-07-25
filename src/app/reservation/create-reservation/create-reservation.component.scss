@@ -181,35 +181,38 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background-color: rgba(255, 255, 255, 0.923);
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
-.progress-container {
-  width: 70%;
-  background: #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-  height: 30px;
+.progress-bar-container {
   position: relative;
+  width: 100%;
+  max-width: 90%;
+  height: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 10px #00000050;
 }
 
 .progress {
   height: 100%;
-  background: #28a745;
-  width: 0;
+  background-color: #2563eb;
+  width: 0%;
   transition: width 0.3s ease;
 }
 
 .progress-text {
-  margin-top: 10px;
-  color: #fff;
-  font-size: 1.5rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   font-weight: bold;
+  color: #131212;
+  line-height: 30px;
 }
