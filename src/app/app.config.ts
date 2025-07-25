@@ -8,6 +8,9 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { LoadingInterceptor } from './components/loading.interceptor';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
 
 export const appConfig: ApplicationConfig = {
   providers: [

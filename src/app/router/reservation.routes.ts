@@ -4,6 +4,7 @@ import { guardsGuard } from '../auth/guards/guards.guard';
 import { URLS } from '../components/helpers/url-constants';
 import { ReservationComponent } from '../reservation/reservation/reservation.component';
 import { CreateReservationComponent } from '../reservation/create-reservation/create-reservation.component';
+import { ViewReservationComponent } from '../reservation/view-reservation/view-reservation.component';
 
 export const reservationRoutes: Routes = [
   {
@@ -17,5 +18,9 @@ export const reservationRoutes: Routes = [
     // canActivate: [guardsGuard],
     component: CreateReservationComponent,
     // data: { role: [constants.USER.SUPERADMIN, constants.USER.ADMIN] },
+  },
+  {
+    path:URLS.VIEW_RESERVATION,
+    component:ViewReservationComponent
   }
 ];

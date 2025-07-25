@@ -8,19 +8,26 @@ export const guardsGuard: CanActivateFn = async (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthService);
   const userContextService = inject(UserContextService);
+  const url = state.url;
+
+
+  const segments = url.split('/');
+  const currentFrontPath = segments.length > 1 ? segments[1] : null;
 
   if (!authService.isAuthenticated()) {
-    if (userContextService.getUserContext()) {
-      router.navigate([`/${(userContextService.getUserContext())?.frontPath}/login`]);
-      return false;
-    };
+    if (currentFrontPath) {
+      router.navigate([`/${currentFrontPath}/login`]);
+    } else {
+      router.navigate(['/unauthorized']);
+    }
+    return false;
+  }
+
+  const hasRole = await authService.hasRole(route.data['role']);
+  if (!hasRole) {
     router.navigate(['/unauthorized']);
     return false;
-  };
-
-  if (!await authService.hasRole(route.data['role'])) {
-    router.navigate(['/unauthorized']);
-  };
+  }
 
   return true;
 };

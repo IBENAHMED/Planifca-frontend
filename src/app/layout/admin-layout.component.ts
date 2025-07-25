@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import constants from '../components/constants';
 import { RouterLink, RouterModule } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
@@ -9,7 +9,7 @@ import { UserContextService } from '../components/services/user-context.service'
 @Component({
   selector: 'app-admin-layout',
   standalone: true,
-  imports: [NgIf, RouterLink, NgbCollapseModule, RouterModule],
+  imports: [NgIf, RouterLink, NgbCollapseModule, RouterModule,CommonModule],
   templateUrl: './admin-layout.component.html',
   styleUrl: './admin-layout.component.scss'
 })
@@ -23,7 +23,10 @@ export class AdminLayoutComponent implements OnInit {
   private userContextService = inject(UserContextService);
   frontPath = this.userContextService.getUserContext()?.frontPath;
 
+  user!: any
+
   async ngOnInit() {
+    this.getCurrentUser()
     this.roleClub = await this.authService.hasRole([constants.USER.SUPERADMIN]);
     this.roleAdministration = await this.authService.hasRole([constants.USER.ADMIN]);
     this.roleReservation = await this.authService.hasRole([constants.USER.ADMIN, constants.USER.STAFF]);
@@ -39,5 +42,16 @@ export class AdminLayoutComponent implements OnInit {
 
   logOut() {
     this.authService.logout();
+  }
+
+  getCurrentUser() {
+    this.authService.getCurrentUser().subscribe({
+      next: (user) => {
+        this.user = user
+      },
+      error: (err) => {
+
+      }
+    })
   }
 }
